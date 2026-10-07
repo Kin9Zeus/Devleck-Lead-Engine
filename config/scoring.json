@@ -1,0 +1,29 @@
+{
+  "_help": "Pesos del puntaje 0-100 de cada lead. La IA califica cada dimensión de 0 a 10 con evidencia; el sistema calcula el puntaje final con estos pesos (así es consistente entre trabajadores).",
+  "weights": {
+    "fit": 0.30,
+    "need": 0.25,
+    "reachability": 0.20,
+    "budget": 0.15,
+    "timing": 0.10
+  },
+  "dimensions": {
+    "fit": "¿Qué tan bien encaja el negocio con el servicio recomendado (perfil de cliente ideal del catálogo)?",
+    "need": "¿Hay evidencia concreta del dolor? (reseñas, vacantes, web deficiente, procesos manuales)",
+    "reachability": "¿Tenemos teléfono directo y correo verificado, idealmente del decisor?",
+    "budget": "¿Puede pagar? (tamaño, empleados, ubicaciones, ticket promedio de su industria)",
+    "timing": "¿Hay un disparador reciente? (crecimiento, nueva sede, financiación, contratación activa)"
+  },
+  "adjustments": {
+    "nichePriorityPointsPerLevel": 3,
+    "noPhonePenalty": 20,
+    "noVerifiedEmailPenalty": 5,
+    "decisionMakerBonus": 4,
+    "directPhoneBonus": 3
+  },
+  "tiers": {
+    "A": 75,
+    "B": 55
+  },
+  "minScoreToKeep": 35
+}

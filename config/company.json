@@ -1,0 +1,42 @@
+{
+  "name": "Devleck",
+  "legalName": "Devleck",
+  "website": "https://www.devleck.com/en",
+  "instagram": "https://www.instagram.com/devleck.ia",
+  "tagline": "Custom software engineering, process automation and applied AI.",
+  "elevatorPitch": "Devleck is a senior software engineering studio. We build custom software, automate repetitive operations and ship applied AI that solves a specific business problem — with fixed price per phase, weekly demos and the client owning 100% of the code.",
+  "location": "Colombia — remote team serving the United States, LatAm and Europe",
+  "contact": {
+    "email": "contact@devleck.com",
+    "phone": "+57 318 102 0319",
+    "bookingUrl": "https://www.devleck.com/en",
+    "responseTime": "within one business day"
+  },
+  "differentiators": [
+    "Senior engineers talk directly with the client — no account managers, no junior hand-offs.",
+    "Fixed price per phase, quoted after a free scoping call with a written brief.",
+    "Weekly demos of working software in a real environment.",
+    "The client owns the code and infrastructure from day one — no licenses, no lock-in.",
+    "AI only ships if it beats the client's current baseline; we start from the business problem, not the hype.",
+    "Readable, tested and documented code. Bilingual team (English / Spanish)."
+  ],
+  "pricingGuidance": {
+    "contained_automation": "Low thousands of USD (≈ $2,500 – $9,000)",
+    "full_platform": "Tens of thousands of USD (≈ $15,000 – $80,000)",
+    "timelines": "Focused automation 2–6 weeks; full web platform 3–6 months",
+    "freeOffer": "Free 30-minute scoping call + written brief"
+  },
+  "process": [
+    "Scope — call + written brief (problem, inclusions, exclusions, success criteria)",
+    "Architecture — technical plan, stack decisions and fixed estimate per phase",
+    "Build — weekly demos of working software",
+    "Harden — testing, performance, security review and load checks",
+    "Handover — deployment, documentation and team walkthrough"
+  ],
+  "techStack": ["TypeScript", "React", "Next.js", "React Native", "Node.js", "Python", "PostgreSQL", "Anthropic Claude", "OpenAI", "AWS", "Vercel", "Docker"],
+  "callGoal": "Book a free 30-minute scoping call with the decision maker.",
+  "salesRepIntro": "Hi, this is {repName} with Devleck — we're a software engineering studio that builds automation and AI tools for {niche}.",
+  "brandTone": "Direct, confident and practical. Short sentences. Talk about outcomes and money/time saved, never about technology for its own sake. No hype, no buzzwords, no pressure.",
+  "emailSignature": "{repName}\nDevleck — Software & Digital Solutions\n{repEmail} · devleck.com",
+  "complianceFooter": "Devleck · Remote software studio · devleck.com\nIf this isn't relevant, just reply \"no thanks\" and I won't follow up."
+}

@@ -1,0 +1,362 @@
+{
+  "_help": "Catálogo de servicios y productos de Devleck. La IA SOLO recomienda lo que esté aquí con active=true. Edítalo desde la interfaz (modo administrador) o con /nuevo-servicio en Claude Code, y luego súbelo al repo.",
+  "items": [
+    {
+      "id": "ai-receptionist",
+      "type": "service",
+      "name": "AI Receptionist & Booking Agent",
+      "category": "Automation",
+      "active": true,
+      "oneLiner": "An AI agent that answers calls, chats and web forms 24/7, qualifies the customer and books the appointment directly in the business calendar.",
+      "description": "Omnichannel AI agent (phone, website chat, SMS, WhatsApp, Instagram DM) trained on the business's services, prices and policies. It answers questions, qualifies leads, books/reschedules appointments in the existing calendar/CRM and escalates to a human when needed. Built on Claude, integrated with the tools the business already uses.",
+      "deliverables": ["Voice + chat agent trained on the business", "Calendar / CRM integration", "Human hand-off rules", "Dashboard with conversations and booked appointments"],
+      "idealCustomer": {
+        "niches": ["dental-practices", "med-spas", "law-firms", "home-services", "veterinary-clinics", "real-estate", "auto-repair", "fitness-studios", "property-management"],
+        "companySize": "2–100 employees, appointment-driven, high inbound call volume",
+        "description": "Local service businesses that lose money when the phone isn't answered: after-hours calls, busy front desk, slow web-lead response."
+      },
+      "buyingSignals": [
+        "Reviews complaining about not answering the phone, voicemail full or slow replies",
+        "Job posts for receptionist / front desk / call center / scheduling coordinator",
+        "Website only has a contact form or 'call us' (no online booking, no chat)",
+        "Multiple locations or extended hours",
+        "Running Google/Facebook ads (paying for leads that may go unanswered)"
+      ],
+      "disqualifiers": ["Already uses an AI receptionist/chatbot that books appointments", "National chain with corporate call center"],
+      "painPointsSolved": ["Missed calls = lost revenue", "Front-desk overload and turnover", "No coverage nights/weekends", "Slow response to web leads"],
+      "pricing": { "model": "Setup + monthly", "from": 2500, "to": 8000, "currency": "USD", "notes": "Setup fee plus optional monthly maintenance; fixed price per phase." },
+      "timeline": "2–5 weeks",
+      "roi": "If they miss 10 calls/week and a new customer is worth $300, that's ~$150k/year walking to competitors. The agent pays for itself with 2–3 recovered customers a month.",
+      "pitch": {
+        "hook": "Most {niche} lose 1 in 4 calls after hours or when the front desk is busy — we build an AI receptionist that answers every call and books the appointment for you.",
+        "valueProps": ["Never miss a call or a web lead again", "Books directly into your calendar", "Costs less than a part-time receptionist", "You own it — no per-seat SaaS"],
+        "proof": "Built on Claude by a senior engineering team; weekly demos so you see it working before you pay the next phase."
+      },
+      "objections": [
+        { "objection": "Customers want to talk to a human.", "response": "Totally — the agent hands off to your team instantly for anything sensitive. It just makes sure nobody hits voicemail at 7 pm and calls your competitor instead." },
+        { "objection": "We already have a receptionist.", "response": "Great — this isn't replacing her, it's covering lunch, after-hours, weekends and the moments she's on another line. How many calls do you think go to voicemail in a week?" },
+        { "objection": "Too expensive.", "response": "It's a fixed setup, quoted after a free call. If it doesn't recover more than it costs in the first months, it's not worth doing — and we'll tell you that." }
+      ],
+      "keywords": ["ai receptionist", "answering service", "chatbot", "appointment booking", "missed calls"]
+    },
+    {
+      "id": "process-automation",
+      "type": "service",
+      "name": "Back-Office Process Automation",
+      "category": "Automation",
+      "active": true,
+      "oneLiner": "We automate the repetitive work — invoicing, data entry, reconciliation, CRM/ERP sync, approvals — so the team stops copying data between systems.",
+      "description": "Custom automations and internal tools that connect the systems a company already uses (QuickBooks, Xero, Salesforce, HubSpot, spreadsheets, ERPs, email) and remove manual steps: invoicing and reconciliation, order/inventory sync, document processing with AI, approval flows with digital signatures, reporting.",
+      "deliverables": ["Process mapping + ROI estimate", "Automated workflows / bots", "Integrations between existing systems", "Audit trail and monitoring"],
+      "idealCustomer": {
+        "niches": ["accounting-firms", "logistics-trucking", "construction", "wholesale-distribution", "insurance-agencies", "manufacturing", "staffing-agencies", "property-management", "home-health"],
+        "companySize": "10–250 employees with admin/ops staff",
+        "description": "Companies whose operations run on spreadsheets, email and double data entry, and whose admin headcount grows with revenue."
+      },
+      "buyingSignals": [
+        "Job posts for data entry, billing specialist, AP/AR clerk, dispatcher, admin assistant",
+        "Fast growth (new locations, hiring spree, new contracts) without new systems",
+        "Mentions of spreadsheets, paper forms, PDFs, fax or 'email us your documents'",
+        "Uses several disconnected tools (QuickBooks + CRM + spreadsheets)"
+      ],
+      "disqualifiers": ["Fewer than 5 employees with almost no admin work", "Has a large in-house IT/dev team"],
+      "painPointsSolved": ["Hours lost to manual data entry", "Billing errors and late invoices", "Systems that don't talk to each other", "Admin headcount growing with revenue"],
+      "pricing": { "model": "Fixed price per phase", "from": 3000, "to": 15000, "currency": "USD", "notes": "A contained automation module is usually in the low thousands." },
+      "timeline": "2–6 weeks per automation",
+      "roi": "10 people × 5 hours/week of manual work × $25/hour ≈ $65,000/year and 2,600 hours reclaimed.",
+      "pitch": {
+        "hook": "We help {niche} stop paying people to copy data between systems — invoicing, dispatch, reconciliation, reports.",
+        "valueProps": ["Fixed price per phase", "Works with the tools you already have", "Measurable hours saved", "You own the code"],
+        "proof": "Free scoping call ends with a written brief and an ROI estimate — you decide with numbers."
+      },
+      "objections": [
+        { "objection": "We tried Zapier and it broke.", "response": "That's common — no-code glue breaks at scale. We build it like real software: tested, monitored, documented, and you own it." },
+        { "objection": "Our process is too specific.", "response": "That's exactly why off-the-shelf tools fail for you. Custom is our whole business — we map your process first, then automate only what pays back." }
+      ],
+      "keywords": ["automation", "invoicing", "reconciliation", "crm integration", "erp", "data entry"]
+    },
+    {
+      "id": "custom-web-platform",
+      "type": "service",
+      "name": "Custom Web Platform / Customer Portal",
+      "category": "Core engineering",
+      "active": true,
+      "oneLiner": "Fast, modern web platforms, customer portals and internal tools built with Next.js — designed to scale and convert.",
+      "description": "Custom web applications: customer portals (quotes, orders, tracking, documents), booking/ordering platforms, internal dashboards, marketplaces and SaaS MVPs. Built with Next.js/React, Node and PostgreSQL, with design system, SEO and performance included.",
+      "deliverables": ["Discovery + UX", "Design system", "Web app / portal", "Admin dashboard", "Deployment + documentation"],
+      "idealCustomer": {
+        "niches": ["construction", "logistics-trucking", "wholesale-distribution", "manufacturing", "real-estate", "property-management", "saas-startups", "insurance-agencies"],
+        "companySize": "10–500 employees, or funded startups",
+        "description": "Businesses whose customers still request quotes, orders or status updates by phone/email, or startups that need an MVP built by seniors."
+      },
+      "buyingSignals": [
+        "Customers must call or email for quotes, order status or documents",
+        "Outdated website (old copyright year, not mobile friendly, slow)",
+        "Recent funding round or new product launch",
+        "Job posts for a web developer / CTO (we can be the team instead)"
+      ],
+      "disqualifiers": ["Only needs a 5-page brochure website", "Has a strong in-house product team"],
+      "painPointsSolved": ["Manual quoting and order handling", "Website that doesn't generate business", "No visibility for customers", "Slow time to market"],
+      "pricing": { "model": "Fixed price per phase", "from": 15000, "to": 80000, "currency": "USD", "notes": "Full platform in the tens of thousands; MVP phases can start smaller." },
+      "timeline": "3–6 months (MVP from 6–8 weeks)",
+      "roi": "A self-service portal removes most status/quote calls and emails and lets the business sell 24/7.",
+      "pitch": {
+        "hook": "We build customer portals that let your clients get quotes, place orders and track status online — without calling your team.",
+        "valueProps": ["Senior engineers only", "Weekly demos", "Fixed price per phase", "You own 100% of the code"],
+        "proof": "Next.js/React platforms engineered for real users and real load, not templates."
+      },
+      "objections": [
+        { "objection": "We already have a website.", "response": "Most of our clients do — the question is whether it does work for you. Can your customers get a quote or check an order without calling you?" },
+        { "objection": "We'd rather hire an in-house developer.", "response": "One mid-level dev costs $100k+/year and takes months to hire. We give you a senior team for a fixed price per phase, and hand over everything documented if you hire later." }
+      ],
+      "keywords": ["web platform", "customer portal", "web app", "nextjs", "mvp", "dashboard"]
+    },
+    {
+      "id": "mobile-app",
+      "type": "service",
+      "name": "Mobile App (iOS + Android)",
+      "category": "Core engineering",
+      "active": true,
+      "oneLiner": "Cross-platform iOS and Android apps from a single codebase — loyalty, ordering, booking, field-team apps.",
+      "description": "React Native apps for customers (ordering, booking, loyalty, memberships) or for field teams (inspections, deliveries, time tracking, photos, signatures), connected to the company's backend.",
+      "deliverables": ["iOS + Android app", "Backend/API", "Admin panel", "Store publishing"],
+      "idealCustomer": {
+        "niches": ["fitness-studios", "multi-location-restaurants", "home-services", "construction", "logistics-trucking", "saas-startups"],
+        "companySize": "Multi-location businesses or companies with field teams",
+        "description": "Brands with recurring customers who would use an app, or companies with crews in the field using paper or WhatsApp."
+      },
+      "buyingSignals": ["Several locations / franchise growth", "Field crews and paper forms", "Loyalty/membership model", "Competitors already have an app"],
+      "disqualifiers": ["Single small location with low repeat customers"],
+      "painPointsSolved": ["Low customer retention", "Paper-based field operations", "Dependence on third-party apps and their fees"],
+      "pricing": { "model": "Fixed price per phase", "from": 12000, "to": 60000, "currency": "USD", "notes": "" },
+      "timeline": "2–5 months",
+      "roi": "Owning the ordering/booking channel avoids 15–30% marketplace fees and increases repeat purchases.",
+      "pitch": {
+        "hook": "We build the app your customers or your field team actually use — iOS and Android from one codebase, owned by you.",
+        "valueProps": ["One codebase, both stores", "Fixed price per phase", "You own it — no platform fees"],
+        "proof": "Weekly builds you can install on your phone and test."
+      },
+      "objections": [
+        { "objection": "Apps are expensive.", "response": "Which is why we scope a first phase that pays back on its own — usually ordering or booking — before anything else." }
+      ],
+      "keywords": ["mobile app", "ios", "android", "react native", "loyalty app"]
+    },
+    {
+      "id": "web-performance-seo",
+      "type": "service",
+      "name": "Website Rebuild — Performance, SEO & Conversion",
+      "category": "Core engineering",
+      "active": true,
+      "oneLiner": "We rebuild slow, outdated websites into fast, SEO-healthy sites that turn visitors into calls and bookings.",
+      "description": "Technical rebuild of the website focused on Core Web Vitals, technical SEO, local SEO structure, conversion (clear CTAs, online booking/quote forms, click-to-call) and analytics. Often the entry point before automation or AI.",
+      "deliverables": ["Performance & SEO audit", "New fast website", "Conversion-focused pages", "Analytics + tracking setup"],
+      "idealCustomer": {
+        "niches": ["home-services", "law-firms", "dental-practices", "med-spas", "jewelry-stores", "real-estate", "construction", "auto-repair", "solar-installers"],
+        "companySize": "Any local business with a weak website",
+        "description": "Profitable local businesses with a website that looks 2015, loads slowly on mobile or doesn't rank."
+      },
+      "buyingSignals": ["Old copyright year in the footer", "Not mobile friendly / very slow", "No clear call-to-action or online booking", "Strong reviews but weak website (good business, bad online presence)"],
+      "disqualifiers": ["Website recently rebuilt by an agency and performing well"],
+      "painPointsSolved": ["Losing customers to competitors with better sites", "Not ranking on Google", "Paying ads that land on a slow page"],
+      "pricing": { "model": "Fixed price", "from": 2500, "to": 9000, "currency": "USD", "notes": "Good entry offer; upsell automation / AI receptionist afterwards." },
+      "timeline": "3–6 weeks",
+      "roi": "Faster mobile pages and clear CTAs typically lift calls/bookings from the same traffic.",
+      "pitch": {
+        "hook": "I took a look at your website on my phone — {specificIssue}. That usually costs {niche} real calls every week.",
+        "valueProps": ["Built by engineers, not a template shop", "Fast on mobile", "Designed to generate calls and bookings"],
+        "proof": "We can send a short free audit of your current site before the call."
+      },
+      "objections": [
+        { "objection": "My nephew/agency handles the website.", "response": "No problem — we can send the audit to whoever manages it. The goal is just that the site brings you business." }
+      ],
+      "keywords": ["website redesign", "seo", "core web vitals", "page speed", "conversion"]
+    },
+    {
+      "id": "private-ai-knowledge",
+      "type": "service",
+      "name": "Private AI Assistant over Company Documents",
+      "category": "Applied AI",
+      "active": true,
+      "oneLiner": "A private ChatGPT-style assistant that answers from the company's own documents, policies, contracts and case files — securely.",
+      "description": "Retrieval-augmented AI (private LLM) over the firm's knowledge: contracts, case files, policies, manuals, SOPs, past proposals. Staff ask questions in plain English and get answers with citations. Deployed in the client's cloud with encryption and access control.",
+      "deliverables": ["Document ingestion pipeline", "Secure AI assistant with citations", "Access control", "Usage analytics"],
+      "idealCustomer": {
+        "niches": ["law-firms", "insurance-agencies", "accounting-firms", "engineering-firms", "manufacturing", "home-health"],
+        "companySize": "15–300 employees with lots of documents",
+        "description": "Knowledge-heavy firms where staff spend hours searching documents or re-asking senior people the same questions."
+      },
+      "buyingSignals": ["Large document volume (case files, policies, contracts)", "Hiring paralegals / analysts / coordinators", "Mentions of compliance or quality manuals", "Onboarding many new employees"],
+      "disqualifiers": ["Very small firm with few documents"],
+      "painPointsSolved": ["Hours lost searching documents", "Knowledge locked in senior people", "Slow onboarding", "Data privacy fears with public AI tools"],
+      "pricing": { "model": "Fixed price per phase", "from": 6000, "to": 30000, "currency": "USD", "notes": "" },
+      "timeline": "4–8 weeks",
+      "roi": "If 20 staff save 3 hours/week searching, that's ~3,000 hours/year.",
+      "pitch": {
+        "hook": "We build private AI assistants for {niche} that answer from your own files — with citations — without sending your data to public chatbots.",
+        "valueProps": ["Your data stays private", "Answers with sources", "Deployed in your cloud", "You own it"],
+        "proof": "We start from one concrete use case and only ship if it beats how your team works today."
+      },
+      "objections": [
+        { "objection": "We're worried about confidentiality.", "response": "That's the point of a private deployment — it runs in your environment, encrypted, with permissions. Nothing goes to a public chatbot." }
+      ],
+      "keywords": ["private llm", "rag", "knowledge base", "document ai", "enterprise search"]
+    },
+    {
+      "id": "retail-ai-forecasting",
+      "type": "service",
+      "name": "Retail AI — Demand Forecasting & Dynamic Pricing",
+      "category": "Applied AI",
+      "active": true,
+      "oneLiner": "AI models that forecast demand, optimize inventory and adjust prices so the business stops overstocking and running out.",
+      "description": "Forecasting and repricing models trained on the company's sales history, seasonality and catalog, integrated with their e-commerce/POS/ERP. Includes inventory recommendations and pricing rules with guardrails.",
+      "deliverables": ["Data audit", "Forecasting model", "Repricing engine", "Dashboard + integration"],
+      "idealCustomer": {
+        "niches": ["ecommerce-brands", "wholesale-distribution", "multi-location-restaurants", "manufacturing"],
+        "companySize": "$2M+ revenue, 500+ SKUs",
+        "description": "Retailers and distributors with enough sales history and SKUs that inventory mistakes are expensive."
+      },
+      "buyingSignals": ["Large catalog on Shopify/WooCommerce/Amazon", "Frequent out-of-stock or clearance sales", "Hiring inventory planners / buyers", "Multiple warehouses or channels"],
+      "disqualifiers": ["Tiny catalog or under ~1 year of sales data"],
+      "painPointsSolved": ["Cash tied up in overstock", "Lost sales from stock-outs", "Manual price changes"],
+      "pricing": { "model": "Fixed price per phase", "from": 8000, "to": 40000, "currency": "USD", "notes": "" },
+      "timeline": "6–10 weeks",
+      "roi": "A few points less overstock on a $1M inventory frees tens of thousands in cash.",
+      "pitch": {
+        "hook": "We build forecasting models for {niche} that tell you what to reorder and when — so less cash sits in the warehouse.",
+        "valueProps": ["Trained on your data", "Integrated with your store/ERP", "Only ships if it beats your current method"],
+        "proof": "We benchmark against your current forecasting before you commit to the next phase."
+      },
+      "objections": [
+        { "objection": "Our data is messy.", "response": "Everyone's is. Phase one is a data audit — you get a clear answer on whether AI is worth it before building anything." }
+      ],
+      "keywords": ["demand forecasting", "inventory optimization", "dynamic pricing", "retail ai"]
+    },
+    {
+      "id": "ai-jewelry-design-studio",
+      "type": "product",
+      "name": "AI Jewelry Design Studio (Claude + Blender / AutoCAD)",
+      "category": "Applied AI",
+      "active": true,
+      "oneLiner": "An AI design tool that turns a customer's idea, sketch or photo into a 3D jewelry model and photorealistic render in minutes — integrated with Blender / AutoCAD / Rhino workflows.",
+      "description": "Custom design assistant for jewelers: the customer describes the piece (or uploads a sketch/inspiration photo), Claude generates design variations and parametric 3D models through Blender/AutoCAD scripting, renders photorealistic previews for approval, and exports CAD files ready for casting / 3D printing. Cuts custom-design turnaround from days to minutes and closes more custom orders in the first visit.",
+      "deliverables": ["AI design assistant tuned to the jeweler's style", "Blender / AutoCAD / Rhino integration", "Photorealistic renders for customer approval", "Export to STL/3DM for casting or printing", "Training for the sales team"],
+      "idealCustomer": {
+        "niches": ["jewelry-stores"],
+        "companySize": "Independent jewelers and small chains (1–30 employees) that sell custom pieces",
+        "description": "Jewelers selling custom engagement rings, wedding bands and bespoke pieces, who depend on a CAD designer (in-house or outsourced) and lose sales while customers wait for renders."
+      },
+      "buyingSignals": [
+        "Offers 'custom design', 'bespoke', 'design your own ring' or engagement ring services",
+        "Mentions CAD design, 3D printing or in-house casting",
+        "Instagram full of custom pieces / renders",
+        "Job posts for CAD jewelry designer",
+        "Reviews mentioning design process, waiting for renders or multiple revisions"
+      ],
+      "disqualifiers": ["Only resells mass-produced brand jewelry", "Pawn shops / gold buyers without design services"],
+      "painPointsSolved": ["Days of waiting for CAD renders", "Customers who leave to 'think about it'", "Cost of outsourced CAD designers", "Too many revision rounds"],
+      "pricing": { "model": "Setup + monthly", "from": 4000, "to": 15000, "currency": "USD", "notes": "Price depends on CAD tool integration and customization." },
+      "timeline": "4–8 weeks",
+      "roi": "Closing just 2–3 extra custom engagement rings a month (avg. $3k–$6k each) pays for the system quickly.",
+      "pitch": {
+        "hook": "We built an AI design tool for jewelers: your customer describes the ring, and in minutes you show them a photorealistic 3D render — while they're still in the store.",
+        "valueProps": ["Close custom orders on the first visit", "Fewer revision rounds", "Works with Blender / AutoCAD / Rhino", "Exports ready for casting/printing"],
+        "proof": "We can show a live demo with one of your own pieces as reference."
+      },
+      "objections": [
+        { "objection": "We already have a CAD designer.", "response": "Perfect — this makes your designer 5x faster: the AI produces the first variations and renders, your designer refines. Less waiting, more closed sales." },
+        { "objection": "AI can't match our craftsmanship.", "response": "Agreed — it doesn't replace your craft. It shows the customer the idea instantly so they commit; your team still makes the final design." }
+      ],
+      "keywords": ["jewelry cad", "custom engagement ring", "3d jewelry design", "blender", "autocad", "rhino matrix"]
+    },
+    {
+      "id": "generative-content",
+      "type": "service",
+      "name": "Generative Content Pipeline",
+      "category": "Emerging",
+      "active": true,
+      "oneLiner": "Automated AI pipelines that produce on-brand product descriptions, listings, images and short videos at volume.",
+      "description": "Custom pipelines that generate and publish content at scale: real-estate listing descriptions and virtual staging, e-commerce product copy and images, social posts and short videos — reviewed by humans and kept on brand.",
+      "deliverables": ["Brand-trained generation pipeline", "Approval workflow", "Publishing integrations"],
+      "idealCustomer": {
+        "niches": ["real-estate", "ecommerce-brands", "marketing-agencies", "auto-dealerships"],
+        "companySize": "Businesses publishing many listings/products every week",
+        "description": "Teams that manually write hundreds of listings, product pages or posts."
+      },
+      "buyingSignals": ["Hundreds of listings/products", "Hiring content writers / social media coordinators", "Inconsistent or missing product descriptions"],
+      "disqualifiers": ["Low content volume"],
+      "painPointsSolved": ["Content bottleneck", "Inconsistent brand voice", "Cost of writers/designers"],
+      "pricing": { "model": "Fixed price per phase", "from": 4000, "to": 20000, "currency": "USD", "notes": "" },
+      "timeline": "3–6 weeks",
+      "roi": "Turns days of copywriting into minutes per batch.",
+      "pitch": {
+        "hook": "We build AI pipelines that write and publish your listings/product pages in your brand voice — your team just approves.",
+        "valueProps": ["On-brand", "Human approval step", "Integrated with your platform"],
+        "proof": "We can generate a sample batch from your own listings."
+      },
+      "objections": [
+        { "objection": "AI content sounds generic.", "response": "Generic prompts do. We train it on your best-performing listings and your tone, and a human approves every batch." }
+      ],
+      "keywords": ["ai content", "listing descriptions", "product descriptions", "virtual staging"]
+    },
+    {
+      "id": "reviews-sentiment-ai",
+      "type": "service",
+      "name": "Reviews & Customer Sentiment Intelligence",
+      "category": "Emerging",
+      "active": true,
+      "oneLiner": "AI that reads every review, survey and support ticket across locations and tells management exactly what to fix — plus drafted replies.",
+      "description": "Sentiment analysis across Google, Yelp, TripAdvisor, surveys and tickets, by location and topic, with alerts, weekly executive reports and AI-drafted review responses.",
+      "deliverables": ["Review aggregation", "Topic & sentiment dashboard per location", "Alerts", "AI reply drafts"],
+      "idealCustomer": {
+        "niches": ["multi-location-restaurants", "hotels-hospitality", "dental-practices", "auto-dealerships", "fitness-studios"],
+        "companySize": "3+ locations or hundreds of reviews",
+        "description": "Multi-location brands whose reputation drives revenue and who can't read every review."
+      },
+      "buyingSignals": ["Hundreds/thousands of reviews", "Unanswered reviews", "Mixed ratings across locations"],
+      "disqualifiers": ["Single location with few reviews"],
+      "painPointsSolved": ["No visibility across locations", "Unanswered reviews hurting ranking", "Recurring complaints nobody tracks"],
+      "pricing": { "model": "Setup + monthly", "from": 3000, "to": 12000, "currency": "USD", "notes": "" },
+      "timeline": "3–5 weeks",
+      "roi": "Each star of rating has a direct effect on local revenue; fixing the top recurring complaint pays back quickly.",
+      "pitch": {
+        "hook": "We give {niche} with several locations one dashboard that reads every review and tells you what to fix first — and drafts the replies.",
+        "valueProps": ["All locations in one view", "Weekly priorities", "Reply drafts in your voice"],
+        "proof": "We can run a free snapshot on your last 200 reviews."
+      },
+      "objections": [
+        { "objection": "We already use a reviews tool.", "response": "Most tools count stars. This tells you why — by topic and location — and what to fix first." }
+      ],
+      "keywords": ["review management", "sentiment analysis", "reputation", "multi-location"]
+    },
+    {
+      "id": "rescue-and-harden",
+      "type": "service",
+      "name": "Software Rescue & Hardening",
+      "category": "Core engineering",
+      "active": true,
+      "oneLiner": "Audit and fix existing software that's slow, insecure or abandoned by the previous developer — in priority order.",
+      "description": "We audit the existing app (security, performance, architecture, data), deliver a prioritized report and then fix the issues — or take over development as an embedded senior team.",
+      "deliverables": ["Full technical audit + scorecard", "Prioritized fix plan", "Fixes / takeover", "Documentation"],
+      "idealCustomer": {
+        "niches": ["saas-startups", "ecommerce-brands", "logistics-trucking", "property-management", "staffing-agencies"],
+        "companySize": "Companies running their own custom software",
+        "description": "Businesses that depend on custom software built by a freelancer or agency that disappeared, or that's slow and breaking."
+      },
+      "buyingSignals": ["Job posts for a senior developer / CTO", "App store reviews complaining about bugs", "Very slow web app", "Custom platform with no visible tech team"],
+      "disqualifiers": ["No custom software at all"],
+      "painPointsSolved": ["Fragile software nobody understands", "Security risk", "Slow product and unhappy users"],
+      "pricing": { "model": "Audit fixed fee + phases", "from": 2500, "to": 25000, "currency": "USD", "notes": "Audit is a low-risk entry point." },
+      "timeline": "Audit 1–2 weeks; fixes per phase",
+      "roi": "Avoids rewrites, outages and security incidents that cost far more.",
+      "pitch": {
+        "hook": "If your platform was built by a developer who's no longer around, we audit it, tell you exactly what's risky, and fix it in priority order.",
+        "valueProps": ["Clear written audit", "Fix in priority order", "Fixed price per phase"],
+        "proof": "15-domain senior engineering audit with a 0–100 scorecard."
+      },
+      "objections": [
+        { "objection": "It works fine for now.", "response": "Usually until it doesn't. The audit is a small fixed fee and tells you whether you have a problem before your customers find it." }
+      ],
+      "keywords": ["software audit", "legacy code", "app rescue", "security audit", "fractional cto"]
+    }
+  ]
+}

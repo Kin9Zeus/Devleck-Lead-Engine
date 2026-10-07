@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Devleck Lead Engine</title>
+  <link rel="icon" href="/logo.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <a class="brand" href="#/">
+        <img src="/logo.svg" alt="" width="34" height="34" />
+        <span><b>DEVLECK</b><small>Lead Engine</small></span>
+      </a>
+      <nav id="nav"></nav>
+      <div class="sidebar-foot" id="sidebar-foot"></div>
+    </aside>
+    <main id="view" class="view" tabindex="-1"></main>
+  </div>
+  <div id="drawer-root"></div>
+  <div id="modal-root"></div>
+  <div id="toasts" aria-live="polite"></div>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

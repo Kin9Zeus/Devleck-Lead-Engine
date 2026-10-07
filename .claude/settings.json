@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch",
+      "Read",
+      "Glob",
+      "Grep",
+      "Write(workspace/**)",
+      "Edit(workspace/**)",
+      "Bash(node scripts/cli.mjs:*)",
+      "PowerShell(node scripts/cli.mjs:*)"
+    ]
+  }
+}

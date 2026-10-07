@@ -1,0 +1,9 @@
+# Datos personales de cada trabajador: NUNCA se suben al repo
+workspace/*
+!workspace/.gitkeep
+
+node_modules/
+.DS_Store
+Thumbs.db
+*.log
+.claude/settings.local.json

@@ -1,0 +1,16 @@
+{
+  "name": "devleck-leads",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Devleck Lead Engine — prospección B2B en USA impulsada por Claude Code.",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node server/index.mjs",
+    "check": "node scripts/cli.mjs doctor",
+    "stats": "node scripts/cli.mjs stats",
+    "test": "node --test tests/*.test.mjs"
+  }
+}

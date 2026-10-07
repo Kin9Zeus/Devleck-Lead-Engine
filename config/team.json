@@ -1,0 +1,9 @@
+{
+  "_help": "Equipo comercial y territorios. Asignar estados distintos a cada persona evita que dos trabajadores llamen al mismo negocio. El 'id' debe coincidir con el que cada trabajador elige en Configuración.",
+  "members": [
+    { "id": "aleck", "name": "Aleck Martinez", "role": "admin", "email": "contact@devleck.com", "states": [], "niches": [] },
+    { "id": "rep-1", "name": "Sales Rep 1", "role": "sales", "email": "", "states": ["TX", "OK", "LA"], "niches": [] },
+    { "id": "rep-2", "name": "Sales Rep 2", "role": "sales", "email": "", "states": ["FL", "GA", "NC", "SC"], "niches": [] },
+    { "id": "rep-3", "name": "Sales Rep 3", "role": "sales", "email": "", "states": ["CA", "AZ", "NV"], "niches": [] }
+  ]
+}
