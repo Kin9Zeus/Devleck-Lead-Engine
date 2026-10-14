@@ -2,6 +2,7 @@
   "name": "devleck-leads",
   "version": "1.0.0",
   "private": true,
+  "license": "UNLICENSED",
   "description": "Devleck Lead Engine — prospección B2B en USA impulsada por Claude Code.",
   "type": "module",
   "engines": {

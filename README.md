@@ -14,6 +14,7 @@ and writes the call script and emails. A local dashboard turns the result into a
 [![Dependencies](https://img.shields.io/badge/npm%20dependencies-0-d7ff1f)](package.json)
 [![Tests](https://img.shields.io/badge/tests-node%3Atest-informational)](tests/)
 [![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey)](#quick-start)
+[![License](https://img.shields.io/badge/license-All%20rights%20reserved-red)](LICENSE)
 
 [Overview](#overview) · [Screenshots](#screenshots) · [Features](#features) · [Architecture](#architecture) · [Quick start](#quick-start) · [Configuration](#configuration) · [Lead pipeline](#the-lead-pipeline) · [Design decisions](#design-decisions)
 
@@ -284,6 +285,10 @@ PORT=4700 npm start           # run on another port
 - [ ] CRM export (HubSpot / Pipedrive)
 - [ ] Email-sending integration with tracked follow-up sequences
 - [ ] Win/loss analytics fed back into niche priorities and scoring weights
+
+## License
+
+Copyright © 2026 Devleck. **All rights reserved.** This code is published for portfolio and evaluation purposes. You may view it and run it locally to evaluate it, but you may not copy, modify, distribute or use it commercially without written permission. See [LICENSE](LICENSE), or contact contact@devleck.com for licensing.
 
 ---
 
