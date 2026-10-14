@@ -19,8 +19,10 @@ const OUTCOMES = [
   { key: 'dnc', label: 'Pidió no ser contactado', status: 'dnc', log: 'Pidió no volver a ser contactado' },
 ];
 
-export function openLead(id, onChange) {
-  current = { id, tab: current.id === id ? current.tab : 'script', onChange };
+const TABS = ['script', 'email', 'analysis', 'contacts', 'track'];
+
+export function openLead(id, onChange, tab) {
+  current = { id, tab: TABS.includes(tab) ? tab : current.id === id ? current.tab : 'script', onChange };
   render();
 }
 
@@ -86,7 +88,7 @@ function header(lead) {
           </div>
         </div>
         <div class="row">
-          <button class="btn sm ghost" data-act="star" title="Marcar como favorito">${icon('star')}${lead.starred ? ' ★' : ''}</button>
+          <button class="btn sm ghost" data-act="star" title="${lead.starred ? 'Quitar de favoritos' : 'Marcar como favorito'}" aria-pressed="${!!lead.starred}" ${lead.starred ? 'style="color:var(--lime)"' : ''}>${lead.starred ? '★' : icon('star')}</button>
           <button class="btn sm ghost" data-act="close" aria-label="Cerrar">${icon('x')}</button>
         </div>
       </div>

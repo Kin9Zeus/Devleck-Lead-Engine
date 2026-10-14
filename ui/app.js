@@ -48,12 +48,12 @@ function renderNav() {
 async function route() {
   if (activeStream) { activeStream.close(); activeStream = null; }
   clearInterval(pollTimer);
-  const [, page = '', arg] = location.hash.replace(/^#/, '').split('/');
+  const [, page = '', arg, sub] = location.hash.replace(/^#/, '').split('/');
   renderNav();
   const pages = { '': dashboard, queue, leads: leadsPage, prospect, niches: nichesPage, runs: runsPage, catalog, settings: settingsPage };
   const fn = pages[page] || dashboard;
   try {
-    await fn(arg);
+    await fn(arg, sub);
   } catch (err) {
     view.innerHTML = `<div class="callout err">${esc(err.message)}</div>`;
   }
@@ -119,6 +119,8 @@ function dashboard() {
   view.querySelectorAll('[data-prefill-niche]').forEach((a) => a.addEventListener('click', () => { ui.prospectDraft = { niche: a.dataset.prefillNiche }; }));
 }
 
+const growthLabel = (g) => ({ high: 'alto', medium: 'medio', low: 'bajo' }[g] || g || '—');
+const plural = (n, word) => `${n} ${word}${n === 1 ? '' : 's'}`;
 const kpi = (label, value, hint, accent) => `<div class="card kpi ${accent ? 'accent' : ''}"><div class="label">${label}</div><div class="value">${value}</div><div class="hint">${hint}</div></div>`;
 const endOfToday = () => { const d = new Date(); d.setHours(23, 59, 59, 999); return d; };
 
@@ -211,7 +213,7 @@ function filteredLeads() {
   });
 }
 
-function leadsPage() {
+function leadsPage(id, tab) {
   const f = ui.leads;
   const opts = (vals, cur, label, nameFn = (x) => x) => `<option value="">${label}</option>${vals.map((v) => `<option value="${attr(v)}" ${cur === v ? 'selected' : ''}>${esc(nameFn(v))}</option>`).join('')}`;
   const uniq = (fn) => [...new Set(state.leads.map(fn).filter(Boolean))].sort();
@@ -231,6 +233,8 @@ function leadsPage() {
   view.querySelector('#f-q').addEventListener('input', (e) => { f.q = e.target.value; renderLeadsTable(); });
   view.querySelectorAll('[data-f]').forEach((s) => s.addEventListener('change', () => { f[s.dataset.f] = s.value; renderLeadsTable(); }));
   view.querySelector('#export').addEventListener('click', exportCsv);
+  // Enlace directo: #/leads/<id>[/<pestaña>] abre la ficha del lead.
+  if (id) openLead(decodeURIComponent(id), renderLeadsTable, tab);
 }
 
 function renderLeadsTable() {
@@ -353,7 +357,7 @@ function prospect() {
     $('#p-service-help').textContent = svc ? svc.oneLiner : '';
     $('#p-side').innerHTML = n ? `<h3>${icon('trend')} ${esc(n.name)}</h3>
       <div class="stack small">
-        <div>${stars(n.priority)} · crecimiento ${esc(i?.growth || n.growth)}</div>
+        <div>${stars(n.priority)} · crecimiento ${esc(growthLabel(i?.growth || n.growth))}</div>
         ${i?.whyNow ? `<div><b>Por qué ahora:</b> <span class="muted">${esc(i.whyNow)}</span></div>` : ''}
         ${i?.hotMarkets?.length ? `<div><b>Mercados calientes:</b> <span class="muted">${i.hotMarkets.map(esc).join(', ')}</span></div>` : ''}
         <div><b>Servicios que encajan:</b><div class="chips" style="margin-top:6px">${(i?.bestServices?.length ? i.bestServices : n.matchingServices).map((id) => `<span class="badge">${esc(serviceName(id))}</span>`).join('')}</div></div>
@@ -436,7 +440,7 @@ function nichesPage() {
         <div class="niche-top">
           ${n.opportunityScore != null ? `<div class="ring" style="--p:${n.opportunityScore}"><div>${n.opportunityScore}</div></div>` : ''}
           <div style="min-width:0;flex:1"><div style="font-weight:700;font-size:15px">${esc(n.name)}</div>
-            <div class="small muted">${n.configured ? stars(n.priority) : '<span class="badge" style="color:var(--lime)">Nuevo nicho sugerido</span>'} · crecimiento ${esc(n.growth || '—')}</div></div>
+            <div class="small muted">${n.configured ? stars(n.priority) : '<span class="badge" style="color:var(--lime)">Nuevo nicho sugerido</span>'} · crecimiento ${esc(growthLabel(n.growth))}</div></div>
         </div>
         ${n.whyNow ? `<p class="small" style="margin:0">${esc(n.whyNow)}</p>` : n.notes ? `<p class="small muted" style="margin:0">${esc(n.notes)}</p>` : ''}
         ${n.pitchAngle ? `<p class="small muted" style="margin:0"><b style="color:var(--text)">Ángulo:</b> ${esc(n.pitchAngle)}</p>` : ''}
@@ -446,7 +450,7 @@ function nichesPage() {
         <div class="row" style="margin-top:auto">
           <button class="btn sm primary" data-prospect="${attr(n.id)}" data-custom="${n.configured ? '' : attr(n.name)}">${icon('radar')} Prospectar</button>
           ${isAdmin && n.configured ? `<select class="input" style="width:auto;min-height:30px;padding:3px 8px" data-prio="${attr(n.id)}" title="Prioridad">${[1, 2, 3, 4, 5].map((p) => `<option ${p === n.priority ? 'selected' : ''}>${p}</option>`).join('')}</select>` : ''}
-          <span class="small dim" style="margin-left:auto">${state.leads.filter((l) => l.business.niche === n.id).length} leads</span>
+          <span class="small dim" style="margin-left:auto">${plural(state.leads.filter((l) => l.business.niche === n.id).length, 'lead')}</span>
         </div>
       </div>`).join('')}</div>`;
 

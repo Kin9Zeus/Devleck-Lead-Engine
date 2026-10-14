@@ -15,7 +15,11 @@ and writes the call script and emails. A local dashboard turns the result into a
 [![Tests](https://img.shields.io/badge/tests-node%3Atest-informational)](tests/)
 [![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey)](#quick-start)
 
-[Overview](#overview) · [Features](#features) · [Architecture](#architecture) · [Quick start](#quick-start) · [Configuration](#configuration) · [Lead pipeline](#the-lead-pipeline) · [Design decisions](#design-decisions)
+[Overview](#overview) · [Screenshots](#screenshots) · [Features](#features) · [Architecture](#architecture) · [Quick start](#quick-start) · [Configuration](#configuration) · [Lead pipeline](#the-lead-pipeline) · [Design decisions](#design-decisions)
+
+<br/>
+
+<img src="docs/screenshots/dashboard.png" alt="Devleck Lead Engine dashboard: KPIs, call-now list with local business hours, follow-ups and pipeline" width="100%" />
 
 </div>
 
@@ -39,6 +43,35 @@ Each lead comes back with:
 
 The research runs on **each rep's own Claude subscription** through Claude Code's headless mode. There are no API keys,
 no per-seat SaaS fees and no hosted backend to maintain.
+
+## Screenshots
+
+> All data shown is fictional demo data (`npm run demo`). Businesses, people, `.example` domains and `555-01xx` numbers are invented.
+
+<table>
+  <tr>
+    <td width="50%"><img src="docs/screenshots/call-queue.png" alt="Call queue ranked by score, open-now status and overdue follow-ups" /></td>
+    <td width="50%"><img src="docs/screenshots/lead-detail.png" alt="Lead detail with click-to-call, call opener, discovery questions and objections" /></td>
+  </tr>
+  <tr>
+    <td><b>Call queue</b>: ranked by close probability, the business's local hours and overdue follow-ups. One click dials, and the script opens while it rings.</td>
+    <td><b>Lead detail</b>: verified contacts, the recommended offer with its evidence, a personalized call opener, discovery questions and objection handling.</td>
+  </tr>
+  <tr>
+    <td><img src="docs/screenshots/prospecting.png" alt="Prospecting form with niche, product, states, signals and filters" /></td>
+    <td><img src="docs/screenshots/research-run.png" alt="Live research log streamed from Claude Code" /></td>
+  </tr>
+  <tr>
+    <td><b>Prospecting</b>: target a niche and a product, choose states and cities, prioritize buying signals, then launch the search in the background.</td>
+    <td><b>Live research run</b>: every search, page read and saved batch streams from headless Claude Code over Server-Sent Events.</td>
+  </tr>
+  <tr>
+    <td colspan="2"><img src="docs/screenshots/niche-intelligence.png" alt="Niche intelligence: opportunity scores, why-now, best services and hot markets" /></td>
+  </tr>
+  <tr>
+    <td colspan="2"><b>Niche intelligence</b>: US niches scored 0–100 on growth, pain, ability to pay and catalog fit, each with a pitch angle, best-fit services and hot markets.</td>
+  </tr>
+</table>
 
 ## Features
 
@@ -104,6 +137,8 @@ npm start          # opens http://localhost:4600
 ```
 
 There is no `npm install` step: the project has zero runtime dependencies. On Windows, double-clicking `iniciar.bat` does the same as `npm start`.
+
+**Just want to look around?** Run `npm run demo`. It opens http://localhost:4601 with fictional sample data stored in `.demo-workspace/`, and it doesn't need Claude Code or a login.
 
 On first launch, open **Configuración**, pick your profile and territory, then go to **Prospectar** and launch a search.
 
@@ -201,13 +236,17 @@ The default tiers are **A ≥ 75** and **B ≥ 55**. Changing weights or niche p
 │   ├── leads.mjs          # validation, normalization, scoring, dedupe, ingest
 │   ├── normalize.mjs      # phones (NANP/E.164), emails, domains, US states & timezones
 │   └── store.mjs          # atomic JSON writes + cross-process file lock
-├── scripts/cli.mjs        # the agent's only write path: brief · known · ingest · insights · stats · doctor
+├── scripts/
+│   ├── cli.mjs            # the agent's only write path: brief · known · ingest · insights · stats · doctor
+│   └── demo.mjs           # demo mode with fictional data in .demo-workspace/
 ├── server/
 │   ├── index.mjs          # REST API, SSE, static hosting, git-based updates
 │   └── runner.mjs         # headless Claude Code runner and stream-json → event translation
 ├── ui/                    # dependency-free SPA (dashboard, queue, lead drawer, prospecting, niches, catalog)
 ├── tests/                 # node:test suite for the core
-├── docs/GUIA-DEL-EQUIPO.md  # end-user guide for the sales team (Spanish)
+├── docs/
+│   ├── GUIA-DEL-EQUIPO.md # end-user guide for the sales team (Spanish)
+│   └── screenshots/
 └── CLAUDE.md              # project context loaded by Claude Code
 ```
 
@@ -234,6 +273,7 @@ The default tiers are **A ≥ 75** and **B ≥ 55**. Changing weights or niche p
 ```bash
 npm test                      # core test suite (node:test)
 npm run check                 # environment diagnostics
+npm run demo                  # UI with fictional data (add -- --reset to regenerate it)
 node scripts/cli.mjs help     # all CLI commands
 PORT=4700 npm start           # run on another port
 ```

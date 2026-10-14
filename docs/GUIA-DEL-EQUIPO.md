@@ -138,5 +138,6 @@ Trabajador → Interfaz (localhost:4600) ──lanza──> claude -p (cuenta de
 ```bash
 npm test          # pruebas de normalización, validación, puntaje y deduplicación
 npm run check     # diagnóstico del entorno
+npm run demo      # interfaz con datos ficticios en .demo-workspace/ (puerto 4601), sin tocar tus leads
 node scripts/cli.mjs help
 ```
