@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<title>Guía de instalación — Devleck Lead Engine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet" />
+<style>
+  @page { size: Letter; margin: 0; }
+  :root {
+    --bg: #07080a; --panel: #111418; --panel2: #161a1f; --line: #262c34;
+    --text: #eef0f2; --muted: #98a0a9; --lime: #d7ff1f; --ink: #0a0c00;
+    --green: #3ddc84; --amber: #ffb547; --red: #ff6b6b;
+    --paper: #ffffff; --soft: #f4f6f1; --dark-text: #0d1014; --dark-muted: #5b636d;
+  }
+  * { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: 'Inter', 'Segoe UI', Arial, sans-serif; color: var(--dark-text); font-size: 10.5pt; line-height: 1.5; }
+  .page { width: 8.5in; height: 11in; position: relative; overflow: hidden; page-break-after: always; background: var(--paper); }
+  .page:last-child { page-break-after: auto; }
+
+  /* ---------- Header ---------- */
+  .hero { background: var(--bg); color: var(--text); padding: 0.4in 0.6in 0.3in; position: relative; overflow: hidden; }
+  .hero::after { content: ''; position: absolute; right: -1.1in; top: -1.3in; width: 4in; height: 4in; border-radius: 50%; background: radial-gradient(circle, rgba(215,255,31,.22), rgba(215,255,31,0) 65%); }
+  .brand { display: flex; align-items: center; gap: 12px; position: relative; z-index: 1; }
+  .brand svg { width: 38px; height: 38px; }
+  .brand b { font-family: 'Anton', Impact, sans-serif; font-weight: 400; font-size: 17pt; letter-spacing: 1.5px; line-height: 1; display: block; }
+  .brand small { color: var(--lime); font-size: 7.5pt; letter-spacing: 2.2px; text-transform: uppercase; font-weight: 600; }
+  h1 { font-family: 'Anton', Impact, sans-serif; font-weight: 400; font-size: 30pt; line-height: 1.02; letter-spacing: .5px; text-transform: uppercase; margin: 0.18in 0 0.07in; position: relative; z-index: 1; }
+  h1 em { font-style: normal; color: var(--lime); }
+  .lead { color: #c4cad1; font-size: 11pt; max-width: 5.6in; margin: 0; position: relative; z-index: 1; }
+  .chips { display: flex; gap: 8px; margin-top: 0.14in; position: relative; z-index: 1; }
+  .chip { border: 1px solid #343b44; background: #0f1215; color: var(--text); font-size: 8.5pt; font-weight: 600; padding: 4px 11px; border-radius: 20px; }
+  .chip b { color: var(--lime); }
+
+  .body { padding: 0.26in 0.6in 0; }
+  .running { position: absolute; left: 0; right: 0; bottom: 0; height: 0.42in; background: var(--bg); color: var(--muted); font-size: 7.5pt; display: flex; align-items: center; justify-content: space-between; padding: 0 0.6in; letter-spacing: .3px; }
+  .running b { color: var(--lime); font-weight: 600; }
+  .topbar { background: var(--bg); color: var(--text); padding: 0.28in 0.6in; display: flex; align-items: center; justify-content: space-between; }
+  .topbar .brand svg { width: 28px; height: 28px; }
+  .topbar .brand b { font-size: 13pt; }
+  .topbar .t { font-family: 'Anton', Impact, sans-serif; font-size: 15pt; text-transform: uppercase; letter-spacing: .6px; }
+  .topbar .t em { font-style: normal; color: var(--lime); }
+
+  /* ---------- Blocks ---------- */
+  h2 { font-family: 'Anton', Impact, sans-serif; font-weight: 400; font-size: 15pt; text-transform: uppercase; letter-spacing: .5px; margin: 0 0 8px; display: flex; align-items: center; gap: 10px; }
+  h2 .bar { width: 26px; height: 5px; background: var(--lime); border-radius: 3px; display: inline-block; box-shadow: 0 0 0 1px #0d1014 inset; }
+  .req { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 0.14in; }
+  .req div { background: var(--soft); border: 1px solid #e3e8dc; border-radius: 10px; padding: 10px 12px; font-size: 9pt; color: var(--dark-muted); }
+  .req b { display: block; color: var(--dark-text); font-size: 10pt; margin-bottom: 2px; }
+
+  .step { display: grid; grid-template-columns: 0.46in 1fr; gap: 12px; margin-bottom: 0.13in; break-inside: avoid; }
+  .num { width: 0.46in; height: 0.46in; border-radius: 12px; background: var(--bg); color: var(--lime); font-family: 'Anton', Impact, sans-serif; font-size: 18pt; display: grid; place-items: center; line-height: 1; }
+  .step h3 { margin: 1px 0 3px; font-size: 12pt; line-height: 1.25; }
+  .step p { margin: 0 0 6px; color: var(--dark-muted); font-size: 10pt; }
+  .step ul { margin: 0 0 6px; padding-left: 17px; color: var(--dark-text); font-size: 10pt; }
+  .step li { margin-bottom: 3px; }
+  .step li span { color: var(--dark-muted); }
+  code, .k { font-family: 'JetBrains Mono', Consolas, monospace; font-size: 8.8pt; }
+  .code { background: var(--bg); color: #e9ffd0; border-radius: 9px; padding: 6px 12px; margin: 4px 0 5px; border-left: 3px solid var(--lime); line-height: 1.7; }
+  .code .c { color: #77808a; }
+  .inline { background: #eef2e6; color: #1a2008; border-radius: 5px; padding: 1px 6px; font-weight: 600; }
+  a { color: #3d5200; font-weight: 600; text-decoration: none; border-bottom: 1px solid #c4dc3b; }
+  .note { border-radius: 10px; padding: 6px 12px; font-size: 9pt; margin: 5px 0 0; }
+  .note.warn { background: #fff6e5; border: 1px solid #f5d79a; color: #6b4a07; }
+  .note.ok { background: #effcf4; border: 1px solid #bfeccf; color: #145a31; }
+  .note.lime { background: #f6ffd0; border: 1px solid #d9ef7c; color: #2c3a00; }
+  .note b { font-weight: 700; }
+
+  /* ---------- Page 3 ---------- */
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0.25in; margin-bottom: 0.2in; }
+  .card { border: 1px solid #e3e8dc; border-radius: 12px; padding: 14px 16px; background: var(--soft); break-inside: avoid; }
+  .card h3 { margin: 0 0 6px; font-size: 11.5pt; }
+  .card ol, .card ul { margin: 0; padding-left: 18px; font-size: 9.8pt; }
+  .card li { margin-bottom: 3px; }
+  table { width: 100%; border-collapse: collapse; font-size: 9.4pt; margin-bottom: 0.2in; border-radius: 10px; overflow: hidden; }
+  th { background: var(--bg); color: var(--lime); text-align: left; padding: 8px 12px; font-size: 8pt; letter-spacing: 1.2px; text-transform: uppercase; }
+  td { padding: 8px 12px; border-bottom: 1px solid #e5e9df; vertical-align: top; }
+  tr:nth-child(even) td { background: #fafbf7; }
+  td:first-child { font-weight: 600; width: 36%; }
+  .rules { background: var(--bg); color: var(--text); border-radius: 14px; padding: 16px 20px; margin-bottom: 0.2in; }
+  .rules h3 { margin: 0 0 8px; font-family: 'Anton', Impact, sans-serif; font-weight: 400; font-size: 13pt; letter-spacing: .5px; text-transform: uppercase; color: var(--lime); }
+  .rules ul { margin: 0; padding-left: 18px; font-size: 9.6pt; color: #d6dbe0; }
+  .rules li { margin-bottom: 4px; }
+  .rules b { color: #fff; }
+  .contact { display: flex; align-items: center; justify-content: space-between; background: var(--lime); color: var(--ink); border-radius: 14px; padding: 14px 20px; }
+  .contact b { font-family: 'Anton', Impact, sans-serif; font-weight: 400; font-size: 14pt; text-transform: uppercase; letter-spacing: .4px; display: block; line-height: 1.1; }
+  .contact span { font-size: 9.5pt; }
+  .contact .mail { font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 10pt; background: var(--ink); color: var(--lime); padding: 7px 13px; border-radius: 9px; }
+</style>
+</head>
+<body>
+
+<!-- ============ PÁGINA 1 ============ -->
+<section class="page">
+  <div class="hero">
+    <div class="brand">
+      <svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="32" fill="#000"/><g fill="#D7FF1F"><path d="M32 12 16 28h9v6h14v-6h9z"/><path d="M25 37h14v5H25z" opacity=".85"/><path d="M25 45h14v4H25z" opacity=".6"/><path d="M27 52h10v3H27z" opacity=".4"/><path d="M40 20l8 0-4 4z" opacity=".5"/><path d="M13 33h6v2h-6zM45 31h6v2h-6z" opacity=".55"/></g></svg>
+      <div><b>DEVLECK</b><small>Lead Engine</small></div>
+    </div>
+    <h1>Guía de <em>instalación</em><br/>para el equipo comercial</h1>
+    <p class="lead">Deja la herramienta lista en tu computadora en unos 15 minutos. Se hace una sola vez; después solo la abres y empiezas a llamar.</p>
+    <div class="chips"><span class="chip"><b>6</b> pasos</span><span class="chip"><b>~15</b> minutos</span><span class="chip">Windows · Mac · Linux</span></div>
+  </div>
+
+  <div class="body">
+    <h2><span class="bar"></span>Antes de empezar</h2>
+    <div class="req">
+      <div><b>Una computadora</b>Windows, Mac o Linux, con conexión a internet.</div>
+      <div><b>Cuenta de Claude de pago</b>Plan Pro o Max. La herramienta investiga con tu propia cuenta.</div>
+      <div><b>Sin cuenta de GitHub</b>El repositorio es público: no necesitas registrarte en GitHub.</div>
+    </div>
+
+    <div class="step">
+      <div class="num">1</div>
+      <div>
+        <h3>Instala 3 programas</h3>
+        <ul>
+          <li><b>Node.js</b> (versión LTS) <span>→</span> <a>nodejs.org</a></li>
+          <li><b>Git</b> <span>→</span> <a>git-scm.com/downloads</a></li>
+          <li><b>Claude Code</b>: abre PowerShell (en Mac o Linux, la Terminal) y ejecuta:</li>
+        </ul>
+        <div class="code">npm install -g @anthropic-ai/claude-code</div>
+        <div class="note warn"><b>Importante:</b> cierra y vuelve a abrir la terminal cuando termines de instalar.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">2</div>
+      <div>
+        <h3>Inicia sesión en Claude</h3>
+        <p>En la terminal escribe el comando de abajo. Se abre el navegador para que entres con tu cuenta de Claude. Cuando termine, escribe <span class="inline">/exit</span>.</p>
+        <div class="code">claude</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">3</div>
+      <div>
+        <h3>Descarga la herramienta</h3>
+        <p>Elige una carpeta que recuerdes (por ejemplo, Documentos) y ejecuta estos comandos, uno por uno:</p>
+        <div class="code">git clone https://github.com/Kin9Zeus/Devleck-Lead-Engine.git<br/>cd Devleck-Lead-Engine<br/>npm run check</div>
+        <div class="note ok"><b>Qué debes ver:</b> ✔ en Node, Claude Code, Git y Catálogo ("Trabajador" saldrá ✘ hasta el paso 5).</div>
+        <div class="note warn"><b>No uses "Download ZIP":</b> sin <span class="inline">git clone</span> no podrás recibir actualizaciones.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="running"><span><b>Devleck</b> · Software &amp; Digital Solutions</span><span>Guía de instalación · 1 de 3</span></div>
+</section>
+
+<!-- ============ PÁGINA 2 ============ -->
+<section class="page">
+  <div class="topbar">
+    <div class="brand">
+      <svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="32" fill="#000"/><g fill="#D7FF1F"><path d="M32 12 16 28h9v6h14v-6h9z"/><path d="M25 37h14v5H25z" opacity=".85"/><path d="M25 45h14v4H25z" opacity=".6"/><path d="M27 52h10v3H27z" opacity=".4"/></g></svg>
+      <div><b>DEVLECK</b><small>Lead Engine</small></div>
+    </div>
+    <div class="t">Puesta en <em>marcha</em></div>
+  </div>
+
+  <div class="body" style="padding-top:0.32in">
+    <div class="step">
+      <div class="num">4</div>
+      <div>
+        <h3>Abre la herramienta</h3>
+        <ul>
+          <li><b>Windows:</b> doble clic en <span class="inline">iniciar.bat</span>, dentro de la carpeta Devleck-Lead-Engine.</li>
+          <li><b>Mac o Linux:</b> en la terminal, ejecuta <span class="inline">./iniciar.sh</span></li>
+        </ul>
+        <p>Se abre el navegador en <b>http://localhost:4600</b>. No cierres la ventana negra mientras uses la herramienta.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">5</div>
+      <div>
+        <h3>Configura tu perfil (solo la primera vez)</h3>
+        <p>Ve a <b>Configuración</b> en el menú izquierdo y completa:</p>
+        <ul>
+          <li><b>¿Quién eres?</b> Elige tu nombre. Si no aparece, elige "Otro…" y escribe tu id.</li>
+          <li><b>Tu nombre, correo de trabajo y teléfono.</b> <span>Se usan en los guiones y correos que envías.</span></li>
+          <li><b>Tu territorio:</b> los estados que te asignaron.</li>
+        </ul>
+        <p>Pulsa <b>Guardar perfil</b>.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">6</div>
+      <div>
+        <h3>Haz tu primera búsqueda</h3>
+        <ul>
+          <li>Ve a <b>Prospectar</b>. Elige el nicho, el servicio y los estados.</li>
+          <li>Para la primera prueba pon <b>3 leads</b> y pulsa <b>Lanzar búsqueda</b>.</li>
+          <li>Mira el progreso en <b>Búsquedas</b>. Con 3 leads tarda unos 10 minutos.</li>
+          <li>Al terminar, ve a <b>Cola de llamadas</b>: los leads aparecen ordenados por prioridad, con teléfono, guion y correo listos.</li>
+        </ul>
+        <div class="note lime"><b>Consejo:</b> puedes seguir llamando mientras una búsqueda corre en segundo plano; los leads aparecen a medida que se guardan.</div>
+      </div>
+    </div>
+
+    <h2 style="margin-top:0.26in"><span class="bar"></span>Tu rutina diaria</h2>
+    <div class="cols">
+      <div class="card">
+        <h3>Cada día</h3>
+        <ol>
+          <li>Abre <span class="inline">iniciar.bat</span>.</li>
+          <li>Entra a <b>Cola de llamadas</b> y llama de arriba hacia abajo.</li>
+          <li>Mientras suena el teléfono, lee el <b>guion</b> en la ficha.</li>
+          <li>Al colgar, <b>registra el resultado</b>: así se programa el seguimiento solo.</li>
+          <li>Si no contesta, envía el <b>correo</b> preparado con un clic.</li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3>Cuando haya una versión nueva</h3>
+        <ol>
+          <li>Te avisaremos por el chat del equipo.</li>
+          <li>Entra a <b>Configuración → Buscar actualizaciones</b>.</li>
+          <li>Pulsa <b>Actualizar ahora</b>.</li>
+          <li>Cierra la ventana negra y vuelve a abrir <span class="inline">iniciar.bat</span>.</li>
+        </ol>
+        <p style="margin:8px 0 0;font-size:9pt;color:var(--dark-muted)">Tus leads y notas no se pierden al actualizar.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="running"><span><b>Devleck</b> · Software &amp; Digital Solutions</span><span>Guía de instalación · 2 de 3</span></div>
+</section>
+
+<!-- ============ PÁGINA 3 ============ -->
+<section class="page">
+  <div class="topbar">
+    <div class="brand">
+      <svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="32" fill="#000"/><g fill="#D7FF1F"><path d="M32 12 16 28h9v6h14v-6h9z"/><path d="M25 37h14v5H25z" opacity=".85"/><path d="M25 45h14v4H25z" opacity=".6"/><path d="M27 52h10v3H27z" opacity=".4"/></g></svg>
+      <div><b>DEVLECK</b><small>Lead Engine</small></div>
+    </div>
+    <div class="t">Si algo <em>falla</em></div>
+  </div>
+
+  <div class="body" style="padding-top:0.32in">
+    <h2><span class="bar"></span>Soluciones rápidas</h2>
+    <table>
+      <thead><tr><th>Problema</th><th>Solución</th></tr></thead>
+      <tbody>
+        <tr><td>La búsqueda dice "Failed to authenticate" o "OAuth session expired"</td><td>Tu sesión de Claude caducó. En la terminal escribe <span class="inline">claude</span>, luego <span class="inline">/login</span> e inicia sesión de nuevo.</td></tr>
+        <tr><td>"No se encontró Claude Code"</td><td>Repite el comando de instalación del paso 1 y reinicia la herramienta. Para comprobarlo, ejecuta <span class="inline">claude --version</span>.</td></tr>
+        <tr><td>No se abre la página</td><td>Entra manualmente a <b>http://localhost:4600</b>. Si el puerto está ocupado, es que la herramienta ya está abierta.</td></tr>
+        <tr><td>Al actualizar dice "Tienes cambios locales"</td><td>Modificaste archivos de la herramienta. Escríbele a soporte antes de actualizar; tus leads no se tocan.</td></tr>
+        <tr><td>Salen muy pocos leads</td><td>Amplía los estados o ciudades, desmarca "Solo leads con teléfono" o elige otro nicho en la sección <b>Nichos</b>.</td></tr>
+        <tr><td>La búsqueda se queda "trabajando" mucho rato</td><td>Es normal: cada lead toma unos 2–3 minutos. Si pasa de 45 minutos, detenla con el botón <b>Detener</b>; los leads ya guardados se conservan.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="rules">
+      <h3>Reglas de oro</h3>
+      <ul>
+        <li><b>Confirma los datos en la llamada.</b> Un correo marcado como "Deducido" no se vio publicado: pídelo al hablar con el cliente.</li>
+        <li>Si alguien pide <b>no ser contactado</b>, márcalo como "No contactar" y avisa a soporte para bloquearlo para todo el equipo.</li>
+        <li>Llama <b>manualmente</b> desde tu teléfono: nada de marcadores automáticos ni mensajes pregrabados.</li>
+        <li>No compartas tus leads con personas fuera del equipo: contienen datos de prospectos de Devleck.</li>
+        <li>Si algo se ve raro, no lo arregles tú: envía una <b>captura de pantalla</b> a soporte.</li>
+      </ul>
+    </div>
+
+    <div class="contact">
+      <div><b>¿Necesitas ayuda?</b><span>Escríbenos con una captura de pantalla del problema.</span></div>
+      <div class="mail">contact@devleck.com</div>
+    </div>
+  </div>
+
+  <div class="running"><span><b>Devleck</b> · Software &amp; Digital Solutions · devleck.com</span><span>Guía de instalación · 3 de 3</span></div>
+</section>
+
+</body>
+</html>
