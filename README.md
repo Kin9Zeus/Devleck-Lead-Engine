@@ -17,6 +17,7 @@ and a follow-up agenda, so reps spend their day selling instead of researching.
 [![Tests](https://img.shields.io/badge/tests-14%20passing-3ddc84)](tests/)
 [![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey)](#quick-start)
 [![License](https://img.shields.io/badge/license-All%20rights%20reserved-red)](LICENSE)
+[![CI](https://github.com/Kin9Zeus/Devleck-Lead-Engine/actions/workflows/ci.yml/badge.svg)](https://github.com/Kin9Zeus/Devleck-Lead-Engine/actions/workflows/ci.yml)
 
 [Overview](#overview) · [Product tour](#product-tour) · [Sales pipeline model](#the-sales-pipeline-model) · [Niche potential](#calibrated-niche-potential) · [Catalog](#service-catalog) · [Architecture](#architecture) · [Quick start](#quick-start) · [Design decisions](#design-decisions)
 
