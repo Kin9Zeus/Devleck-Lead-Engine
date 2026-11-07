@@ -253,14 +253,14 @@ const ICONS = {
 export const icon = (name, cls = '') => `<svg class="icon ${cls}" viewBox="0 0 24 24" aria-hidden="true">${ICONS[name] || ICONS.tool}</svg>`;
 
 // ---------- Toast / modal / portapapeles ----------
-export function toast(msg, isError = false, { action, onAction, sticky = false } = {}) {
+export function toast(msg, isError = false, { action, onAction, sticky = false, duration } = {}) {
   const el = document.createElement('div');
   el.className = `toast${isError ? ' err' : ''}`;
   el.innerHTML = `<span>${esc(msg)}</span>${action ? `<button class="btn sm">${esc(action)}</button>` : ''}${sticky ? '<button class="btn sm ghost" aria-label="Cerrar">✕</button>' : ''}`;
   if (action) el.querySelector('.btn').addEventListener('click', () => { onAction?.(); el.remove(); });
   if (sticky) el.querySelector('.ghost').addEventListener('click', () => el.remove());
   document.getElementById('toasts').appendChild(el);
-  if (!sticky) setTimeout(() => el.remove(), isError ? 7000 : 3200);
+  if (!sticky) setTimeout(() => el.remove(), duration || (isError ? 7000 : 3200));
 }
 
 export async function copy(text, label = 'Copiado') {
@@ -359,4 +359,52 @@ export function agendaItems() {
     for (const t of l.tasksOpen || []) items.push({ lead: l, task: t });
   }
   return items;
+}
+
+// ---------- Eliminar leads (con confirmación y "Deshacer") ----------
+/**
+ * Pregunta antes de eliminar uno o varios leads. Al terminar ofrece "Deshacer" durante unos segundos.
+ * @param {object[]} leads  leads a eliminar
+ * @param {Function} onDone  se llama después de eliminar o de deshacer (para repintar la pantalla)
+ */
+export function confirmDeleteLeads(leads, onDone) {
+  if (!leads.length) return;
+  const one = leads.length === 1;
+  const names = leads.slice(0, 5).map((l) => `<li>${esc(l.business.name)} <span class="dim">· ${esc(l.business.city)}, ${esc(l.business.state)}</span></li>`).join('');
+  const hasWork = leads.some((l) => l.notes?.length || ['meeting', 'proposal', 'won'].includes(l.status));
+  modal(`
+    <h2>${one ? 'Eliminar este lead' : `Eliminar ${leads.length} leads`}</h2>
+    <ul class="list small" style="margin:6px 0 10px">${names}${leads.length > 5 ? `<li class="dim">…y ${leads.length - 5} más</li>` : ''}</ul>
+    ${hasWork ? `<div class="callout warn small">${one ? 'Este lead tiene notas o está avanzado' : 'Algunos tienen notas o están avanzados'} en el embudo (reunión, propuesta o ganado). Se eliminará${one ? '' : 'n'} con todo su historial.</div>` : ''}
+    <label class="check" style="margin:12px 0 4px"><input type="checkbox" id="del-forget" checked /> No volver a proponer ${one ? 'este negocio' : 'estos negocios'} en futuras búsquedas</label>
+    <p class="small muted" style="margin:0">Podrás deshacerlo unos segundos después. Además se guarda una copia de seguridad en <span class="mono">workspace/backups/</span>.</p>
+    <div class="row" style="justify-content:flex-end;margin-top:16px;gap:8px">
+      <button class="btn ghost" data-close>Cancelar</button>
+      <button class="btn danger" id="del-ok">${icon('trash')} Eliminar</button>
+    </div>`, (m, close) => {
+    m.querySelector('#del-ok').addEventListener('click', async (e) => {
+      e.target.disabled = true;
+      try {
+        const forget = m.querySelector('#del-forget').checked;
+        const res = await api('/api/leads/delete', { method: 'POST', body: { ids: leads.map((l) => l.id), forget } });
+        const gone = new Set(leads.map((l) => l.id));
+        state.leads = state.leads.filter((l) => !gone.has(l.id));
+        close();
+        onDone?.();
+        window.dispatchEvent(new Event('leads-changed'));
+        toast(`${res.count} lead${res.count === 1 ? '' : 's'} eliminado${res.count === 1 ? '' : 's'}`, false, {
+          action: 'Deshacer', sticky: false, duration: 9000,
+          onAction: async () => {
+            try {
+              const back = await api('/api/leads/restore', { method: 'POST', body: { leads: res.removed } });
+              state.leads.push(...back.leads);
+              toast('Leads restaurados');
+              onDone?.();
+              window.dispatchEvent(new Event('leads-changed'));
+            } catch (err) { toast(err.message, true); }
+          },
+        });
+      } catch (err) { e.target.disabled = false; toast(err.message, true); }
+    });
+  });
 }

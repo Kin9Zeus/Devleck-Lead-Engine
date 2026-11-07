@@ -2,7 +2,7 @@
 import {
   state, STATUS, STATUS_COLOR, GROUPS, INTEREST, PRIORITY, FOLLOWUP, api, esc, attr, icon, tierBadge, statusPill, localPill, fill, copy, toast,
   mailto, dealRange, serviceName, nicheName, fmtDateTime, timeAgo, whenLabel, toLocalInput, leadById, modal, closenessMeter, priorityChip,
-  followUpChip, US_STATES,
+  followUpChip, US_STATES, confirmDeleteLeads,
 } from './lib.js';
 
 let current = { id: null, tab: 'summary', onChange: null };
@@ -106,6 +106,7 @@ function header(lead) {
         </div>
         <div class="row">
           <button class="btn sm ghost" data-act="star" title="${lead.starred ? 'Quitar de favoritos' : 'Marcar como favorito'}" aria-pressed="${!!lead.starred}" ${lead.starred ? 'style="color:var(--lime)"' : ''}>${lead.starred ? '★' : icon('star')}</button>
+          <button class="btn sm ghost danger" data-act="delete" title="Eliminar este lead" aria-label="Eliminar lead">${icon('trash')}</button>
           <button class="btn sm ghost" data-act="close" aria-label="Cerrar">${icon('x')}</button>
         </div>
       </div>
@@ -487,14 +488,7 @@ function handleClick(e) {
     case 'prep': startPrep(lead); break;
     case 'prep-copy': copy(`/preparar-llamada ${lead.id}`, 'Comando copiado — pégalo en Claude Code'); break;
     case 'delete':
-      if (confirm(`¿Eliminar "${lead.business.name}" de tu base? Si solo no califica, mejor márcalo como "No califica".`)) {
-        api(`/api/leads/${lead.id}`, { method: 'DELETE' }).then(() => {
-          state.leads = state.leads.filter((l) => l.id !== lead.id);
-          closeLead();
-          current.onChange?.();
-          toast('Lead eliminado');
-        }).catch((err) => toast(err.message, true));
-      }
+      confirmDeleteLeads([lead], () => { closeLead(); current.onChange?.(); });
       break;
     default:
   }

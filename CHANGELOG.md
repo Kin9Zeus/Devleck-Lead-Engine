@@ -1,5 +1,20 @@
 # Changelog
 
+## v1.1.1 — 2026-11-07
+
+### Eliminar leads
+- Botón **Eliminar** (papelera) siempre visible en la ficha del lead, y **selección múltiple** en la lista de leads: marca filas o "Seleccionar los N de esta lista" y elimina de una vez (ideal para la pestaña "Cerrados sin venta").
+- Confirmación clara, opción **Deshacer** tras eliminar y copia de seguridad previa en `workspace/backups/`.
+- Por defecto el negocio eliminado **no vuelve a proponerse** en futuras búsquedas (se puede desmarcar en el diálogo). La IA recibe esos negocios en la lista de "ya conocidos".
+
+### Interfaz
+- **Embudo**: las columnas ya no se cortan a la derecha; se reparten en filas (3 por fila, 2 en tablet, 1 en móvil) y todas las etapas, incluida "Ganados", son visibles.
+- **Notas del equipo** (Agenda): ahora es un panel que se abre y se cierra con un botón (cerrado por defecto, recuerda tu elección) y la agenda usa todo el ancho; con muchas notas el panel se desplaza por dentro.
+- Revisión de responsividad en todas las pantallas (panel, agenda, cola, listas, ficha): sin desbordes horizontales desde 375 px hasta pantallas anchas.
+
+### Servidor
+- Validación del cuerpo de las peticiones (JSON no objeto → 400), ruta de archivos estáticos más estricta y retención de copias de seguridad separada (30 diarias + 20 recientes de otro tipo).
+
 ## v1.1.0 — 2026-11-07
 
 ### Embudo de ventas

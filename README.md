@@ -10,7 +10,7 @@ Claude Code researches the web, verifies contact data, qualifies each business a
 and writes the call script and emails. A local dashboard turns the result into a call queue, a color-coded pipeline
 and a follow-up agenda, so reps spend their day selling instead of researching.
 
-[![Version](https://img.shields.io/badge/version-1.1.0-d7ff1f)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-1.1.1-d7ff1f)](CHANGELOG.md)
 [![Node.js](https://img.shields.io/badge/Node.js-%E2%89%A518-339933?logo=node.js&logoColor=white)](https://nodejs.org)
 [![Claude Code](https://img.shields.io/badge/Powered%20by-Claude%20Code-D97757?logo=anthropic&logoColor=white)](https://claude.com/claude-code)
 [![Dependencies](https://img.shields.io/badge/npm%20dependencies-0-d7ff1f)](package.json)
@@ -118,6 +118,8 @@ Dragging a card moves the deal, and the interest rating rises to the minimum tha
 
 Color-coded tabs split the database into *To contact · Trying · Interested · Meeting · Proposal · Won · Closed*. Each row shows closeness,
 stage and interest, the next step and the last note. Search covers names, phones, emails, decision makers **and note text**, and CSV export follows the current view.
+
+**Keeping it tidy:** tick rows (or *select the whole list*) and delete them in one go — handy for the *Closed* tab. Deleting asks first, offers an **Undo**, backs up beforehand, and by default remembers the business so a future search never brings it back.
 
 ### 7 · Prospect with AI and watch it work
 
@@ -266,7 +268,7 @@ Reference pricing for a senior engineering team based in Colombia selling to US 
 
 **Sales pipeline** · lists by stage · drag-and-drop kanban · closeness to a yes · interest rating · suggested and manual tasks · agenda · in-app and desktop reminders · pinned notes surfaced everywhere · team notes feed · semantic color system with a built-in legend.
 
-**Sales workflow** · call queue ranked by urgency and closeness · one-click outcomes · prefilled `tel:` and `mailto:` · on-demand AI call prep · manual enrichment of people, phones, emails and business data · CSV export.
+**Sales workflow** · call queue ranked by urgency and closeness · one-click outcomes · prefilled `tel:` and `mailto:` · on-demand AI call prep · manual enrichment of people, phones, emails and business data · CSV export · multi-select and delete with undo.
 
 **Administration** · versioned JSON configuration editable from the UI or through Claude · Spanish sales guides · territories · blocklist · in-app updates through git.
 
@@ -332,7 +334,7 @@ Reps update from **Configuración → Buscar actualizaciones → Actualizar ahor
 
 - **Leads live outside git** in `workspace/`, so an update never touches them.
 - **Non-destructive migration**: on startup, leads saved by older versions get the new fields (stage timestamps, interest, tasks, note ids), and nothing is removed. The migration path is covered by tests.
-- **Backups**: one copy per day and one before every in-app update, in `workspace/backups/` (the latest 30 are kept).
+- **Backups**: one copy per day and one before every in-app update or deletion, in `workspace/backups/` (30 daily copies plus the 20 most recent others are kept).
 - **Manual edits win**: fields a rep edits by hand are tracked in `manualFields`, and later AI re-research never overwrites them.
 
 ## Configuration

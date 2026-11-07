@@ -446,3 +446,54 @@ table.leads tbody tr { box-shadow: inset 3px 0 0 var(--c); }
 .kcard .row.between > .truncate { flex: 1; }
 .col header b { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .col header .small { white-space: nowrap; }
+
+/* ===== v1.1.1 — embudo adaptable, panel de notas plegable y selección múltiple ===== */
+/* El tablero ya no se corta a la derecha: en pantallas medianas las columnas se reparten en filas
+   equilibradas (3 por fila) y solo en pantallas muy anchas se muestran todas en una sola fila. */
+.board { grid-template-columns: repeat(3, minmax(0, 1fr)); overflow: visible; padding-bottom: 0; }
+.col-body { max-height: 62vh; }
+@media (min-width: 1680px) { .board { grid-template-columns: repeat(var(--cols), minmax(0, 1fr)); } }
+@media (max-width: 860px) { .board { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 540px) { .board { grid-template-columns: minmax(0, 1fr); } }
+
+.btn.on { border-color: var(--lime); color: var(--lime); background: var(--lime-soft); }
+.btn.danger:hover { background: rgba(255,93,93,.12); border-color: rgba(255,93,93,.5); }
+.btn.sm.danger { border-color: rgba(255,93,93,.4); }
+.notes-panel { max-height: min(75vh, 760px); overflow-y: auto; overscroll-behavior: contain; }
+.notes-panel h3 { position: sticky; top: -20px; background: var(--panel); margin: -20px -20px 12px; padding: 16px 20px 10px; z-index: 1; border-radius: var(--radius) var(--radius) 0 0; }
+.page-head, .head { flex-wrap: wrap; }
+
+.sel-cell { width: 38px; padding-right: 0 !important; cursor: default; }
+.sel-cell input, th.sel-cell input { width: 16px; height: 16px; accent-color: var(--lime); cursor: pointer; }
+table.leads tbody tr.selected { background: var(--lime-soft); }
+.bulk-bar { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 10px 14px; margin-bottom: 10px; border: 1px solid rgba(215,255,31,.3); background: var(--lime-soft); border-radius: 12px; }
+.bulk-bar .right { margin-left: auto; }
+
+/* Móvil: las rejillas de una columna no deben crecer más que la pantalla */
+@media (max-width: 860px) {
+  .g2, .g3, .g4 { grid-template-columns: minmax(0, 1fr); }
+  .grid > *, .card { min-width: 0; }
+  .toolbar { flex-wrap: wrap; }
+  .toolbar .input, .toolbar select.input { min-width: 0; max-width: 100%; flex: 1 1 140px; }
+  .toolbar .search { flex-basis: 100%; }
+  .agenda-item .mono, .agenda-item .small { white-space: normal; }
+  .page-head .actions { display: flex; flex-wrap: wrap; gap: 8px; }
+  .notes-panel { max-height: none; }
+}
+@media (max-width: 860px) {
+  .lead-row { flex-wrap: wrap; }
+  .lead-row > *, .agenda-item > * { min-width: 0; }
+  .lead-row > :first-child { flex: 1 1 100%; }
+  .agenda-item { align-items: stretch; width: 100%; }
+  .agenda-item > .row { flex-wrap: wrap; }
+}
+.stack { grid-template-columns: minmax(0, 1fr); }
+.stack > * { min-width: 0; }
+@media (max-width: 860px) {
+  .q-item { grid-template-columns: auto minmax(0, 1fr); }
+  .q-item > * { min-width: 0; }
+  .q-item > :nth-child(n+3) { grid-column: 1 / -1; justify-items: start; }
+  .task-line { flex-wrap: wrap; }
+}
+.lead-tasks { grid-template-columns: minmax(0, 1fr); }
+.task-line > .truncate { min-width: 0; flex: 1 1 120px; }

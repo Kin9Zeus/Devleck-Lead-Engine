@@ -6,7 +6,7 @@ import { exec, execFile } from 'node:child_process';
 import {
   ROOT, INSIGHTS_FILE, CONFIG_FILES, loadAllConfig, saveConfig, loadLeads, updateLeads, loadSettings, saveSettings, readJson, backupLeads,
 } from '../lib/store.mjs';
-import { STATUSES, computeScore } from '../lib/leads.mjs';
+import { STATUSES, computeScore, removeLeads, restoreLeads } from '../lib/leads.mjs';
 import { localTimeInfo } from '../lib/normalize.mjs';
 import { decorate, migrateLead, applyLeadUpdate, EditError, STAGES, GROUPS, INTEREST } from '../lib/pipeline.mjs';
 import { runs, getClaudeVersion, findClaude } from './runner.mjs';
@@ -35,7 +35,10 @@ async function readBody(req) {
     chunks.push(chunk);
   }
   if (!chunks.length) return {};
-  try { return JSON.parse(Buffer.concat(chunks).toString('utf8')); } catch { throw new HttpError(400, 'JSON inválido'); }
+  let body;
+  try { body = JSON.parse(Buffer.concat(chunks).toString('utf8')); } catch { throw new HttpError(400, 'JSON inválido'); }
+  if (body === null || typeof body !== 'object') throw new HttpError(400, 'Se esperaba un objeto JSON');
+  return body;
 }
 
 const git = (args, timeout = 20000) => new Promise((resolve) => {
@@ -150,15 +153,26 @@ route('PATCH', '/api/leads/:id', async (req, res, p) => {
   return decorateLead(lead);
 });
 
-route('DELETE', '/api/leads/:id', async (req, res, p) => {
-  const ok = updateLeads((db) => {
-    const i = db.leads.findIndex((x) => x.id === p.id);
-    if (i < 0) return false;
-    db.leads.splice(i, 1);
-    return true;
-  });
-  if (!ok) throw new HttpError(404, 'Lead no encontrado');
-  return { ok: true };
+// Eliminar leads (uno o varios). Se hace una copia de seguridad antes y se devuelven los leads
+// eliminados para que la interfaz pueda ofrecer "Deshacer". `forget` evita que una búsqueda futura los vuelva a traer.
+function deleteLeads(ids, forget) {
+  if (!Array.isArray(ids) || !ids.length || ids.length > 2000 || ids.some((i) => typeof i !== 'string')) throw new HttpError(400, 'Indica los leads a eliminar.');
+  backupLeads('pre-delete');
+  const removed = updateLeads((db) => removeLeads(db, ids, { forget: forget !== false }));
+  if (!removed.length) throw new HttpError(404, 'Lead no encontrado');
+  return { ok: true, count: removed.length, removed: removed.map(decorateLead) };
+}
+
+route('DELETE', '/api/leads/:id', async (req, res, p, url) => deleteLeads([p.id], url.searchParams.get('forget') !== '0'));
+route('POST', '/api/leads/delete', async (req) => {
+  const body = await readBody(req);
+  return deleteLeads(body.ids, body.forget);
+});
+route('POST', '/api/leads/restore', async (req) => {
+  const body = await readBody(req);
+  if (!Array.isArray(body.leads) || !body.leads.length) throw new HttpError(400, 'Nada que restaurar.');
+  const restored = updateLeads((db) => restoreLeads(db, body.leads));
+  return { ok: true, count: restored.length, leads: restored.map(decorateLead) };
 });
 
 route('GET', '/api/insights', async () => readJson(INSIGHTS_FILE, null));
@@ -192,8 +206,10 @@ route('GET', '/api/runs/:id/stream', async (req, res, p) => {
 });
 
 function serveStatic(req, res, pathname) {
-  const file = path.normalize(path.join(UI_DIR, pathname === '/' ? 'index.html' : decodeURIComponent(pathname)));
-  if (!file.startsWith(UI_DIR) || !fs.existsSync(file) || fs.statSync(file).isDirectory()) return send(res, 404, 'No encontrado');
+  let rel;
+  try { rel = decodeURIComponent(pathname); } catch { return send(res, 400, 'Solicitud inválida'); }
+  const file = path.normalize(path.join(UI_DIR, rel === '/' ? 'index.html' : rel));
+  if (!file.startsWith(UI_DIR + path.sep) || !fs.existsSync(file) || fs.statSync(file).isDirectory()) return send(res, 404, 'No encontrado');
   res.writeHead(200, { 'Content-Type': MIME[path.extname(file)] || 'application/octet-stream', 'Cache-Control': 'no-cache' });
   fs.createReadStream(file).pipe(res);
 }

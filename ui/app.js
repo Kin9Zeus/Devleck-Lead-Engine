@@ -3,13 +3,13 @@ import {
   state, STATUS, STATUS_COLOR, GROUPS, groupOf, INTEREST, PRIORITY, FOLLOWUP, ACTIVE_STATUSES, US_STATES, api, esc, attr, icon, tierBadge,
   statusPill, localPill, stars, toast, copy, modal, download, refreshLeads, timeAgo, fmtDateTime, whenLabel, nicheName, serviceName,
   nicheById, queueRank, isQueueable, localInfo, initials, dealRange, fill, plural, closenessMeter, closenessColor, interestPill,
-  priorityChip, followUpChip, notePreview, colorLegend, agendaItems, leadById,
+  priorityChip, followUpChip, notePreview, colorLegend, agendaItems, leadById, confirmDeleteLeads,
 } from './lib.js';
 import { openLead, closeLead } from './drawer.js';
 
 const view = document.getElementById('view');
 const ui = {
-  leads: { group: 'active', q: '', tier: '', niche: '', state: '', service: '', interest: '', sort: 'closeness', dir: -1 },
+  leads: { sel: new Set(), group: 'active', q: '', tier: '', niche: '', state: '', service: '', interest: '', sort: 'closeness', dir: -1 },
   queue: { openOnly: false, niche: '' },
   pipeline: { q: '', niche: '', showClosed: false },
   prospectDraft: null,
@@ -35,6 +35,15 @@ const NAV = [
   ['#/catalog', 'box', 'Catálogo'],
   ['#/settings', 'settings', 'Configuración'],
 ];
+
+// Preferencias de interfaz por navegador (si el almacenamiento no está disponible, se usan los valores por defecto).
+function getPref(key, fallback) {
+  try { const v = localStorage.getItem(`devleck.${key}`); return v == null ? fallback : JSON.parse(v); } catch { return fallback; }
+}
+function setPref(key, value) {
+  try { localStorage.setItem(`devleck.${key}`, JSON.stringify(value)); } catch { /* sin almacenamiento */ }
+}
+window.addEventListener('leads-changed', () => renderNav());
 
 function renderNav() {
   const hash = location.hash.split('/').slice(0, 2).join('/') || '#/';
@@ -174,6 +183,7 @@ function dashboard() {
 
 // ---------- Agenda: seguimientos y tareas por urgencia ----------
 function agenda() {
+  const notesOpen = getPref('agenda.notes', false);
   const items = agendaItems();
   const now = new Date();
   const endToday = new Date(now); endToday.setHours(23, 59, 59, 999);
@@ -193,9 +203,9 @@ function agenda() {
   const notes = state.leads.flatMap((l) => l.notes.map((n) => ({ n, l }))).sort((a, b) => String(b.n.at).localeCompare(String(a.n.at))).slice(0, 25);
   view.innerHTML = `
     ${head('Agenda y <em>seguimientos</em>', 'Todo lo que tienes que hacer, ordenado por urgencia. Las tareas sugeridas desaparecen solas cuando registras el resultado.',
-      `<button class="btn" id="notif-btn">${icon('bell')} Recordatorios en el escritorio</button>`)}
-    <div class="grid g3" style="align-items:start">
-      <div class="span2 stack" style="gap:16px">
+      `<button class="btn ${notesOpen ? 'on' : ''}" id="notes-btn" aria-expanded="${notesOpen}" aria-controls="notes-panel">${icon('note')} Notas del equipo${notes.length ? ` <span class="tab-count">${notes.length}</span>` : ''}</button><button class="btn" id="notif-btn">${icon('bell')} Recordatorios en el escritorio</button>`)}
+    <div class="grid ${notesOpen ? 'g3' : ''}" style="align-items:start">
+      <div class="${notesOpen ? 'span2 ' : ''}stack" style="gap:16px">
         ${cols.map((b) => `<div class="card agenda-col" style="--c:${b.color}">
           <h3><span class="dot" style="background:var(--c)"></span> ${esc(b.label)} <span class="right badge">${b.list.length}</span></h3>
           ${b.list.length ? `<div class="stack" style="gap:6px">${b.list.slice(0, 60).map(({ lead, task }) => `
@@ -208,12 +218,15 @@ function agenda() {
             </div>`).join('')}</div>` : '<p class="muted small" style="margin:0">Nada aquí.</p>'}
         </div>`).join('')}
       </div>
-      <div class="card">
-        <h3>${icon('note')} Notas recientes del equipo</h3>
+      ${notesOpen ? `<aside class="card notes-panel" id="notes-panel">
+        <h3>${icon('note')} Notas recientes del equipo <button class="btn sm ghost right" id="notes-close" aria-label="Ocultar notas del equipo">${icon('x')}</button></h3>
         ${notes.length ? `<div class="stack" style="gap:10px">${notes.map(({ n, l }) => `<div class="note-feed" data-lead="${attr(l.id)}" data-tab="activity"><div class="small"><b>${esc(l.business.name)}</b> <span class="dim">· ${esc(n.by || '')} · ${esc(timeAgo(n.at))}</span>${n.pinned ? ` ${icon('pin')}` : ''}</div><div class="small" style="white-space:pre-wrap">${esc(n.text.length > 220 ? `${n.text.slice(0, 220)}…` : n.text)}</div></div>`).join('')}</div>` : '<p class="muted small">Las notas que guardes en los leads aparecerán aquí.</p>'}
-      </div>
+      </aside>` : ''}
     </div>`;
   bindLeadClicks(agenda);
+  const toggleNotes = () => { setPref('agenda.notes', !notesOpen); agenda(); };
+  view.querySelector('#notes-btn').addEventListener('click', toggleNotes);
+  view.querySelector('#notes-close')?.addEventListener('click', toggleNotes);
   view.querySelector('#notif-btn').addEventListener('click', enableNotifications);
 }
 
@@ -387,13 +400,23 @@ function renderLeadsTable() {
   renderGroupTabs();
   const list = filteredLeads();
   const el = view.querySelector('#leads-table');
+  // La selección solo incluye leads visibles: nunca se elimina algo que el filtro actual oculta.
+  const sel = ui.leads.sel;
+  const visible = new Set(list.map((l) => l.id));
+  for (const id of [...sel]) if (!visible.has(id)) sel.delete(id);
   if (!state.leads.length) {
     el.innerHTML = `<div class="card empty"><div class="big">Aún no hay leads</div>Lanza una búsqueda desde <a href="#/prospect">Prospectar</a> o con <span class="mono">/prospectar</span> en Claude Code.</div>`;
     return;
   }
-  el.innerHTML = list.length ? `<div class="table-wrap"><table class="leads">
-      <thead><tr><th>Cercanía al sí</th><th>Negocio · última nota</th><th>Etapa · interés</th><th>Próximo paso</th><th>Contacto</th><th>Servicio a ofrecer</th></tr></thead>
-      <tbody>${list.map((l) => `<tr data-lead="${attr(l.id)}" style="--c:${STATUS_COLOR[l.status]}">
+  const allSel = list.length > 0 && list.every((l) => sel.has(l.id));
+  el.innerHTML = (sel.size ? `<div class="bulk-bar" role="status">
+      <b>${sel.size} seleccionado${sel.size === 1 ? '' : 's'}</b>
+      ${allSel ? '' : `<button class="btn sm ghost" id="sel-view">Seleccionar los ${list.length} de esta lista</button>`}
+      <span class="right row" style="gap:8px"><button class="btn sm ghost" id="sel-none">Quitar selección</button><button class="btn sm danger" id="sel-del">${icon('trash')} Eliminar</button></span>
+    </div>` : '') + (list.length ? `<div class="table-wrap"><table class="leads">
+      <thead><tr><th class="sel-cell"><input type="checkbox" id="sel-all" aria-label="Seleccionar todos los de esta lista" ${allSel ? 'checked' : ''} /></th><th>Cercanía al sí</th><th>Negocio · última nota</th><th>Etapa · interés</th><th>Próximo paso</th><th>Contacto</th><th>Servicio a ofrecer</th></tr></thead>
+      <tbody>${list.map((l) => `<tr data-lead="${attr(l.id)}" class="${sel.has(l.id) ? 'selected' : ''}" style="--c:${STATUS_COLOR[l.status]}">
+        <td class="sel-cell"><input type="checkbox" class="sel" data-sel="${attr(l.id)}" aria-label="Seleccionar ${attr(l.business.name)}" ${sel.has(l.id) ? 'checked' : ''} /></td>
         <td>${closenessMeter(l)}</td>
         <td style="max-width:300px"><div class="row" style="gap:8px">${tierBadge(l)}<div style="min-width:0"><div class="biz-name truncate">${l.starred ? '★ ' : ''}${esc(l.business.name)}</div><div class="biz-sub truncate">${esc(l.business.city)}, ${esc(l.business.state)} · ${esc(nicheName(l.business.niche))}</div></div></div>${notePreview(l, 90)}</td>
         <td><div class="stack" style="gap:4px;justify-items:start">${statusPill(l.status)}${interestPill(l.interest || 0)}</div></td>
@@ -401,8 +424,14 @@ function renderLeadsTable() {
         <td><div class="mono small">${esc(l.contacts.phones[0]?.display || '—')}</div><div class="small dim truncate" style="max-width:180px">${esc(l.contacts.decisionMakers[0]?.name || l.contacts.emails[0]?.email || '')}</div>${localPill(l)}</td>
         <td style="max-width:220px"><div class="small truncate" style="color:var(--lime)">${esc(serviceName(l.recommendation.serviceId))}</div><div class="small dim">${esc(dealRange(l.recommendation.estimatedDeal))}</div></td>
       </tr>`).join('')}</tbody></table></div>`
-    : '<div class="card empty"><div class="big">Lista vacía</div>No hay leads en esta etapa con los filtros actuales.</div>';
-  el.querySelectorAll('[data-lead]').forEach((r) => r.addEventListener('click', () => openLead(r.dataset.lead, renderLeadsTable)));
+    : '<div class="card empty"><div class="big">Lista vacía</div>No hay leads en esta etapa con los filtros actuales.</div>');
+  el.querySelectorAll('tr[data-lead]').forEach((r) => r.addEventListener('click', () => openLead(r.dataset.lead, renderLeadsTable)));
+  el.querySelectorAll('.sel-cell').forEach((c) => c.addEventListener('click', (e) => e.stopPropagation()));
+  el.querySelectorAll('[data-sel]').forEach((c) => c.addEventListener('change', () => { c.checked ? sel.add(c.dataset.sel) : sel.delete(c.dataset.sel); renderLeadsTable(); }));
+  el.querySelector('#sel-all')?.addEventListener('change', (e) => { if (e.target.checked) list.forEach((l) => sel.add(l.id)); else sel.clear(); renderLeadsTable(); });
+  el.querySelector('#sel-view')?.addEventListener('click', () => { list.forEach((l) => sel.add(l.id)); renderLeadsTable(); });
+  el.querySelector('#sel-none')?.addEventListener('click', () => { sel.clear(); renderLeadsTable(); });
+  el.querySelector('#sel-del')?.addEventListener('click', () => confirmDeleteLeads(list.filter((l) => sel.has(l.id)), () => { sel.clear(); renderLeadsTable(); renderNav(); }));
 }
 
 function exportCsv() {
