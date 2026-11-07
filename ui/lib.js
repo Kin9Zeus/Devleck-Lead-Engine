@@ -1,4 +1,4 @@
-// Utilidades compartidas de la interfaz: estado, API, iconos y helpers de render.
+// Utilidades compartidas de la interfaz: estado, API, sistema de colores, iconos y helpers de render.
 
 export const state = {
   config: null,
@@ -8,13 +8,17 @@ export const state = {
   leads: [],
   runs: [],
   system: null,
+  pipeline: null,
 };
 
+// ---------- Sistema de colores (una sola fuente de verdad; la leyenda se genera desde aquí) ----------
+
+/** Etapas del embudo. */
 export const STATUS = {
   new: 'Nuevo',
   attempted: 'Intentado',
   callback: 'Volver a llamar',
-  contacted: 'Contactado',
+  contacted: 'Interesado',
   meeting: 'Reunión agendada',
   proposal: 'Propuesta enviada',
   won: 'Ganado',
@@ -23,12 +27,58 @@ export const STATUS = {
   dnc: 'No contactar',
 };
 export const STATUS_COLOR = {
-  new: '#5cb8ff', attempted: '#ffb547', callback: '#ffcf85', contacted: '#b18cff', meeting: '#d7ff1f',
-  proposal: '#b8e000', won: '#3ddc84', lost: '#3a4048', not_fit: '#2d333b', dnc: '#ff5d5d',
+  new: '#5cb8ff', attempted: '#ffb547', callback: '#ff9447', contacted: '#b18cff', meeting: '#d7ff1f',
+  proposal: '#2dd4bf', won: '#3ddc84', lost: '#6b7280', not_fit: '#4b5563', dnc: '#ff5d5d',
 };
-export const OPEN_STATUSES = ['new', 'attempted', 'callback'];
-export const ACTIVE_STATUSES = ['new', 'attempted', 'callback', 'contacted', 'meeting', 'proposal'];
+export const STATUS_HINT = {
+  new: 'Encontrado por la IA, aún sin contactar.',
+  attempted: 'Se llamó pero no se habló con nadie.',
+  callback: 'Pidieron que volvamos a llamar.',
+  contacted: 'Hubo conversación y mostró interés.',
+  meeting: 'Tiene reunión agendada.',
+  proposal: 'Se envió propuesta; esperando respuesta.',
+  won: 'Cerrado: es cliente.',
+  lost: 'No interesado.',
+  not_fit: 'No encaja con lo que vendemos.',
+  dnc: 'Pidió no ser contactado nunca más.',
+};
 
+/** Listas en las que se separan los leads (mismo orden que el embudo). */
+export const GROUPS = [
+  { id: 'todo', label: 'Por contactar', statuses: ['new'], color: STATUS_COLOR.new },
+  { id: 'trying', label: 'En intento', statuses: ['attempted', 'callback'], color: STATUS_COLOR.attempted },
+  { id: 'interested', label: 'Interesados', statuses: ['contacted'], color: STATUS_COLOR.contacted },
+  { id: 'meeting', label: 'Reunión', statuses: ['meeting'], color: STATUS_COLOR.meeting },
+  { id: 'proposal', label: 'Propuesta', statuses: ['proposal'], color: STATUS_COLOR.proposal },
+  { id: 'won', label: 'Ganados', statuses: ['won'], color: STATUS_COLOR.won },
+  { id: 'closed', label: 'Cerrados sin venta', statuses: ['lost', 'not_fit', 'dnc'], color: STATUS_COLOR.lost },
+];
+export const groupOf = (status) => GROUPS.find((g) => g.statuses.includes(status)) || GROUPS[0];
+
+/** Escala de "temperatura": se usa para el interés del lead y para la cercanía al sí. */
+export const INTEREST = [
+  { level: 0, label: 'Sin evaluar', color: '#4b5563', hint: 'Aún no has hablado con el decisor.' },
+  { level: 1, label: 'Frío', color: '#60a5fa', hint: 'Escuchó, pero no muestra interés.' },
+  { level: 2, label: 'Tibio', color: '#2dd4bf', hint: 'Le interesa el tema, pero no ahora.' },
+  { level: 3, label: 'Interesado', color: '#facc15', hint: 'Quiere más información.' },
+  { level: 4, label: 'Caliente', color: '#fb923c', hint: 'Tiene el dolor claro y quiere avanzar.' },
+  { level: 5, label: 'Listo para cerrar', color: '#3ddc84', hint: 'Solo faltan detalles para firmar.' },
+];
+export const closenessColor = (c) => (c >= 80 ? '#3ddc84' : c >= 60 ? '#fb923c' : c >= 40 ? '#facc15' : c >= 20 ? '#2dd4bf' : '#60a5fa');
+
+export const PRIORITY = {
+  high: { label: 'Alta', color: '#ff5d5d' },
+  medium: { label: 'Media', color: '#ffb547' },
+  low: { label: 'Baja', color: '#8b939c' },
+};
+export const FOLLOWUP = {
+  overdue: { label: 'Vencido', color: '#ff5d5d' },
+  today: { label: 'Hoy', color: '#ffb547' },
+  soon: { label: 'Próximo', color: '#5cb8ff' },
+  later: { label: 'Programado', color: '#8b939c' },
+};
+
+export const ACTIVE_STATUSES = ['new', 'attempted', 'callback', 'contacted', 'meeting', 'proposal'];
 export const US_STATES = ['AL','AK','AZ','AR','CA','CO','CT','DE','DC','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY'];
 
 // ---------- API ----------
@@ -49,6 +99,7 @@ export const attr = esc;
 export const money = (n) => (n == null ? '' : `$${Number(n).toLocaleString('en-US', { maximumFractionDigits: 0 })}`);
 export const dealRange = (d) => (d?.min || d?.max ? [money(d.min), money(d.max)].filter(Boolean).join(' – ') : '—');
 export const initials = (name) => String(name || '?').split(/\s+/).map((w) => w[0]).slice(0, 2).join('').toUpperCase();
+export const plural = (n, word, pl) => `${n} ${n === 1 ? word : pl || `${word}s`}`;
 
 export function timeAgo(iso) {
   if (!iso) return '';
@@ -63,6 +114,27 @@ export function timeAgo(iso) {
 export function fmtDateTime(iso) {
   if (!iso) return '';
   return new Date(iso).toLocaleString('es', { weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
+}
+
+/** "hoy 15:00", "mañana 09:00", "hace 2 d", "vie 14 nov 10:00". */
+export function whenLabel(iso) {
+  if (!iso) return '';
+  const d = new Date(iso);
+  const now = new Date();
+  const time = d.toLocaleTimeString('es', { hour: '2-digit', minute: '2-digit' });
+  const day = (x) => new Date(x.getFullYear(), x.getMonth(), x.getDate()).getTime();
+  const diff = Math.round((day(d) - day(now)) / 86400e3);
+  if (diff === 0) return `hoy ${time}`;
+  if (diff === 1) return `mañana ${time}`;
+  if (diff === -1) return `ayer ${time}`;
+  if (diff < -1) return `hace ${-diff} d`;
+  return d.toLocaleString('es', { weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
+}
+
+export function toLocalInput(iso) {
+  const d = new Date(iso);
+  const p = (n) => String(n).padStart(2, '0');
+  return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}T${p(d.getHours())}:${p(d.getMinutes())}`;
 }
 
 /** Hora local del lead y si está en horario laboral (lun–vie 8–18). */
@@ -93,12 +165,43 @@ export const nicheName = (id) => nicheById(id)?.name || id || '—';
 export const serviceName = (id) => serviceById(id)?.name || id || '—';
 
 // ---------- Componentes ----------
-export const tierBadge = (l) => `<span class="tier tier-${esc(l.tier)}" title="Tier ${esc(l.tier)} · ${l.score}/100">${esc(l.tier)}</span>`;
-export const statusPill = (s) => `<span class="st st-${esc(s)}">${esc(STATUS[s] || s)}</span>`;
+export const tierBadge = (l) => `<span class="tier tier-${esc(l.tier)}" title="Tier ${esc(l.tier)}: calidad del lead · ${l.score}/100">${esc(l.tier)}</span>`;
+export const statusPill = (s) => `<span class="st" style="--c:${STATUS_COLOR[s] || '#8b939c'}" title="${attr(STATUS_HINT[s] || '')}">${esc(STATUS[s] || s)}</span>`;
 export const stars = (n = 0) => `<span class="stars" title="Prioridad ${n}/5">${'★'.repeat(n)}<span class="off">${'★'.repeat(Math.max(0, 5 - n))}</span></span>`;
+
 export function localPill(lead) {
   const li = localInfo(lead.business.timezone);
-  return `<span class="small ${li.open ? 'open-now' : 'closed-now'}" title="Hora local del negocio"><span class="dot" style="background:currentColor"></span> ${esc(li.label)}</span>`;
+  return `<span class="small ${li.open ? 'open-now' : 'closed-now'}" title="Hora local del negocio${li.open ? ' (abierto)' : ' (fuera de horario)'}"><span class="dot" style="background:currentColor"></span> ${esc(li.label)}</span>`;
+}
+
+/** Barra de cercanía al "sí" con el color de la escala de temperatura. */
+export function closenessMeter(lead, { compact = false } = {}) {
+  const c = lead.closeness ?? 0;
+  const color = closenessColor(c);
+  return `<span class="meter ${compact ? 'compact' : ''}" title="Cercanía al sí: ${c}% (etapa + interés + calidad del lead)"><span class="meter-track"><span class="meter-fill" style="width:${c}%;background:${color}"></span></span><b style="color:${color}">${c}%</b></span>`;
+}
+
+export function interestPill(level = 0) {
+  const it = INTEREST[level] || INTEREST[0];
+  return `<span class="pill-dot" style="--c:${it.color}" title="Interés: ${attr(it.label)} — ${attr(it.hint)}"><i></i>${esc(it.label)}</span>`;
+}
+
+export function priorityChip(p) {
+  const pr = PRIORITY[p] || PRIORITY.low;
+  return `<span class="prio" style="--c:${pr.color}" title="Prioridad ${attr(pr.label)}">${esc(pr.label)}</span>`;
+}
+
+export function followUpChip(lead) {
+  if (!lead.nextActionAt || !FOLLOWUP[lead.followUp]) return '';
+  const f = FOLLOWUP[lead.followUp];
+  return `<span class="fu" style="--c:${f.color}" title="Seguimiento ${attr(f.label.toLowerCase())}">${icon('clock')} ${esc(whenLabel(lead.nextActionAt))}</span>`;
+}
+
+export function notePreview(lead, max = 110) {
+  const n = lead.lastNote;
+  if (!n) return '';
+  const text = n.text.length > max ? `${n.text.slice(0, max)}…` : n.text;
+  return `<div class="note-peek${n.pinned ? ' pinned' : ''}" title="${attr(`${n.by || ''} · ${fmtDateTime(n.at)}\n${n.text}`)}">${icon(n.pinned ? 'pin' : 'note')}<span>${esc(text)}</span></div>`;
 }
 
 const ICONS = {
@@ -138,16 +241,26 @@ const ICONS = {
   trash: '<path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>',
   calendar: '<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>',
   alert: '<path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/>',
+  note: '<path d="M4 4h16v12l-4 4H4z"/><path d="M16 20v-4h4M8 9h8M8 13h5"/>',
+  pin: '<path d="M12 17v5M9 3h6l-1 6 4 4H6l4-4z"/>',
+  kanban: '<rect x="3" y="3" width="5" height="18" rx="1"/><rect x="10" y="3" width="5" height="12" rx="1"/><rect x="17" y="3" width="4" height="8" rx="1"/>',
+  checklist: '<path d="M9 6h12M9 12h12M9 18h12"/><path d="m3 6 1.5 1.5L7 5M3 12l1.5 1.5L7 11M3 18l1.5 1.5L7 17"/>',
+  palette: '<circle cx="12" cy="12" r="10"/><circle cx="8" cy="10" r="1.5"/><circle cx="12" cy="7" r="1.5"/><circle cx="16" cy="10" r="1.5"/><path d="M12 22a3 3 0 0 1 0-6h2a2 2 0 0 0 0-4"/>',
+  bell: '<path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 0 1-3.4 0"/>',
+  book: '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/>',
+  person: '<circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/>',
 };
 export const icon = (name, cls = '') => `<svg class="icon ${cls}" viewBox="0 0 24 24" aria-hidden="true">${ICONS[name] || ICONS.tool}</svg>`;
 
 // ---------- Toast / modal / portapapeles ----------
-export function toast(msg, isError = false) {
+export function toast(msg, isError = false, { action, onAction, sticky = false } = {}) {
   const el = document.createElement('div');
   el.className = `toast${isError ? ' err' : ''}`;
-  el.textContent = msg;
+  el.innerHTML = `<span>${esc(msg)}</span>${action ? `<button class="btn sm">${esc(action)}</button>` : ''}${sticky ? '<button class="btn sm ghost" aria-label="Cerrar">✕</button>' : ''}`;
+  if (action) el.querySelector('.btn').addEventListener('click', () => { onAction?.(); el.remove(); });
+  if (sticky) el.querySelector('.ghost').addEventListener('click', () => el.remove());
   document.getElementById('toasts').appendChild(el);
-  setTimeout(() => el.remove(), isError ? 7000 : 3200);
+  if (!sticky) setTimeout(() => el.remove(), isError ? 7000 : 3200);
 }
 
 export async function copy(text, label = 'Copiado') {
@@ -159,9 +272,9 @@ export async function copy(text, label = 'Copiado') {
   }
 }
 
-export function modal(html, onMount) {
+export function modal(html, onMount, { wide = false } = {}) {
   const root = document.getElementById('modal-root');
-  root.innerHTML = `<div class="modal-backdrop"><div class="modal" role="dialog" aria-modal="true">${html}</div></div>`;
+  root.innerHTML = `<div class="modal-backdrop"><div class="modal${wide ? ' wide' : ''}" role="dialog" aria-modal="true">${html}</div></div>`;
   const close = () => { root.innerHTML = ''; document.removeEventListener('keydown', onKey); };
   const onKey = (e) => { if (e.key === 'Escape') close(); };
   document.addEventListener('keydown', onKey);
@@ -169,6 +282,33 @@ export function modal(html, onMount) {
   root.querySelectorAll('[data-close]').forEach((b) => b.addEventListener('click', close));
   onMount?.(root.querySelector('.modal'), close);
   return close;
+}
+
+/** Leyenda del sistema de colores, para que todo el equipo lea igual cada color. */
+export function colorLegend() {
+  const row = (color, label, hint) => `<div class="legend-row"><span class="swatch" style="background:${color}"></span><div><b>${esc(label)}</b>${hint ? `<div class="small muted">${esc(hint)}</div>` : ''}</div></div>`;
+  modal(`
+    <h2>Guía de colores</h2>
+    <div class="grid g2" style="gap:22px">
+      <div>
+        <div class="section-title">Etapa del embudo</div>
+        ${Object.keys(STATUS).map((s) => row(STATUS_COLOR[s], STATUS[s], STATUS_HINT[s])).join('')}
+      </div>
+      <div>
+        <div class="section-title">Interés del lead (lo asignas tú) y cercanía al sí</div>
+        ${INTEREST.map((i) => row(i.color, `${i.level ? `${i.level} · ` : ''}${i.label}`, i.hint)).join('')}
+        <p class="small muted">La <b>cercanía al sí</b> (0–100%) combina la etapa, tu nivel de interés y la calidad del lead, y usa la misma escala: azul = lejos, verde = a punto de cerrar.</p>
+        <div class="section-title">Seguimientos</div>
+        ${Object.values(FOLLOWUP).map((f) => row(f.color, f.label)).join('')}
+        <div class="section-title">Prioridad de tareas</div>
+        ${Object.values(PRIORITY).map((p) => row(p.color, p.label)).join('')}
+        <div class="section-title">Calidad del lead (tier)</div>
+        ${row('#d7ff1f', 'Tier A', 'Puntaje ≥ 75: mejor encaje, necesidad y contactabilidad.')}
+        ${row('#4d5c00', 'Tier B', 'Puntaje 55–74.')}
+        ${row('#2d333b', 'Tier C', 'Puntaje < 55.')}
+      </div>
+    </div>
+    <div class="row" style="justify-content:flex-end;margin-top:16px"><button class="btn primary" data-close>Entendido</button></div>`, null, { wide: true });
 }
 
 export function download(filename, content, type = 'text/csv;charset=utf-8') {
@@ -195,16 +335,28 @@ export function leadById(id) {
   return state.leads.find((l) => l.id === id);
 }
 
-/** Prioridad de la cola de llamadas: puntaje + abierto ahora + callbacks vencidos. */
+/** Prioridad de la cola de llamadas: seguimientos vencidos, cercanía al sí, calidad y si están abiertos ahora. */
 export function queueRank(lead) {
   const li = localInfo(lead.business.timezone);
-  const due = lead.nextActionAt && new Date(lead.nextActionAt) <= new Date();
+  const fu = lead.followUp === 'overdue' ? 40 : lead.followUp === 'today' ? 25 : 0;
   const attempts = (lead.activity || []).filter((a) => a.type === 'call').length;
-  return lead.score + (li.open ? 15 : 0) + (due ? 30 : 0) + (lead.starred ? 10 : 0) - attempts * 4 + (lead.contacts.phones.length ? 0 : -40);
+  return lead.score * 0.6 + (lead.closeness || 0) * 0.6 + fu + (li.open ? 15 : 0) + (lead.starred ? 10 : 0) - attempts * 4 + (lead.contacts.phones.length ? 0 : -40);
 }
 
+/** Entra a la cola: leads sin contactar o en intento sin cita futura, y cualquier lead activo con seguimiento vencido u hoy. */
 export function isQueueable(lead) {
-  if (!OPEN_STATUSES.includes(lead.status)) return false;
-  if (lead.nextActionAt && new Date(lead.nextActionAt) > new Date()) return false;
-  return true;
+  if (!ACTIVE_STATUSES.includes(lead.status)) return false;
+  if (['overdue', 'today'].includes(lead.followUp)) return true;
+  if (!['new', 'attempted', 'callback'].includes(lead.status)) return false;
+  return !lead.nextActionAt || new Date(lead.nextActionAt) <= new Date();
+}
+
+/** Seguimientos y tareas con fecha agrupados por urgencia, para la agenda y los recordatorios. */
+export function agendaItems() {
+  const items = [];
+  for (const l of state.leads) {
+    if (!ACTIVE_STATUSES.includes(l.status)) continue;
+    for (const t of l.tasksOpen || []) items.push({ lead: l, task: t });
+  }
+  return items;
 }

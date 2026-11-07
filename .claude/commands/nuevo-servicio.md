@@ -11,7 +11,11 @@ Información inicial: $ARGUMENTS
    a quién se le vende (nichos y tamaño), qué señales indican que un negocio lo necesita, qué lo descalifica, rango de
    precio y plazos, y prueba/demo disponible.
 3. Investiga brevemente en la web el mercado de USA para ese servicio (dolores típicos, objeciones, competencia) y
-   completa: `buyingSignals`, `disqualifiers`, `painPointsSolved`, `roi`, `pitch` (en inglés), `objections` (en inglés), `keywords`.
+   completa: `buyingSignals`, `disqualifiers`, `painPointsSolved`, `roi`, `pitch` (en inglés), `objections` (en inglés), `keywords`,
+   `pricing` (con `monthly` si hay mensualidad y `packages` si hay paquetes) y `allNiches: true` si aplica a cualquier negocio.
+   Escribe también `salesGuide` en **español** para que el equipo aprenda a venderlo: `simple` (qué es en palabras simples),
+   `howItWorks` (pasos), `example` (caso concreto), `qualifyingQuestions` (en inglés), `priceTalk` (cómo hablar del precio),
+   `redFlags` y `glossary` (términos clave). Toma como referencia los servicios existentes.
 4. Si el servicio apunta a nichos que no existen en `config/niches.json`, crea esas entradas con la misma estructura.
 5. Muestra un resumen del item creado y ejecuta `node scripts/cli.mjs brief` para validar que el JSON carga bien.
 6. Recuerda al administrador publicar el cambio para el equipo:

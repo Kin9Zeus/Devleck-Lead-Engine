@@ -36,17 +36,27 @@ npm run check
 
 | Sección | Para qué sirve |
 |---|---|
-| **Panel** | Resumen: leads tier A pendientes, seguimientos de hoy, pipeline, y a quién llamar ahora. |
-| **Cola de llamadas** | Lista ordenada para llamar uno tras otro: mejor puntaje, negocios abiertos ahora y seguimientos vencidos primero. |
-| **Leads** | Base completa con filtros, búsqueda y exportación a CSV. |
+| **Panel** | Resumen: seguimientos vencidos, tareas urgentes, los negocios más cerca del sí y a quién llamar ahora. |
+| **Agenda** | Seguimientos y tareas **vencidos (rojo)**, de **hoy (ámbar)** y de los próximos 7 días (azul), más las notas recientes del equipo. Empieza el día aquí. |
+| **Cola de llamadas** | Lista para llamar uno tras otro: primero los seguimientos vencidos, luego los más cerca del sí y los negocios abiertos ahora. |
+| **Embudo** | Tablero por etapas (Por contactar → En intento → Interesados → Reunión → Propuesta → Ganados). Arrastra una tarjeta para cambiarla de etapa. |
+| **Leads** | Listas separadas por etapa, ordenadas por **cercanía al sí**, con la última nota y el próximo paso. Filtros, búsqueda (incluye notas) y exportación a CSV. |
 | **Prospectar** | Configura una búsqueda (nicho, servicio a vender, estados, ciudades, cantidad, señales) y lánzala. |
 | **Nichos** | Ranking de oportunidad por nicho en USA, con evidencia. "Actualizar análisis con IA" investiga el mercado. |
 | **Búsquedas** | Progreso en vivo de cada investigación: qué busca Claude, qué páginas lee y cuántos leads guardó. |
 | **Catálogo** | Servicios y productos que la IA puede ofrecer. |
 
-En la ficha de cada lead: botón para **llamar** (abre tu app de llamadas), botón para **enviar correo** (abre tu correo con
-el texto listo), guion, análisis, contactos y **registro del resultado** (no contestó, buzón, callback, reunión...).
-Cada resultado programa el siguiente intento.
+En la ficha de cada lead:
+- **Resumen**: los **próximos pasos** ordenados por prioridad (alta = rojo, media = ámbar, baja = gris), el seguimiento programado
+  con botones rápidos (+1 h, mañana 9:00, +3 días, +1 semana) y las notas. Puedes **fijar** una nota importante arriba.
+- **Etapa** (barra de colores arriba) y **nivel de interés** del 1 al 5: Frío · Tibio · Interesado · Caliente · Listo para cerrar.
+  Con eso se calcula la **cercanía al sí** (0–100%).
+- **Contactos**: agrega teléfonos, correos y personas que consigas en la llamada, y edita los datos del negocio.
+  Lo que agregas a mano queda marcado como "manual" y la IA nunca lo borra.
+- Botones para **llamar** y **enviar el correo** preparado, el guion, el análisis y el historial completo.
+- **Registrar resultado** (no contestó, buzón, reunión, propuesta, ganado…): actualiza la etapa y el interés y programa el siguiente paso.
+
+¿Dudas con algún color? En el menú izquierdo está la **Guía de colores**.
 
 ### Opción B: chat de Claude Code
 Abre la carpeta con Claude Code (`claude` en la terminal, o la app de escritorio o VS Code) y usa:

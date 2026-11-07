@@ -1,19 +1,82 @@
 {
-  "_help": "Nichos objetivo. priority: 1 (baja) a 5 (máxima) — la define el administrador y sube/baja el puntaje de los leads del nicho. growth: estimado inicial; /nichos lo actualiza con investigación real en workspace/niche-insights.json.",
+  "_help": "Nichos objetivo. 'potential' es el potencial calibrado con investigación de mercado (rúbrica fija, ver _methodology). 'priority' (1-5) se deriva del potencial y el administrador puede ajustarla; sube o baja el puntaje de los leads del nicho.",
   "items": [
     {
       "id": "jewelry-stores",
       "name": "Jewelry stores & custom jewelers",
-      "priority": 5,
+      "priority": 3,
       "active": true,
       "growth": "medium",
-      "searchKeywords": ["custom jewelry store", "custom engagement rings", "bespoke jeweler", "jewelry designer CAD"],
-      "matchingServices": ["ai-jewelry-design-studio", "web-performance-seo", "ai-receptionist"],
-      "typicalPains": ["Slow CAD render turnaround", "Customers leaving to think about it", "Outsourced CAD costs"],
-      "signals": ["Custom design services", "CAD / 3D printing mentioned", "Engagement ring focus"],
-      "decisionMakers": ["Owner", "Master Jeweler", "Store Manager"],
+      "searchKeywords": [
+        "custom jewelry store",
+        "custom engagement rings",
+        "bespoke jeweler",
+        "jewelry designer CAD"
+      ],
+      "matchingServices": [
+        "ai-jewelry-design-studio",
+        "web-performance-seo",
+        "ai-receptionist"
+      ],
+      "typicalPains": [
+        "Slow CAD render turnaround",
+        "Customers leaving to think about it",
+        "Outsourced CAD costs"
+      ],
+      "signals": [
+        "Custom design services",
+        "CAD / 3D printing mentioned",
+        "Engagement ring focus"
+      ],
+      "decisionMakers": [
+        "Owner",
+        "Master Jeweler",
+        "Store Manager"
+      ],
       "bestTimeToCall": "Tue–Thu 10:00–12:00 local (avoid Saturdays)",
-      "notes": "Prefer independent jewelers that design in-house; skip mall chains and pawn shops."
+      "notes": "Prefer independent jewelers that design in-house; skip mall chains and pawn shops.",
+      "potential": {
+        "score": 62,
+        "confidence": "medium",
+        "verdict": "Nicho pequeño y en contracción, pero con encaje perfecto y poca competencia. Atacar solo joyeros independientes que diseñan a medida.",
+        "dimensions": {
+          "growth": {
+            "score": 4,
+            "note": "Categoría de joyerías en contracción (IBISWorld: −12.1% en 2025; JBT: −13% de negocios desde 2020)."
+          },
+          "pain": {
+            "score": 6,
+            "note": "Espera por renders CAD y rondas de revisión; evidencia mayormente anecdótica."
+          },
+          "budget": {
+            "score": 6,
+            "note": "Ticket alto en anillos de compromiso, pero márgenes presionados por el precio del oro."
+          },
+          "fit": {
+            "score": 9,
+            "note": "Tenemos un producto dedicado (AI Jewelry Design Studio)."
+          },
+          "market": {
+            "score": 5,
+            "note": "~16.900 joyerías minoristas; solo una parte diseña a medida."
+          },
+          "reach": {
+            "score": 8,
+            "note": "Joyeros independientes contestan y deciden rápido."
+          }
+        },
+        "evidence": [
+          {
+            "detail": "Jewelers Board of Trade: 16.873 negocios de joyería minorista en EE. UU. (2T 2025), 13% menos que en 2020.",
+            "source": "https://gjepc.org/solitaire/?p=34175"
+          },
+          {
+            "detail": "Los joyeros independientes fueron el segmento más fuerte y representan ~35% de las ventas de joyería (Rapaport / Statista).",
+            "source": "https://rapaport.com/magazine-article/shifting-tides-in-the-us-jewelry-market/"
+          }
+        ],
+        "updatedAt": "2026-11-07"
+      }
     },
     {
       "id": "dental-practices",
@@ -21,27 +84,150 @@
       "priority": 4,
       "active": true,
       "growth": "medium",
-      "searchKeywords": ["dental practice", "family dentist", "cosmetic dentist", "orthodontist", "dental implants clinic"],
-      "matchingServices": ["ai-receptionist", "web-performance-seo", "reviews-sentiment-ai"],
-      "typicalPains": ["Missed calls and no-shows", "Front-desk overload", "Recall/reactivation of patients"],
-      "signals": ["Hiring front desk", "No online booking", "Multiple locations"],
-      "decisionMakers": ["Practice Owner (DDS/DMD)", "Office Manager", "Practice Administrator"],
+      "searchKeywords": [
+        "dental practice",
+        "family dentist",
+        "cosmetic dentist",
+        "orthodontist",
+        "dental implants clinic"
+      ],
+      "matchingServices": [
+        "ai-receptionist",
+        "web-performance-seo",
+        "reviews-sentiment-ai"
+      ],
+      "typicalPains": [
+        "Missed calls and no-shows",
+        "Front-desk overload",
+        "Recall/reactivation of patients"
+      ],
+      "signals": [
+        "Hiring front desk",
+        "No online booking",
+        "Multiple locations"
+      ],
+      "decisionMakers": [
+        "Practice Owner (DDS/DMD)",
+        "Office Manager",
+        "Practice Administrator"
+      ],
       "bestTimeToCall": "Tue–Thu 13:00–15:00 local (after lunch, before afternoon rush)",
-      "notes": "Office manager is usually the gatekeeper and the champion."
+      "notes": "Office manager is usually the gatekeeper and the champion.",
+      "potential": {
+        "score": 73,
+        "confidence": "high",
+        "verdict": "Dolor muy documentado (falta de personal) y buen presupuesto. Entrar por la gerente de oficina.",
+        "dimensions": {
+          "growth": {
+            "score": 5,
+            "note": "Mercado de ~USD 176B creciendo ~4% anual: estable, no explosivo."
+          },
+          "pain": {
+            "score": 8,
+            "note": "Más de la mitad de los consultorios con escasez de personal (ADA); 76% con al menos una vacante abierta."
+          },
+          "budget": {
+            "score": 8,
+            "note": "Facturación alta por consultorio y valor de vida del paciente."
+          },
+          "fit": {
+            "score": 8,
+            "note": "AI Receptionist (citas y recordatorios), web y gestión de reseñas."
+          },
+          "market": {
+            "score": 9,
+            "note": "Más de 100.000 consultorios en EE. UU."
+          },
+          "reach": {
+            "score": 6,
+            "note": "La recepción filtra; la gerente de oficina es la puerta de entrada."
+          }
+        },
+        "evidence": [
+          {
+            "detail": "ADA HPI: más de la mitad de los consultorios reportan escasez de personal; el personal está entre los 3 mayores retos esperados para 2026.",
+            "source": "https://adanews.ada.org/new-dentist/2025/march/staffing-shortages-top-expected-challenges-this-year"
+          },
+          {
+            "detail": "Encuesta Dental Economics–Levin 2025: 89% percibe escasez de personal y 76% tiene al menos una vacante abierta.",
+            "source": "https://www.dentaleconomics.com/practice/article/55368689/findings-from-the-2025-dental-economics-levin-group-annual-practice-survey"
+          }
+        ],
+        "updatedAt": "2026-11-07"
+      }
     },
     {
       "id": "med-spas",
       "name": "Med spas & aesthetic clinics",
-      "priority": 4,
+      "priority": 5,
       "active": true,
       "growth": "high",
-      "searchKeywords": ["med spa", "medical spa", "aesthetic clinic botox", "laser hair removal clinic"],
-      "matchingServices": ["ai-receptionist", "web-performance-seo", "generative-content"],
-      "typicalPains": ["Lead response speed from ads", "Booking friction", "Instagram DMs unanswered"],
-      "signals": ["Runs paid ads", "Heavy Instagram presence", "New locations"],
-      "decisionMakers": ["Owner / Medical Director", "Practice Manager", "Marketing Manager"],
+      "searchKeywords": [
+        "med spa",
+        "medical spa",
+        "aesthetic clinic botox",
+        "laser hair removal clinic"
+      ],
+      "matchingServices": [
+        "ai-receptionist",
+        "web-performance-seo",
+        "generative-content"
+      ],
+      "typicalPains": [
+        "Lead response speed from ads",
+        "Booking friction",
+        "Instagram DMs unanswered"
+      ],
+      "signals": [
+        "Runs paid ads",
+        "Heavy Instagram presence",
+        "New locations"
+      ],
+      "decisionMakers": [
+        "Owner / Medical Director",
+        "Practice Manager",
+        "Marketing Manager"
+      ],
       "bestTimeToCall": "Mon–Thu 10:00–12:00 local",
-      "notes": "Fast-growing industry with high customer lifetime value."
+      "notes": "Fast-growing industry with high customer lifetime value.",
+      "potential": {
+        "score": 76,
+        "confidence": "medium",
+        "verdict": "El nicho con mejor combinación de crecimiento y capacidad de pago. Vender velocidad de respuesta a leads de anuncios.",
+        "dimensions": {
+          "growth": {
+            "score": 9,
+            "note": "Mercado de EE. UU. creciendo ~10–16% anual según varias firmas de investigación."
+          },
+          "pain": {
+            "score": 7,
+            "note": "Viven de anuncios y reservas por teléfono/DM; cada lead sin respuesta es inversión perdida."
+          },
+          "budget": {
+            "score": 8,
+            "note": "Ticket alto por cliente (tratamientos recurrentes) y buenos márgenes."
+          },
+          "fit": {
+            "score": 8,
+            "note": "AI Receptionist, contenido generativo y web encajan directo."
+          },
+          "market": {
+            "score": 6,
+            "note": "Miles de clínicas independientes; conteo oficial no confirmado."
+          },
+          "reach": {
+            "score": 7,
+            "note": "Dueños/gerentes accesibles; recepción contesta en horario."
+          }
+        },
+        "evidence": [
+          {
+            "detail": "Mercado de med spas en EE. UU.: ~USD 25.1B en 2025, CAGR ~9.6% a 2031 (Mobility Foresights); Grand View estima CAGR global 15.9% 2026–2033 con EE. UU. como mayor mercado.",
+            "source": "https://www.grandviewresearch.com/industry-analysis/medical-spa-market?id=155"
+          }
+        ],
+        "updatedAt": "2026-11-07"
+      }
     },
     {
       "id": "law-firms",
@@ -49,41 +235,226 @@
       "priority": 4,
       "active": true,
       "growth": "medium",
-      "searchKeywords": ["personal injury law firm", "immigration attorney", "family law firm", "estate planning attorney"],
-      "matchingServices": ["ai-receptionist", "private-ai-knowledge", "process-automation"],
-      "typicalPains": ["Intake calls missed after hours", "Document-heavy case work", "Paralegal workload"],
-      "signals": ["Hiring intake specialist / paralegal", "24/7 'free consultation' promise", "Spanish-speaking clients"],
-      "decisionMakers": ["Managing Partner", "Firm Administrator", "Operations Manager"],
+      "searchKeywords": [
+        "personal injury law firm",
+        "immigration attorney",
+        "family law firm",
+        "estate planning attorney"
+      ],
+      "matchingServices": [
+        "ai-receptionist",
+        "private-ai-knowledge",
+        "process-automation"
+      ],
+      "typicalPains": [
+        "Intake calls missed after hours",
+        "Document-heavy case work",
+        "Paralegal workload"
+      ],
+      "signals": [
+        "Hiring intake specialist / paralegal",
+        "24/7 'free consultation' promise",
+        "Spanish-speaking clients"
+      ],
+      "decisionMakers": [
+        "Managing Partner",
+        "Firm Administrator",
+        "Operations Manager"
+      ],
       "bestTimeToCall": "Tue–Thu 08:30–10:00 or 16:00–17:30 local",
-      "notes": "PI and immigration firms value intake speed: every missed call is a lost case."
+      "notes": "PI and immigration firms value intake speed: every missed call is a lost case.",
+      "potential": {
+        "score": 72,
+        "confidence": "high",
+        "verdict": "El dolor mejor documentado de todos: la mayoría de firmas no contesta. Vender admisión 24/7 con el dato de Clio.",
+        "dimensions": {
+          "growth": {
+            "score": 4,
+            "note": "Industria madura; crecimiento bajo."
+          },
+          "pain": {
+            "score": 9,
+            "note": "Clio 2024: solo el 40% de las firmas contestó el teléfono a un cliente potencial (56% en 2019)."
+          },
+          "budget": {
+            "score": 8,
+            "note": "Cada caso (lesiones personales, inmigración) vale miles de dólares."
+          },
+          "fit": {
+            "score": 8,
+            "note": "AI Receptionist de admisión bilingüe y asistente de IA privado sobre expedientes."
+          },
+          "market": {
+            "score": 8,
+            "note": "Cientos de miles de firmas pequeñas y medianas."
+          },
+          "reach": {
+            "score": 6,
+            "note": "Hay que pasar recepción; pedir por el socio administrador."
+          }
+        },
+        "evidence": [
+          {
+            "detail": "Clio Legal Trends 2024 (prueba de cliente incógnito): solo 40% de las firmas contestó llamadas de clientes potenciales y solo 33% respondió correos.",
+            "source": "https://www.2civility.org/2024-clio-legal-trends-report-fixing-the-first-impression-problem-for-law-firms/"
+          },
+          {
+            "detail": "La ABA cita el mismo dato: solo 40% de las firmas responde consultas telefónicas.",
+            "source": "https://americanbar.org/groups/law_practice/resources/law-practice-magazine/2025/march-april-2025/laws-new-first-impression-transforming-client-intake"
+          }
+        ],
+        "updatedAt": "2026-11-07"
+      }
     },
     {
       "id": "home-services",
       "name": "Home services (HVAC, plumbing, roofing, electrical)",
-      "priority": 4,
+      "priority": 5,
       "active": true,
       "growth": "high",
-      "searchKeywords": ["HVAC company", "plumbing company", "roofing contractor", "electrical contractor"],
-      "matchingServices": ["ai-receptionist", "process-automation", "mobile-app", "web-performance-seo"],
-      "typicalPains": ["Missed emergency calls", "Dispatch on whiteboards/spreadsheets", "Quoting and invoicing delays"],
-      "signals": ["Hiring dispatchers / CSRs", "Fleet growth", "24/7 emergency service"],
-      "decisionMakers": ["Owner", "General Manager", "Operations Manager"],
+      "searchKeywords": [
+        "HVAC company",
+        "plumbing company",
+        "roofing contractor",
+        "electrical contractor"
+      ],
+      "matchingServices": [
+        "ai-receptionist",
+        "process-automation",
+        "mobile-app",
+        "web-performance-seo"
+      ],
+      "typicalPains": [
+        "Missed emergency calls",
+        "Dispatch on whiteboards/spreadsheets",
+        "Quoting and invoicing delays"
+      ],
+      "signals": [
+        "Hiring dispatchers / CSRs",
+        "Fleet growth",
+        "24/7 emergency service"
+      ],
+      "decisionMakers": [
+        "Owner",
+        "General Manager",
+        "Operations Manager"
+      ],
       "bestTimeToCall": "Mon–Fri 07:30–09:00 or 16:00–17:30 local",
-      "notes": "Owners are in the field — early morning or end of day works best."
+      "notes": "Owners are in the field — early morning or end of day works best.",
+      "potential": {
+        "score": 76,
+        "confidence": "medium",
+        "verdict": "Mercado enorme y fragmentado con dolor claro (llamadas perdidas). Excelente para AI Receptionist.",
+        "dimensions": {
+          "growth": {
+            "score": 7,
+            "note": "Servicios HVAC en EE. UU. crecen ~6.6% anual (2025–2030)."
+          },
+          "pain": {
+            "score": 8,
+            "note": "Escasez de técnicos: ventanas de agenda largas y llamadas de servicio perdidas."
+          },
+          "budget": {
+            "score": 7,
+            "note": "Trabajos de emergencia de alto valor; empresas con flotas pagan por no perder llamadas."
+          },
+          "fit": {
+            "score": 8,
+            "note": "AI Receptionist 24/7, automatización de despacho/facturación y app de campo."
+          },
+          "market": {
+            "score": 9,
+            "note": "~125.000 empresas HVAC, más plomería, techos y electricistas."
+          },
+          "reach": {
+            "score": 7,
+            "note": "Dueños en campo: llamar temprano o al final del día."
+          }
+        },
+        "evidence": [
+          {
+            "detail": "Servicios HVAC de EE. UU.: USD 21–28B en 2025, CAGR 6.6% a 2030 (Mordor Intelligence).",
+            "source": "https://www.marketresearch.com/Mordor-Intelligence-LLP-v4018/HVAC-Services-Share-Trends-Statistics-36211578"
+          },
+          {
+            "detail": "~125.000 empresas y 570.000 técnicos; la escasez de personal se traduce en llamadas de servicio perdidas (Simpro, citando IBISWorld/BLS).",
+            "source": "https://simprogroup.com/blog/hvac-industry-statistics-2026"
+          }
+        ],
+        "updatedAt": "2026-11-07"
+      }
     },
     {
       "id": "real-estate",
       "name": "Real estate brokerages & teams",
-      "priority": 3,
+      "priority": 2,
       "active": true,
-      "growth": "medium",
-      "searchKeywords": ["real estate brokerage", "real estate team", "realty group"],
-      "matchingServices": ["generative-content", "ai-receptionist", "custom-web-platform"],
-      "typicalPains": ["Slow lead follow-up", "Listing content workload", "Agent productivity"],
-      "signals": ["50+ agents", "Many active listings", "Recruiting agents"],
-      "decisionMakers": ["Broker / Owner", "Team Lead", "Operations Manager"],
+      "growth": "low",
+      "searchKeywords": [
+        "real estate brokerage",
+        "real estate team",
+        "realty group"
+      ],
+      "matchingServices": [
+        "generative-content",
+        "ai-receptionist",
+        "custom-web-platform"
+      ],
+      "typicalPains": [
+        "Slow lead follow-up",
+        "Listing content workload",
+        "Agent productivity"
+      ],
+      "signals": [
+        "50+ agents",
+        "Many active listings",
+        "Recruiting agents"
+      ],
+      "decisionMakers": [
+        "Broker / Owner",
+        "Team Lead",
+        "Operations Manager"
+      ],
       "bestTimeToCall": "Tue–Thu 09:00–11:00 local",
-      "notes": "Target teams/brokerages, not individual agents."
+      "notes": "Target teams/brokerages, not individual agents.",
+      "potential": {
+        "score": 50,
+        "confidence": "medium",
+        "verdict": "Mercado deprimido: baja prioridad hasta que repunten las ventas. Solo equipos grandes que están reclutando.",
+        "dimensions": {
+          "growth": {
+            "score": 3,
+            "note": "Ventas de vivienda usada cerca de 4M al año, mínimos de décadas; agentes saliendo."
+          },
+          "pain": {
+            "score": 5,
+            "note": "Seguimiento de leads y contenido de listados."
+          },
+          "budget": {
+            "score": 4,
+            "note": "Márgenes de las inmobiliarias presionados tras los cambios de comisiones de la NAR."
+          },
+          "fit": {
+            "score": 6,
+            "note": "Contenido generativo, AI Receptionist."
+          },
+          "market": {
+            "score": 8,
+            "note": "Muchas inmobiliarias y equipos."
+          },
+          "reach": {
+            "score": 6,
+            "note": "Agentes contestan; los brokers son más difíciles."
+          }
+        },
+        "evidence": [
+          {
+            "detail": "Ventas de vivienda usada: algo más de 4M en 2024 y algo menos en 2025; muchos agentes dejan la profesión.",
+            "source": "https://www.housingwire.com/articles/business-practices-changed-but-real-estate-agents-remained-active-in-2025/"
+          }
+        ],
+        "updatedAt": "2026-11-07"
+      }
     },
     {
       "id": "accounting-firms",
@@ -91,55 +462,295 @@
       "priority": 3,
       "active": true,
       "growth": "medium",
-      "searchKeywords": ["CPA firm", "accounting firm", "bookkeeping services"],
-      "matchingServices": ["process-automation", "private-ai-knowledge"],
-      "typicalPains": ["Manual data entry and reconciliation", "Staff shortage", "Document collection from clients"],
-      "signals": ["Hiring staff accountants", "Client portal missing", "Growth through acquisitions"],
-      "decisionMakers": ["Managing Partner", "Firm Administrator"],
+      "searchKeywords": [
+        "CPA firm",
+        "accounting firm",
+        "bookkeeping services"
+      ],
+      "matchingServices": [
+        "process-automation",
+        "private-ai-knowledge"
+      ],
+      "typicalPains": [
+        "Manual data entry and reconciliation",
+        "Staff shortage",
+        "Document collection from clients"
+      ],
+      "signals": [
+        "Hiring staff accountants",
+        "Client portal missing",
+        "Growth through acquisitions"
+      ],
+      "decisionMakers": [
+        "Managing Partner",
+        "Firm Administrator"
+      ],
       "bestTimeToCall": "May–Dec (avoid tax season Feb–Apr 15); Tue–Thu 10:00–12:00",
-      "notes": "Industry-wide talent shortage makes automation a strong sell."
+      "notes": "Industry-wide talent shortage makes automation a strong sell.",
+      "potential": {
+        "score": 66,
+        "confidence": "medium",
+        "verdict": "Dolor de talento claro; las firmas pequeñas adoptan IA más lento que las grandes. Prospectar de mayo a diciembre.",
+        "dimensions": {
+          "growth": {
+            "score": 5,
+            "note": "Demanda estable; ~124.000 vacantes anuales de contadores proyectadas a 2034."
+          },
+          "pain": {
+            "score": 8,
+            "note": "Escasez de talento: los candidatos a CPA cayeron más de 32% desde 2016."
+          },
+          "budget": {
+            "score": 7,
+            "note": "Firmas rentables con facturación por hora alta."
+          },
+          "fit": {
+            "score": 7,
+            "note": "Automatización de captura de datos y documentos, IA privada, capacitación en IA."
+          },
+          "market": {
+            "score": 7,
+            "note": "Decenas de miles de firmas pequeñas."
+          },
+          "reach": {
+            "score": 5,
+            "note": "Inalcanzables en temporada de impuestos (enero–15 de abril)."
+          }
+        },
+        "evidence": [
+          {
+            "detail": "El número de candidatos a CPA cayó más de 32% desde 2016; ~75% de las firmas reporta dificultad para contratar.",
+            "source": "https://leyton.com/us/insights/articles/the-cpa-landscape-in-2025-key-trends-and-challenges/"
+          },
+          {
+            "detail": "Las firmas pequeñas y medianas despliegan IA más lento que las grandes, lo que aumenta su necesidad de personal.",
+            "source": "https://www.cfodive.com/news/is-accounting-shortage-over-its-complicated-CPA/826771/"
+          }
+        ],
+        "updatedAt": "2026-11-07"
+      }
     },
     {
       "id": "logistics-trucking",
       "name": "Logistics, trucking & freight brokers",
-      "priority": 3,
+      "priority": 2,
       "active": true,
-      "growth": "medium",
-      "searchKeywords": ["trucking company", "freight broker", "logistics company", "3PL warehouse"],
-      "matchingServices": ["process-automation", "custom-web-platform", "rescue-and-harden"],
-      "typicalPains": ["Manual dispatch and load tracking", "Invoicing/POD paperwork", "Customer status calls"],
-      "signals": ["Hiring dispatchers / billing clerks", "Fleet growth", "No customer tracking portal"],
-      "decisionMakers": ["Owner / President", "Operations Director", "Controller"],
+      "growth": "low",
+      "searchKeywords": [
+        "trucking company",
+        "freight broker",
+        "logistics company",
+        "3PL warehouse"
+      ],
+      "matchingServices": [
+        "process-automation",
+        "custom-web-platform",
+        "rescue-and-harden"
+      ],
+      "typicalPains": [
+        "Manual dispatch and load tracking",
+        "Invoicing/POD paperwork",
+        "Customer status calls"
+      ],
+      "signals": [
+        "Hiring dispatchers / billing clerks",
+        "Fleet growth",
+        "No customer tracking portal"
+      ],
+      "decisionMakers": [
+        "Owner / President",
+        "Operations Director",
+        "Controller"
+      ],
       "bestTimeToCall": "Tue–Thu 10:00–12:00 local",
-      "notes": ""
+      "notes": "",
+      "potential": {
+        "score": 55,
+        "confidence": "high",
+        "verdict": "Dolor real, pero sin dinero en este momento. Priorizar brokers medianos que sí están creciendo; el resto, esperar a la recuperación.",
+        "dimensions": {
+          "growth": {
+            "score": 3,
+            "note": "Recesión de carga de más de 3 años; se espera una recuperación lenta, \"sin margen\"."
+          },
+          "pain": {
+            "score": 7,
+            "note": "Despacho, facturación y comprobantes de entrega manuales."
+          },
+          "budget": {
+            "score": 4,
+            "note": "Márgenes muy presionados; muchos transportistas pequeños cerrando."
+          },
+          "fit": {
+            "score": 7,
+            "note": "Automatización de facturación, portal de seguimiento."
+          },
+          "market": {
+            "score": 7,
+            "note": "Muchos brokers y transportistas."
+          },
+          "reach": {
+            "score": 6,
+            "note": "Despachadores contestan; dueños ocupados."
+          }
+        },
+        "evidence": [
+          {
+            "detail": "A finales de 2025 los transportistas seguían reportando caídas interanuales en tarifas, volúmenes e ingresos; la recesión supera los tres años.",
+            "source": "https://www.truckinginfo.com/news/after-three-years-of-pressure-motor-carriers-and-brokers-see-early-signs-of-a-turn"
+          }
+        ],
+        "updatedAt": "2026-11-07"
+      }
     },
     {
       "id": "construction",
       "name": "Construction & specialty contractors",
       "priority": 3,
       "active": true,
-      "growth": "high",
-      "searchKeywords": ["general contractor", "commercial construction company", "remodeling contractor"],
-      "matchingServices": ["process-automation", "custom-web-platform", "mobile-app"],
-      "typicalPains": ["Estimating takes days", "Paper field reports", "Change orders and invoicing"],
-      "signals": ["Hiring estimators / project coordinators", "Many active projects", "Expansion to new states"],
-      "decisionMakers": ["Owner / President", "Operations Manager", "Project Executive"],
+      "growth": "medium",
+      "searchKeywords": [
+        "general contractor",
+        "commercial construction company",
+        "remodeling contractor"
+      ],
+      "matchingServices": [
+        "process-automation",
+        "custom-web-platform",
+        "mobile-app"
+      ],
+      "typicalPains": [
+        "Estimating takes days",
+        "Paper field reports",
+        "Change orders and invoicing"
+      ],
+      "signals": [
+        "Hiring estimators / project coordinators",
+        "Many active projects",
+        "Expansion to new states"
+      ],
+      "decisionMakers": [
+        "Owner / President",
+        "Operations Manager",
+        "Project Executive"
+      ],
       "bestTimeToCall": "Mon–Fri 07:00–08:30 or 15:30–17:00 local",
-      "notes": ""
+      "notes": "",
+      "potential": {
+        "score": 66,
+        "confidence": "high",
+        "verdict": "Mercado enorme con presión de productividad, pero el encaje es indirecto. Vender ahorro de tiempo en estimación y reportes de campo.",
+        "dimensions": {
+          "growth": {
+            "score": 6,
+            "note": "Demanda sostenida, con proyectos retrasados por falta de personal."
+          },
+          "pain": {
+            "score": 7,
+            "note": "92% de los contratistas no logra llenar vacantes; el dolor es de mano de obra, y el administrativo (estimación, reportes) es secundario."
+          },
+          "budget": {
+            "score": 7,
+            "note": "Contratos grandes; presupuesto para herramientas de productividad."
+          },
+          "fit": {
+            "score": 6,
+            "note": "Automatización de estimaciones/órdenes de cambio, app de campo, portal; encaje indirecto."
+          },
+          "market": {
+            "score": 9,
+            "note": "Cientos de miles de contratistas."
+          },
+          "reach": {
+            "score": 5,
+            "note": "Dueños en obra: llamar 7:00–8:30 o al final del día."
+          }
+        },
+        "evidence": [
+          {
+            "detail": "AGC/NCCER 2025: 92% de los contratistas tiene dificultad para llenar vacantes y 45% reporta retrasos por falta de personal.",
+            "source": "https://www.agc.org/news/2025/08/28/construction-workforce-shortages-are-leading-cause-project-delays-immigration-enforcement-affects"
+          }
+        ],
+        "updatedAt": "2026-11-07"
+      }
     },
     {
       "id": "wholesale-distribution",
       "name": "Wholesale distributors",
-      "priority": 3,
+      "priority": 4,
       "active": true,
       "growth": "medium",
-      "searchKeywords": ["wholesale distributor", "B2B distributor", "food distributor", "industrial supply distributor"],
-      "matchingServices": ["process-automation", "custom-web-platform", "retail-ai-forecasting"],
-      "typicalPains": ["Orders by phone/email/fax", "Inventory imbalance", "Manual quoting"],
-      "signals": ["No online ordering portal", "Large catalog", "Hiring order entry clerks"],
-      "decisionMakers": ["Owner / CEO", "Operations Director", "CFO / Controller"],
+      "searchKeywords": [
+        "wholesale distributor",
+        "B2B distributor",
+        "food distributor",
+        "industrial supply distributor"
+      ],
+      "matchingServices": [
+        "process-automation",
+        "custom-web-platform",
+        "retail-ai-forecasting"
+      ],
+      "typicalPains": [
+        "Orders by phone/email/fax",
+        "Inventory imbalance",
+        "Manual quoting"
+      ],
+      "signals": [
+        "No online ordering portal",
+        "Large catalog",
+        "Hiring order entry clerks"
+      ],
+      "decisionMakers": [
+        "Owner / CEO",
+        "Operations Director",
+        "CFO / Controller"
+      ],
       "bestTimeToCall": "Tue–Thu 09:00–11:00 local",
-      "notes": "High ticket — B2B ordering portals are a strong fit."
+      "notes": "High ticket — B2B ordering portals are a strong fit.",
+      "potential": {
+        "score": 71,
+        "confidence": "medium",
+        "verdict": "Mucho trabajo manual (pedidos por correo y teléfono) y buen presupuesto. Vender portal de pedidos y automatización de órdenes.",
+        "dimensions": {
+          "growth": {
+            "score": 5,
+            "note": "Crecimiento moderado, ligado a manufactura y construcción."
+          },
+          "pain": {
+            "score": 8,
+            "note": "En distribuidores pequeños, los pedidos tomados por vendedores aún superan a los pedidos web; el comercio mayorista va por detrás en adopción de IA."
+          },
+          "budget": {
+            "score": 8,
+            "note": "Empresas de millones en ventas con márgenes por volumen."
+          },
+          "fit": {
+            "score": 8,
+            "note": "Portal B2B de pedidos, automatización de órdenes y pronóstico de inventario."
+          },
+          "market": {
+            "score": 7,
+            "note": "Decenas de miles de distribuidores medianos."
+          },
+          "reach": {
+            "score": 6,
+            "note": "Dueños y directores de operaciones accesibles por teléfono."
+          }
+        },
+        "evidence": [
+          {
+            "detail": "Benchmark WizCommerce 2026: tres de cada cuatro mayoristas generan en web menos de la mitad de los pedidos que toman sus vendedores.",
+            "source": "https://distributionstrategy.com/2026/10/ecommerce-takes-larger-share-of-distributor-orders-as-companies-scale/"
+          },
+          {
+            "detail": "Datos del Census muestran que el comercio mayorista va por detrás de la tasa nacional de adopción de IA.",
+            "source": "https://distributionstrategy.com/2026/05/census-bureau-data-show-wholesale-trade-lagging-national-ai-adoption-rate/"
+          }
+        ],
+        "updatedAt": "2026-11-07"
+      }
     },
     {
       "id": "insurance-agencies",
@@ -147,13 +758,70 @@
       "priority": 3,
       "active": true,
       "growth": "medium",
-      "searchKeywords": ["independent insurance agency", "insurance broker", "commercial insurance agency"],
-      "matchingServices": ["process-automation", "ai-receptionist", "private-ai-knowledge"],
-      "typicalPains": ["Quoting across carriers by hand", "Renewals tracking", "Document collection"],
-      "signals": ["Hiring CSRs / account managers", "Multiple carriers", "Agency acquisitions"],
-      "decisionMakers": ["Agency Principal / Owner", "Operations Manager"],
+      "searchKeywords": [
+        "independent insurance agency",
+        "insurance broker",
+        "commercial insurance agency"
+      ],
+      "matchingServices": [
+        "process-automation",
+        "ai-receptionist",
+        "private-ai-knowledge"
+      ],
+      "typicalPains": [
+        "Quoting across carriers by hand",
+        "Renewals tracking",
+        "Document collection"
+      ],
+      "signals": [
+        "Hiring CSRs / account managers",
+        "Multiple carriers",
+        "Agency acquisitions"
+      ],
+      "decisionMakers": [
+        "Agency Principal / Owner",
+        "Operations Manager"
+      ],
       "bestTimeToCall": "Tue–Thu 10:00–12:00 local",
-      "notes": ""
+      "notes": "",
+      "potential": {
+        "score": 62,
+        "confidence": "high",
+        "verdict": "Canal sano y abierto a la IA (su adopción se triplicó). Vender automatización de cotización y renovaciones.",
+        "dimensions": {
+          "growth": {
+            "score": 5,
+            "note": "~37.000 agencias independientes, estable; tres de cada cuatro aumentaron ingresos."
+          },
+          "pain": {
+            "score": 6,
+            "note": "Cotización multi-aseguradora y renovaciones manuales; ya adoptan IA rápidamente."
+          },
+          "budget": {
+            "score": 7,
+            "note": "Ingresos recurrentes por comisiones."
+          },
+          "fit": {
+            "score": 7,
+            "note": "Automatización, AI Receptionist, IA privada sobre pólizas."
+          },
+          "market": {
+            "score": 6,
+            "note": "~37.000 agencias."
+          },
+          "reach": {
+            "score": 7,
+            "note": "Agentes acostumbrados al teléfono."
+          }
+        },
+        "evidence": [
+          {
+            "detail": "Big I Agency Universe 2026: ~37.000 agencias independientes; tres cuartos con ingresos al alza y adopción de IA triplicada desde 2024.",
+            "source": "https://www.insurancebusinessmag.com/us/news/technology/independent-agency-revenue-rose-at-three-in-four-firms-as-ai-adoption-tripled-big-i-study-finds-590958.aspx"
+          }
+        ],
+        "updatedAt": "2026-11-07"
+      }
     },
     {
       "id": "manufacturing",
@@ -161,27 +829,143 @@
       "priority": 3,
       "active": true,
       "growth": "medium",
-      "searchKeywords": ["machine shop", "contract manufacturer", "metal fabrication company", "plastics manufacturer"],
-      "matchingServices": ["process-automation", "custom-web-platform", "private-ai-knowledge", "retail-ai-forecasting"],
-      "typicalPains": ["Manual quoting (RFQs)", "Production tracking on spreadsheets", "Quality docs scattered"],
-      "signals": ["Reshoring / new plant", "Hiring estimators or schedulers", "ISO certifications"],
-      "decisionMakers": ["Owner / President", "Plant Manager", "Operations Director"],
+      "searchKeywords": [
+        "machine shop",
+        "contract manufacturer",
+        "metal fabrication company",
+        "plastics manufacturer"
+      ],
+      "matchingServices": [
+        "process-automation",
+        "custom-web-platform",
+        "private-ai-knowledge",
+        "retail-ai-forecasting"
+      ],
+      "typicalPains": [
+        "Manual quoting (RFQs)",
+        "Production tracking on spreadsheets",
+        "Quality docs scattered"
+      ],
+      "signals": [
+        "Reshoring / new plant",
+        "Hiring estimators or schedulers",
+        "ISO certifications"
+      ],
+      "decisionMakers": [
+        "Owner / President",
+        "Plant Manager",
+        "Operations Director"
+      ],
       "bestTimeToCall": "Tue–Thu 08:00–10:00 local",
-      "notes": "Reshoring trend in the US makes this a growing segment."
+      "notes": "Reshoring trend in the US makes this a growing segment.",
+      "potential": {
+        "score": 64,
+        "confidence": "medium",
+        "verdict": "Buen presupuesto, aunque la incertidumbre por aranceles frena inversiones. Vender ahorro de costos y velocidad de cotización.",
+        "dimensions": {
+          "growth": {
+            "score": 5,
+            "note": "74% de los fabricantes con perspectiva positiva, pero los aranceles presionan costos."
+          },
+          "pain": {
+            "score": 6,
+            "note": "Cotizaciones (RFQ) y producción manejadas con hojas de cálculo."
+          },
+          "budget": {
+            "score": 8,
+            "note": "Empresas de facturación alta."
+          },
+          "fit": {
+            "score": 7,
+            "note": "Automatización, portal de cotizaciones, IA privada para calidad y pronósticos."
+          },
+          "market": {
+            "score": 7,
+            "note": "Decenas de miles de fabricantes pequeños y medianos."
+          },
+          "reach": {
+            "score": 6,
+            "note": "Accesibles temprano en la mañana."
+          }
+        },
+        "evidence": [
+          {
+            "detail": "Encuesta NAM 2T 2026: 74.2% con perspectiva positiva; el 4T 2025 mostró que 72.8% de los pequeños y medianos pagó aranceles sobre insumos.",
+            "source": "https://nam.org/manufacturers-q1-survey-trade-business-challenges-persist-but-optimism-up/"
+          }
+        ],
+        "updatedAt": "2026-11-07"
+      }
     },
     {
       "id": "staffing-agencies",
       "name": "Staffing & recruiting agencies",
-      "priority": 2,
+      "priority": 1,
       "active": true,
-      "growth": "medium",
-      "searchKeywords": ["staffing agency", "recruiting firm", "temp agency"],
-      "matchingServices": ["process-automation", "ai-receptionist", "rescue-and-harden"],
-      "typicalPains": ["Candidate screening volume", "Timesheets and payroll admin", "Slow placements"],
-      "signals": ["High volume postings", "Multiple branches"],
-      "decisionMakers": ["Owner / President", "Operations Director"],
+      "growth": "low",
+      "searchKeywords": [
+        "staffing agency",
+        "recruiting firm",
+        "temp agency"
+      ],
+      "matchingServices": [
+        "process-automation",
+        "ai-receptionist",
+        "rescue-and-harden"
+      ],
+      "typicalPains": [
+        "Candidate screening volume",
+        "Timesheets and payroll admin",
+        "Slow placements"
+      ],
+      "signals": [
+        "High volume postings",
+        "Multiple branches"
+      ],
+      "decisionMakers": [
+        "Owner / President",
+        "Operations Director"
+      ],
       "bestTimeToCall": "Tue–Thu 10:00–12:00 local",
-      "notes": ""
+      "notes": "",
+      "potential": {
+        "score": 46,
+        "confidence": "high",
+        "verdict": "Industria en contracción tres años seguidos: no prioritaria.",
+        "dimensions": {
+          "growth": {
+            "score": 2,
+            "note": "Ingresos de la industria −14% (2023), −12% (2024) y −3% (2025)."
+          },
+          "pain": {
+            "score": 6,
+            "note": "Filtrado de candidatos y papeleo."
+          },
+          "budget": {
+            "score": 4,
+            "note": "En contracción: recortan gastos."
+          },
+          "fit": {
+            "score": 5,
+            "note": "Automatización, receptionist."
+          },
+          "market": {
+            "score": 6,
+            "note": "Miles de agencias."
+          },
+          "reach": {
+            "score": 6,
+            "note": "Accesibles."
+          }
+        },
+        "evidence": [
+          {
+            "detail": "SIA: ingresos de staffing −3% en 2025 a ~USD 179.8B, tras −12% en 2024 y −14% en 2023.",
+            "source": "https://www.staffingindustry.com/news/global-daily-news/staffing-headwinds-persist-industry-revenue-to-slip-3"
+          }
+        ],
+        "updatedAt": "2026-11-07"
+      }
     },
     {
       "id": "property-management",
@@ -189,41 +973,217 @@
       "priority": 3,
       "active": true,
       "growth": "medium",
-      "searchKeywords": ["property management company", "HOA management company", "residential property management"],
-      "matchingServices": ["ai-receptionist", "process-automation", "custom-web-platform"],
-      "typicalPains": ["Maintenance request calls 24/7", "Tenant communication", "Owner reporting"],
-      "signals": ["500+ units managed", "Hiring leasing agents / maintenance coordinators"],
-      "decisionMakers": ["Owner / Principal Broker", "Director of Operations"],
+      "searchKeywords": [
+        "property management company",
+        "HOA management company",
+        "residential property management"
+      ],
+      "matchingServices": [
+        "ai-receptionist",
+        "process-automation",
+        "custom-web-platform"
+      ],
+      "typicalPains": [
+        "Maintenance request calls 24/7",
+        "Tenant communication",
+        "Owner reporting"
+      ],
+      "signals": [
+        "500+ units managed",
+        "Hiring leasing agents / maintenance coordinators"
+      ],
+      "decisionMakers": [
+        "Owner / Principal Broker",
+        "Director of Operations"
+      ],
       "bestTimeToCall": "Tue–Thu 10:00–12:00 local",
-      "notes": ""
+      "notes": "",
+      "potential": {
+        "score": 68,
+        "confidence": "medium",
+        "verdict": "Mercado muy grande con dolor operativo constante. Vender recepción de mantenimiento 24/7.",
+        "dimensions": {
+          "growth": {
+            "score": 6,
+            "note": "+1.5% de empresas en 2025; hogares en alquiler unifamiliar en máximo de 7 años."
+          },
+          "pain": {
+            "score": 7,
+            "note": "Llamadas de mantenimiento 24/7 y comunicación con inquilinos."
+          },
+          "budget": {
+            "score": 6,
+            "note": "Márgenes ajustados por unidad, pero volumen."
+          },
+          "fit": {
+            "score": 8,
+            "note": "AI Receptionist de mantenimiento, automatización y portal de propietarios."
+          },
+          "market": {
+            "score": 9,
+            "note": "~335.000 empresas de administración de propiedades."
+          },
+          "reach": {
+            "score": 6,
+            "note": "Accesibles en horario de oficina."
+          }
+        },
+        "evidence": [
+          {
+            "detail": "IBISWorld: 335.293 empresas de administración de propiedades en 2025 (+1.5%).",
+            "source": "https://img3.ibisworld.com/united-states/number-of-businesses/property-management/1356"
+          },
+          {
+            "detail": "Hogares en alquiler unifamiliar: ~14.6M en 2025, máximo de siete años.",
+            "source": "https://www.credaily.com/briefs/single-family-homes-rentals-hit-seven-year-high/"
+          }
+        ],
+        "updatedAt": "2026-11-07"
+      }
     },
     {
       "id": "home-health",
       "name": "Home health & senior care agencies",
-      "priority": 3,
+      "priority": 5,
       "active": true,
       "growth": "high",
-      "searchKeywords": ["home health agency", "home care agency", "senior care services"],
-      "matchingServices": ["process-automation", "ai-receptionist", "private-ai-knowledge"],
-      "typicalPains": ["Scheduling caregivers", "Compliance paperwork", "Intake calls from families"],
-      "signals": ["Constant caregiver hiring", "Multiple territories"],
-      "decisionMakers": ["Owner / Administrator", "Director of Operations"],
+      "searchKeywords": [
+        "home health agency",
+        "home care agency",
+        "senior care services"
+      ],
+      "matchingServices": [
+        "process-automation",
+        "ai-receptionist",
+        "private-ai-knowledge"
+      ],
+      "typicalPains": [
+        "Scheduling caregivers",
+        "Compliance paperwork",
+        "Intake calls from families"
+      ],
+      "signals": [
+        "Constant caregiver hiring",
+        "Multiple territories"
+      ],
+      "decisionMakers": [
+        "Owner / Administrator",
+        "Director of Operations"
+      ],
       "bestTimeToCall": "Tue–Thu 10:00–12:00 local",
-      "notes": "Aging population = structural growth. Mind HIPAA: position as HIPAA-aware engineering."
+      "notes": "Aging population = structural growth. Mind HIPAA: position as HIPAA-aware engineering.",
+      "potential": {
+        "score": 76,
+        "confidence": "high",
+        "verdict": "El crecimiento estructural más fuerte de la lista (envejecimiento de la población). Vender automatización de agendas y cumplimiento.",
+        "dimensions": {
+          "growth": {
+            "score": 10,
+            "note": "BLS: servicios de salud en casa +18.6% de empleo 2024–2034; servicios para adultos mayores +21%."
+          },
+          "pain": {
+            "score": 8,
+            "note": "Programar cuidadores y papeleo de cumplimiento a mano; contratación constante."
+          },
+          "budget": {
+            "score": 6,
+            "note": "Dependen de reembolsos (Medicare/seguros): presupuesto moderado."
+          },
+          "fit": {
+            "score": 7,
+            "note": "Automatización de agendas/papeleo, AI Receptionist para familias, IA privada para protocolos."
+          },
+          "market": {
+            "score": 7,
+            "note": "Decenas de miles de agencias, muchas independientes."
+          },
+          "reach": {
+            "score": 6,
+            "note": "Administradores ocupados; mejor a media mañana."
+          }
+        },
+        "evidence": [
+          {
+            "detail": "BLS proyecta +18.6% de empleo en servicios de salud en casa (325.800 empleos) y +21% en servicios para adultos mayores y personas con discapacidad, 2024–2034.",
+            "source": "https://www.bls.gov/news.release/ecopro.nr0.htm"
+          }
+        ],
+        "updatedAt": "2026-11-07"
+      }
     },
     {
       "id": "veterinary-clinics",
       "name": "Veterinary clinics & animal hospitals",
       "priority": 3,
       "active": true,
-      "growth": "high",
-      "searchKeywords": ["veterinary clinic", "animal hospital", "vet clinic"],
-      "matchingServices": ["ai-receptionist", "web-performance-seo"],
-      "typicalPains": ["Phones ringing nonstop", "Appointment reminders", "Staff burnout"],
-      "signals": ["Hiring CSR / receptionist", "Multiple locations", "No online booking"],
-      "decisionMakers": ["Practice Owner (DVM)", "Practice Manager"],
+      "growth": "medium",
+      "searchKeywords": [
+        "veterinary clinic",
+        "animal hospital",
+        "vet clinic"
+      ],
+      "matchingServices": [
+        "ai-receptionist",
+        "web-performance-seo"
+      ],
+      "typicalPains": [
+        "Phones ringing nonstop",
+        "Appointment reminders",
+        "Staff burnout"
+      ],
+      "signals": [
+        "Hiring CSR / receptionist",
+        "Multiple locations",
+        "No online booking"
+      ],
+      "decisionMakers": [
+        "Practice Owner (DVM)",
+        "Practice Manager"
+      ],
       "bestTimeToCall": "Tue–Thu 13:30–15:00 local",
-      "notes": "Independent clinics (not Banfield/VCA corporate)."
+      "notes": "Independent clinics (not Banfield/VCA corporate).",
+      "potential": {
+        "score": 67,
+        "confidence": "medium",
+        "verdict": "Sólido y estable. Apuntar a clínicas independientes (no cadenas corporativas).",
+        "dimensions": {
+          "growth": {
+            "score": 6,
+            "note": "Industria de ~USD 68.7B; número de negocios +2% en 2025."
+          },
+          "pain": {
+            "score": 7,
+            "note": "Escasez de veterinarios y técnicos; teléfonos saturados."
+          },
+          "budget": {
+            "score": 7,
+            "note": "Buen ticket por visita; dueños de mascotas gastan."
+          },
+          "fit": {
+            "score": 7,
+            "note": "AI Receptionist, recordatorios y web."
+          },
+          "market": {
+            "score": 7,
+            "note": "~57.000 negocios veterinarios."
+          },
+          "reach": {
+            "score": 6,
+            "note": "Recepción ocupada; mejor después del almuerzo."
+          }
+        },
+        "evidence": [
+          {
+            "detail": "IBISWorld: ~56.756 negocios veterinarios en 2025 (+2%) y ingresos de ~USD 68.7B.",
+            "source": "https://img3.ibisworld.com/united-states/number-of-businesses/veterinary-services/1447"
+          },
+          {
+            "detail": "La escasez de veterinarios y técnicos licenciados está subiendo salarios (Grand View Research).",
+            "source": "https://www.grandviewresearch.com/industry-analysis/us-veterinarians-market"
+          }
+        ],
+        "updatedAt": "2026-11-07"
+      }
     },
     {
       "id": "fitness-studios",
@@ -231,27 +1191,140 @@
       "priority": 2,
       "active": true,
       "growth": "medium",
-      "searchKeywords": ["boutique fitness studio", "crossfit gym", "pilates studio", "martial arts school"],
-      "matchingServices": ["mobile-app", "ai-receptionist", "reviews-sentiment-ai"],
-      "typicalPains": ["Member churn", "Lead follow-up", "Class booking"],
-      "signals": ["Multiple locations", "Franchise expansion"],
-      "decisionMakers": ["Owner", "General Manager"],
+      "searchKeywords": [
+        "boutique fitness studio",
+        "crossfit gym",
+        "pilates studio",
+        "martial arts school"
+      ],
+      "matchingServices": [
+        "mobile-app",
+        "ai-receptionist",
+        "reviews-sentiment-ai"
+      ],
+      "typicalPains": [
+        "Member churn",
+        "Lead follow-up",
+        "Class booking"
+      ],
+      "signals": [
+        "Multiple locations",
+        "Franchise expansion"
+      ],
+      "decisionMakers": [
+        "Owner",
+        "General Manager"
+      ],
       "bestTimeToCall": "Mon–Thu 10:00–14:00 local",
-      "notes": ""
+      "notes": "",
+      "potential": {
+        "score": 56,
+        "confidence": "medium",
+        "verdict": "Industria sana pero con poco presupuesto. Apuntar a cadenas locales con varias sedes.",
+        "dimensions": {
+          "growth": {
+            "score": 6,
+            "note": "Récord de 81M de miembros en 2025; visitas a estudios boutique +2.5% en 2T 2026."
+          },
+          "pain": {
+            "score": 5,
+            "note": "Retención de miembros y seguimiento de leads."
+          },
+          "budget": {
+            "score": 4,
+            "note": "Márgenes ajustados en estudios pequeños."
+          },
+          "fit": {
+            "score": 6,
+            "note": "App, AI Receptionist, reseñas."
+          },
+          "market": {
+            "score": 7,
+            "note": "Muchos estudios independientes."
+          },
+          "reach": {
+            "score": 7,
+            "note": "Dueños accesibles."
+          }
+        },
+        "evidence": [
+          {
+            "detail": "HFA: récord de 81 millones de miembros en 2025; estudios boutique +2.5% de visitas por sede en el 2T 2026.",
+            "source": "https://www.healthandfitness.org/?p=5889"
+          }
+        ],
+        "updatedAt": "2026-11-07"
+      }
     },
     {
       "id": "multi-location-restaurants",
       "name": "Multi-location restaurant groups",
-      "priority": 2,
+      "priority": 1,
       "active": true,
-      "growth": "medium",
-      "searchKeywords": ["restaurant group", "restaurant locations", "fast casual restaurant chain local"],
-      "matchingServices": ["reviews-sentiment-ai", "mobile-app", "retail-ai-forecasting"],
-      "typicalPains": ["Delivery app fees", "Inconsistent reviews across locations", "Food waste / ordering"],
-      "signals": ["3+ locations", "Opening new locations"],
-      "decisionMakers": ["Owner / Founder", "Director of Operations"],
+      "growth": "low",
+      "searchKeywords": [
+        "restaurant group",
+        "restaurant locations",
+        "fast casual restaurant chain local"
+      ],
+      "matchingServices": [
+        "reviews-sentiment-ai",
+        "mobile-app",
+        "retail-ai-forecasting"
+      ],
+      "typicalPains": [
+        "Delivery app fees",
+        "Inconsistent reviews across locations",
+        "Food waste / ordering"
+      ],
+      "signals": [
+        "3+ locations",
+        "Opening new locations"
+      ],
+      "decisionMakers": [
+        "Owner / Founder",
+        "Director of Operations"
+      ],
       "bestTimeToCall": "Tue–Thu 14:00–16:00 local (between lunch and dinner)",
-      "notes": "Never call during lunch or dinner service."
+      "notes": "Never call during lunch or dinner service.",
+      "potential": {
+        "score": 46,
+        "confidence": "high",
+        "verdict": "Sin presupuesto en este momento. Solo grupos con 3+ sedes en expansión.",
+        "dimensions": {
+          "growth": {
+            "score": 2,
+            "note": "~60% de los operadores reportó caída de tráfico en 2025; los independientes bajaron 2.5%."
+          },
+          "pain": {
+            "score": 6,
+            "note": "Comisiones de apps de domicilio, reseñas y desperdicio."
+          },
+          "budget": {
+            "score": 3,
+            "note": "Márgenes muy presionados; muchos no son rentables."
+          },
+          "fit": {
+            "score": 6,
+            "note": "Reseñas con IA, app propia, pronóstico."
+          },
+          "market": {
+            "score": 7,
+            "note": "Muchos grupos locales."
+          },
+          "reach": {
+            "score": 5,
+            "note": "Solo entre 14:00 y 16:00."
+          }
+        },
+        "evidence": [
+          {
+            "detail": "NRA: ventas proyectadas de USD 1.55T en 2026, pero ~60% de operadores reportó caída de tráfico en 2025; los restaurantes independientes cayeron 2.5% (Technomic).",
+            "source": "https://restaurant.org/education-and-resources/resource-library/report-sales-to-hit-$1-55t-in-2026-despite-challenging-business-environment/"
+          }
+        ],
+        "updatedAt": "2026-11-07"
+      }
     },
     {
       "id": "ecommerce-brands",
@@ -259,69 +1332,358 @@
       "priority": 3,
       "active": true,
       "growth": "high",
-      "searchKeywords": ["shopify brand", "direct to consumer brand", "online store company"],
-      "matchingServices": ["retail-ai-forecasting", "generative-content", "rescue-and-harden", "process-automation"],
-      "typicalPains": ["Inventory and stock-outs", "Content volume", "Fragmented tools"],
-      "signals": ["Large catalog", "Fast revenue growth", "Hiring operations / e-commerce manager"],
-      "decisionMakers": ["Founder / CEO", "Head of E-commerce", "COO"],
+      "searchKeywords": [
+        "shopify brand",
+        "direct to consumer brand",
+        "online store company"
+      ],
+      "matchingServices": [
+        "retail-ai-forecasting",
+        "generative-content",
+        "rescue-and-harden",
+        "process-automation"
+      ],
+      "typicalPains": [
+        "Inventory and stock-outs",
+        "Content volume",
+        "Fragmented tools"
+      ],
+      "signals": [
+        "Large catalog",
+        "Fast revenue growth",
+        "Hiring operations / e-commerce manager"
+      ],
+      "decisionMakers": [
+        "Founder / CEO",
+        "Head of E-commerce",
+        "COO"
+      ],
       "bestTimeToCall": "Tue–Thu 11:00–14:00 local",
-      "notes": "Email often works better than phone for DTC founders; still capture phone."
+      "notes": "Email often works better than phone for DTC founders; still capture phone.",
+      "potential": {
+        "score": 64,
+        "confidence": "high",
+        "verdict": "Crece rápido, pero es difícil de contactar por teléfono. Usar el correo como canal principal.",
+        "dimensions": {
+          "growth": {
+            "score": 8,
+            "note": "E-commerce de EE. UU. +12.2% interanual; 17.1% de las ventas minoristas (2T 2026)."
+          },
+          "pain": {
+            "score": 6,
+            "note": "Volumen de contenido, inventario y herramientas fragmentadas."
+          },
+          "budget": {
+            "score": 6,
+            "note": "Variable: desde marcas pequeñas hasta medianas con buen presupuesto."
+          },
+          "fit": {
+            "score": 7,
+            "note": "Pronóstico de inventario, contenido generativo, rescate de software."
+          },
+          "market": {
+            "score": 7,
+            "note": "Muchas marcas DTC."
+          },
+          "reach": {
+            "score": 3,
+            "note": "Los fundadores DTC casi no contestan llamadas en frío: priorizar correo."
+          }
+        },
+        "evidence": [
+          {
+            "detail": "Census: ventas de e-commerce de USD 340.2B en el 2T 2026 (+12.2% interanual), 17.1% del total minorista.",
+            "source": "https://fred.stlouisfed.org/graph/?g=Bebu"
+          }
+        ],
+        "updatedAt": "2026-11-07"
+      }
     },
     {
       "id": "saas-startups",
       "name": "Seed / Series A startups",
       "priority": 2,
       "active": true,
-      "growth": "high",
-      "searchKeywords": ["seed funded startup", "series A startup", "startup raised"],
-      "matchingServices": ["custom-web-platform", "rescue-and-harden", "mobile-app"],
-      "typicalPains": ["Need to ship faster", "Hiring senior engineers is slow", "Technical debt from MVP"],
-      "signals": ["Recent funding announcement", "Hiring engineers", "Non-technical founder"],
-      "decisionMakers": ["Founder / CEO", "CTO", "Head of Product"],
+      "growth": "medium",
+      "searchKeywords": [
+        "seed funded startup",
+        "series A startup",
+        "startup raised"
+      ],
+      "matchingServices": [
+        "custom-web-platform",
+        "rescue-and-harden",
+        "mobile-app"
+      ],
+      "typicalPains": [
+        "Need to ship faster",
+        "Hiring senior engineers is slow",
+        "Technical debt from MVP"
+      ],
+      "signals": [
+        "Recent funding announcement",
+        "Hiring engineers",
+        "Non-technical founder"
+      ],
+      "decisionMakers": [
+        "Founder / CEO",
+        "CTO",
+        "Head of Product"
+      ],
       "bestTimeToCall": "Tue–Thu 10:00–12:00 local",
-      "notes": "Funding news in the last 6 months is the best trigger."
+      "notes": "Funding news in the last 6 months is the best trigger.",
+      "potential": {
+        "score": 54,
+        "confidence": "medium",
+        "verdict": "Solo con un disparador claro (ronda anunciada en los últimos 6 meses). Contactar por correo o LinkedIn.",
+        "dimensions": {
+          "growth": {
+            "score": 5,
+            "note": "El capital se concentra en IA; las rondas semilla cayeron 21% interanual (1T 2026)."
+          },
+          "pain": {
+            "score": 6,
+            "note": "Necesidad de entregar rápido con pocos ingenieros senior."
+          },
+          "budget": {
+            "score": 5,
+            "note": "Capital concentrado en pocos; muchas startups cuidan caja."
+          },
+          "fit": {
+            "score": 7,
+            "note": "Plataforma web, rescate de software, app."
+          },
+          "market": {
+            "score": 5,
+            "note": "Miles de startups, muy dispersas."
+          },
+          "reach": {
+            "score": 3,
+            "note": "Fundadores casi no contestan llamadas en frío."
+          }
+        },
+        "evidence": [
+          {
+            "detail": "Carta 1T 2026: el capital semilla subió 25%, pero el número de rondas cayó 21% (381 frente a 481).",
+            "source": "https://carta.com/data/state-of-private-markets-q1-2026-full-report/"
+          }
+        ],
+        "updatedAt": "2026-11-07"
+      }
     },
     {
       "id": "solar-installers",
       "name": "Solar installers",
-      "priority": 2,
+      "priority": 1,
       "active": true,
-      "growth": "medium",
-      "searchKeywords": ["solar installer", "solar energy company", "solar panel installation company"],
-      "matchingServices": ["ai-receptionist", "process-automation", "web-performance-seo"],
-      "typicalPains": ["Lead qualification", "Permitting paperwork", "Proposal generation"],
-      "signals": ["Heavy ad spend", "Hiring sales reps / permit coordinators"],
-      "decisionMakers": ["Owner", "VP Operations", "Sales Director"],
+      "growth": "low",
+      "searchKeywords": [
+        "solar installer",
+        "solar energy company",
+        "solar panel installation company"
+      ],
+      "matchingServices": [
+        "ai-receptionist",
+        "process-automation",
+        "web-performance-seo"
+      ],
+      "typicalPains": [
+        "Lead qualification",
+        "Permitting paperwork",
+        "Proposal generation"
+      ],
+      "signals": [
+        "Heavy ad spend",
+        "Hiring sales reps / permit coordinators"
+      ],
+      "decisionMakers": [
+        "Owner",
+        "VP Operations",
+        "Sales Director"
+      ],
       "bestTimeToCall": "Tue–Thu 09:00–11:00 local",
-      "notes": ""
+      "notes": "",
+      "potential": {
+        "score": 43,
+        "confidence": "high",
+        "verdict": "Evitar en 2026: el segmento residencial está en contracción fuerte.",
+        "dimensions": {
+          "growth": {
+            "score": 1,
+            "note": "El fin del crédito 25D contrajo el segmento residencial; el 2T 2026 fue el peor trimestre en cinco años."
+          },
+          "pain": {
+            "score": 6,
+            "note": "Calificación de leads y papeleo de permisos."
+          },
+          "budget": {
+            "score": 3,
+            "note": "Quiebras y financiamiento limitado."
+          },
+          "fit": {
+            "score": 6,
+            "note": "Receptionist, automatización."
+          },
+          "market": {
+            "score": 5,
+            "note": "Miles de instaladores, muchos cerrando."
+          },
+          "reach": {
+            "score": 6,
+            "note": "Accesibles."
+          }
+        },
+        "evidence": [
+          {
+            "detail": "Wood Mackenzie: 995 MWdc residenciales en el 2T 2026, el total trimestral más bajo en cinco años; SEIA prevé una contracción significativa en 2026.",
+            "source": "https://seia.org/research-resources/solar-market-insight-report-q2-2026/"
+          }
+        ],
+        "updatedAt": "2026-11-07"
+      }
     },
     {
       "id": "engineering-firms",
       "name": "Engineering & architecture firms",
-      "priority": 2,
+      "priority": 4,
       "active": true,
-      "growth": "medium",
-      "searchKeywords": ["civil engineering firm", "structural engineering firm", "architecture firm"],
-      "matchingServices": ["private-ai-knowledge", "process-automation"],
-      "typicalPains": ["Searching past projects/specs", "Proposal writing", "Document control"],
-      "signals": ["Large project portfolio", "Hiring proposal coordinators"],
-      "decisionMakers": ["Principal", "Managing Partner", "Operations Director"],
+      "growth": "high",
+      "searchKeywords": [
+        "civil engineering firm",
+        "structural engineering firm",
+        "architecture firm"
+      ],
+      "matchingServices": [
+        "private-ai-knowledge",
+        "process-automation"
+      ],
+      "typicalPains": [
+        "Searching past projects/specs",
+        "Proposal writing",
+        "Document control"
+      ],
+      "signals": [
+        "Large project portfolio",
+        "Hiring proposal coordinators"
+      ],
+      "decisionMakers": [
+        "Principal",
+        "Managing Partner",
+        "Operations Director"
+      ],
       "bestTimeToCall": "Tue–Thu 09:00–11:00 local",
-      "notes": ""
+      "notes": "",
+      "potential": {
+        "score": 70,
+        "confidence": "high",
+        "verdict": "Demanda fuerte y escasez de ingenieros: vender productividad con IA privada y capacitación. Solo 11% de las firmas pequeñas tiene política de IA.",
+        "dimensions": {
+          "growth": {
+            "score": 7,
+            "note": "Backlog mediano de 11 meses y confianza alta (ACEC, 1T 2026)."
+          },
+          "pain": {
+            "score": 7,
+            "note": "\"Más trabajo que personas\": buscan productividad, no solo contratar."
+          },
+          "budget": {
+            "score": 8,
+            "note": "Firmas profesionales con buena facturación."
+          },
+          "fit": {
+            "score": 7,
+            "note": "IA privada sobre proyectos y especificaciones, automatización de propuestas, capacitación en IA."
+          },
+          "market": {
+            "score": 6,
+            "note": "Miles de firmas medianas."
+          },
+          "reach": {
+            "score": 6,
+            "note": "Socios ocupados; mejor por la mañana."
+          }
+        },
+        "evidence": [
+          {
+            "detail": "ACEC 1T 2026: confianza financiera +82, backlog mediano de 11 meses; casi dos tercios planea contratar más.",
+            "source": "https://engineeringinc.acec.org/blog/5-numbers-that-define-engineerings-business-outlook-in-2026/"
+          },
+          {
+            "detail": "82% de las firmas grandes tiene política de IA frente a solo 11% de las pequeñas.",
+            "source": "https://engineeringinc.acec.org/blog/engineering-firms-report-rebounding-economic-confidence-accelerating-ai-investment/"
+          }
+        ],
+        "updatedAt": "2026-11-07"
+      }
     },
     {
       "id": "auto-repair",
       "name": "Auto repair shops & collision centers",
-      "priority": 2,
+      "priority": 3,
       "active": true,
-      "growth": "medium",
-      "searchKeywords": ["auto repair shop", "collision repair center", "auto body shop"],
-      "matchingServices": ["ai-receptionist", "web-performance-seo"],
-      "typicalPains": ["Phones during busy hours", "Status update calls", "Estimates"],
-      "signals": ["Multiple bays/locations", "Hiring service advisors"],
-      "decisionMakers": ["Owner", "Service Manager"],
+      "growth": "high",
+      "searchKeywords": [
+        "auto repair shop",
+        "collision repair center",
+        "auto body shop"
+      ],
+      "matchingServices": [
+        "ai-receptionist",
+        "web-performance-seo"
+      ],
+      "typicalPains": [
+        "Phones during busy hours",
+        "Status update calls",
+        "Estimates"
+      ],
+      "signals": [
+        "Multiple bays/locations",
+        "Hiring service advisors"
+      ],
+      "decisionMakers": [
+        "Owner",
+        "Service Manager"
+      ],
       "bestTimeToCall": "Tue–Thu 13:00–15:00 local",
-      "notes": ""
+      "notes": "",
+      "potential": {
+        "score": 62,
+        "confidence": "medium",
+        "verdict": "Demanda creciente por autos más viejos; presupuesto limitado. Ofertas de entrada (web + receptionist).",
+        "dimensions": {
+          "growth": {
+            "score": 7,
+            "note": "Edad promedio de los vehículos en récord de 12.8 años: más reparaciones."
+          },
+          "pain": {
+            "score": 6,
+            "note": "Teléfono en horas pico, llamadas para preguntar estado, complejidad técnica."
+          },
+          "budget": {
+            "score": 5,
+            "note": "Talleres pequeños con presupuesto limitado."
+          },
+          "fit": {
+            "score": 6,
+            "note": "AI Receptionist y web."
+          },
+          "market": {
+            "score": 8,
+            "note": "Decenas de miles de talleres independientes."
+          },
+          "reach": {
+            "score": 6,
+            "note": "Contestan, pero ocupados en horas pico."
+          }
+        },
+        "evidence": [
+          {
+            "detail": "S&P Global Mobility: edad promedio de los vehículos de EE. UU. de 12.8 años en 2025, récord.",
+            "source": "https://www.spglobal.com/automotive-insights/en/blogs/2025/05/average-age-of-vehicle-in-us"
+          }
+        ],
+        "updatedAt": "2026-11-07"
+      }
     },
     {
       "id": "auto-dealerships",
@@ -329,13 +1691,68 @@
       "priority": 2,
       "active": true,
       "growth": "low",
-      "searchKeywords": ["used car dealership", "independent auto dealer"],
-      "matchingServices": ["generative-content", "reviews-sentiment-ai", "ai-receptionist"],
-      "typicalPains": ["Listing content", "Lead response time", "Reviews"],
-      "signals": ["Large inventory", "Multiple lots"],
-      "decisionMakers": ["Owner / Dealer Principal", "General Manager"],
+      "searchKeywords": [
+        "used car dealership",
+        "independent auto dealer"
+      ],
+      "matchingServices": [
+        "generative-content",
+        "reviews-sentiment-ai",
+        "ai-receptionist"
+      ],
+      "typicalPains": [
+        "Listing content",
+        "Lead response time",
+        "Reviews"
+      ],
+      "signals": [
+        "Large inventory",
+        "Multiple lots"
+      ],
+      "decisionMakers": [
+        "Owner / Dealer Principal",
+        "General Manager"
+      ],
       "bestTimeToCall": "Tue–Thu 10:00–12:00 local",
-      "notes": ""
+      "notes": "",
+      "potential": {
+        "score": 50,
+        "confidence": "low",
+        "verdict": "Prioridad baja: mercado en ajuste y encaje medio.",
+        "dimensions": {
+          "growth": {
+            "score": 3,
+            "note": "Compradores de autos nuevos saliendo del mercado."
+          },
+          "pain": {
+            "score": 5,
+            "note": "Contenido de inventario y velocidad de respuesta a leads."
+          },
+          "budget": {
+            "score": 6,
+            "note": "Concesionarios con presupuesto de marketing."
+          },
+          "fit": {
+            "score": 5,
+            "note": "Contenido generativo, reseñas, receptionist."
+          },
+          "market": {
+            "score": 6,
+            "note": "Miles de concesionarios independientes."
+          },
+          "reach": {
+            "score": 6,
+            "note": "Gerentes accesibles."
+          }
+        },
+        "evidence": [
+          {
+            "detail": "Aproximadamente un millón de compradores de autos nuevos salió del mercado, con efectos en cadena en la industria.",
+            "source": "https://www.autobodynews.com/news/one-million-new-car-buyers-have-left-the-market-and-the-ripple-effects-are-reaching-collision-shops"
+          }
+        ],
+        "updatedAt": "2026-11-07"
+      }
     },
     {
       "id": "hotels-hospitality",
@@ -343,27 +1760,152 @@
       "priority": 2,
       "active": true,
       "growth": "medium",
-      "searchKeywords": ["boutique hotel", "independent hotel", "inn and suites"],
-      "matchingServices": ["reviews-sentiment-ai", "ai-receptionist", "web-performance-seo"],
-      "typicalPains": ["OTA commissions", "Reviews", "Reservation calls"],
-      "signals": ["Low direct booking", "Mixed reviews"],
-      "decisionMakers": ["Owner", "General Manager"],
+      "searchKeywords": [
+        "boutique hotel",
+        "independent hotel",
+        "inn and suites"
+      ],
+      "matchingServices": [
+        "reviews-sentiment-ai",
+        "ai-receptionist",
+        "web-performance-seo"
+      ],
+      "typicalPains": [
+        "OTA commissions",
+        "Reviews",
+        "Reservation calls"
+      ],
+      "signals": [
+        "Low direct booking",
+        "Mixed reviews"
+      ],
+      "decisionMakers": [
+        "Owner",
+        "General Manager"
+      ],
       "bestTimeToCall": "Tue–Thu 10:00–12:00 local",
-      "notes": ""
+      "notes": "",
+      "potential": {
+        "score": 54,
+        "confidence": "medium",
+        "verdict": "Impulso temporal por el Mundial 2026. Oportunidad táctica, no estructural.",
+        "dimensions": {
+          "growth": {
+            "score": 5,
+            "note": "RevPAR −0.3% en 2025; +4.4% en 2026 por el Mundial y ~2.1% en 2027."
+          },
+          "pain": {
+            "score": 5,
+            "note": "Comisiones de OTAs y gestión de reseñas."
+          },
+          "budget": {
+            "score": 6,
+            "note": "Hoteles independientes con presupuesto moderado."
+          },
+          "fit": {
+            "score": 6,
+            "note": "Reseñas con IA, recepción y web para reservas directas."
+          },
+          "market": {
+            "score": 5,
+            "note": "Miles de hoteles independientes."
+          },
+          "reach": {
+            "score": 6,
+            "note": "Gerentes generales accesibles."
+          }
+        },
+        "evidence": [
+          {
+            "detail": "CoStar/Tourism Economics: RevPAR −0.3% en 2025 (primera caída no recesiva registrada); pronóstico de +4.4% para 2026.",
+            "source": "https://www.hoteldive.com/news/costar-tourism-economics-raise-us-hotel-performance-outlook-2026/827318/"
+          }
+        ],
+        "updatedAt": "2026-11-07"
+      }
     },
     {
       "id": "marketing-agencies",
       "name": "Marketing agencies (white-label partner)",
-      "priority": 2,
+      "priority": 1,
       "active": true,
-      "growth": "medium",
-      "searchKeywords": ["digital marketing agency", "web design agency"],
-      "matchingServices": ["generative-content", "custom-web-platform"],
-      "typicalPains": ["No in-house engineers for complex builds", "Content volume"],
-      "signals": ["Lists web development but small team", "Hiring developers"],
-      "decisionMakers": ["Founder / CEO", "Head of Delivery"],
+      "growth": "low",
+      "searchKeywords": [
+        "digital marketing agency",
+        "web design agency"
+      ],
+      "matchingServices": [
+        "generative-content",
+        "custom-web-platform"
+      ],
+      "typicalPains": [
+        "No in-house engineers for complex builds",
+        "Content volume"
+      ],
+      "signals": [
+        "Lists web development but small team",
+        "Hiring developers"
+      ],
+      "decisionMakers": [
+        "Founder / CEO",
+        "Head of Delivery"
+      ],
       "bestTimeToCall": "Tue–Thu 10:00–12:00 local",
-      "notes": "Pitch as white-label engineering partner — recurring revenue."
+      "notes": "Pitch as white-label engineering partner — recurring revenue.",
+      "potential": {
+        "score": 48,
+        "confidence": "low",
+        "verdict": "Útil como canal de socios (white-label), no como cliente final. Prioridad baja.",
+        "dimensions": {
+          "growth": {
+            "score": 3,
+            "note": "La IA está desplazando parte del trabajo de las agencias (criterio propio, sin dato duro)."
+          },
+          "pain": {
+            "score": 5,
+            "note": "Necesitan ingeniería para proyectos complejos."
+          },
+          "budget": {
+            "score": 5,
+            "note": "Variable."
+          },
+          "fit": {
+            "score": 5,
+            "note": "Socio de ingeniería white-label y contenido generativo."
+          },
+          "market": {
+            "score": 6,
+            "note": "Muchas agencias pequeñas."
+          },
+          "reach": {
+            "score": 6,
+            "note": "Fundadores accesibles."
+          }
+        },
+        "evidence": [],
+        "updatedAt": "2026-11-07"
+      }
     }
-  ]
+  ],
+  "_methodology": {
+    "updatedAt": "2026-11-07",
+    "weights": {
+      "growth": 0.2,
+      "pain": 0.25,
+      "budget": 0.2,
+      "fit": 0.15,
+      "market": 0.1,
+      "reach": 0.1
+    },
+    "scale": "Cada dimensión de 0 a 10. Potencial = suma ponderada × 10.",
+    "dimensions": {
+      "growth": "Crecimiento del mercado en EE. UU. (BLS, Census, reportes de industria).",
+      "pain": "Evidencia de un dolor que nuestro catálogo resuelve (escasez de personal, llamadas perdidas, trabajo manual).",
+      "budget": "Capacidad de pago: ingresos por negocio, márgenes, ticket promedio.",
+      "fit": "Cuántos servicios del catálogo encajan y qué tan directo.",
+      "market": "Cantidad de negocios objetivo (tamaño y fragmentación).",
+      "reach": "Facilidad de llegar al decisor por teléfono."
+    },
+    "priorityBands": "≥75 → 5 · 70–74 → 4 · 60–69 → 3 · 50–59 → 2 · <50 → 1"
+  }
 }

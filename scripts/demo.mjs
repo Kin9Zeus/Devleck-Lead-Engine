@@ -14,7 +14,7 @@ process.env.PORT ||= '4601';
 
 if (process.argv.includes('--reset')) fs.rmSync(DEMO_DIR, { recursive: true, force: true });
 
-const { loadAllConfig, writeJson, LEADS_FILE, SETTINGS_FILE, INSIGHTS_FILE, RUNS_DIR } = await import('../lib/store.mjs');
+const { loadAllConfig, writeJson, LEADS_FILE, SETTINGS_FILE, RUNS_DIR } = await import('../lib/store.mjs');
 const { validateLead, computeScore, dedupeKeys, newLeadId } = await import('../lib/leads.mjs');
 
 const HOUR = 3600e3;
@@ -29,55 +29,55 @@ function seed() {
   });
 
   const specs = [
-    { name: 'Harborline Jewelers', niche: 'jewelry-stores', category: 'Custom jeweler', city: 'Austin', state: 'TX', area: '512', svc: 'ai-jewelry-design-studio', dm: ['Elena Marsh', 'Owner & Master Jeweler'], scores: [9, 9, 8, 7, 8], deal: [8000, 14000], rating: 4.9, reviews: 412, status: 'new', starred: true,
+    { name: 'Harborline Jewelers', niche: 'jewelry-stores', category: 'Custom jeweler', city: 'Austin', state: 'TX', area: '512', svc: 'ai-jewelry-design-studio', dm: ['Elena Marsh', 'Owner & Master Jeweler'], scores: [9, 9, 8, 7, 8], deal: [3500, 7000], rating: 4.9, reviews: 412, status: 'new', starred: true,
       summary: 'Family-owned jeweler known for custom engagement rings. Designs in-house but outsources CAD modeling; customers wait 3–5 days for renders.',
       pains: ['3–5 day wait for CAD renders', 'Customers leave to "think about it" before approving a design', 'Paying an external CAD freelancer per piece'],
       signals: [['reviews', 'Several recent reviews mention waiting over a week to see the 3D design'], ['hiring', 'Open job post for a part-time CAD jewelry designer'], ['website', '"Design your own ring" page relies on a contact form']],
       angle: 'Show the customer a photorealistic 3D render of their ring while they are still in the store.',
       why: 'They sell custom engagement rings as their core product, outsource CAD (open job post) and their reviews repeatedly mention long waits for the design. Faster renders directly increase first-visit closes.' },
-    { name: 'Bluebonnet Med Spa', niche: 'med-spas', category: 'Medical spa', city: 'Houston', state: 'TX', area: '713', svc: 'ai-receptionist', dm: ['Dr. Priya Nair', 'Medical Director'], scores: [9, 9, 8, 8, 8], deal: [4000, 8000], rating: 4.8, reviews: 268, status: 'callback', due: -1 * HOUR,
+    { name: 'Bluebonnet Med Spa', interest: 3, notes: [{ id: 'N1', at: iso(-30 * HOUR), by: 'Alex Rivera', pinned: true, text: 'Habló Dr. Nair: pierden leads de Instagram los fines de semana. Quiere ver precio y demo. Llamar después de las 2pm.' }], tasks: [{ id: 'T1', title: 'Enviar video demo del agente con su menú de servicios', priority: 'high', due: iso(-2 * HOUR), done: false, by: 'Alex Rivera', createdAt: iso(-30 * HOUR) }], niche: 'med-spas', category: 'Medical spa', city: 'Houston', state: 'TX', area: '713', svc: 'ai-receptionist', dm: ['Dr. Priya Nair', 'Medical Director'], scores: [9, 9, 8, 8, 8], deal: [2500, 4000], rating: 4.8, reviews: 268, status: 'callback', due: -1 * HOUR,
       summary: 'Two-location med spa running paid social ads; bookings handled by phone and Instagram DMs.',
       pains: ['Ad leads arrive after hours and go unanswered until next day', 'Front desk juggling phones and walk-ins'],
       signals: [['ads', 'Active paid campaigns on Instagram and Facebook'], ['growth', 'Second location opened this year'], ['reviews', 'Reviews mention calls going to voicemail']],
       angle: 'Every ad lead gets answered and booked in under a minute — day or night.',
       why: 'They pay for leads through ads but only answer during business hours; reviews mention voicemail. An AI receptionist that books into their calendar recovers paid leads immediately.' },
-    { name: 'Keystone HVAC & Plumbing', niche: 'home-services', category: 'HVAC contractor', city: 'Tampa', state: 'FL', area: '813', svc: 'ai-receptionist', dm: ['Mike Delaney', 'Owner'], scores: [9, 8, 8, 8, 7], deal: [3500, 7000], rating: 4.7, reviews: 530, status: 'new',
+    { name: 'Keystone HVAC & Plumbing', notes: [{ id: 'N6', at: iso(-4 * HOUR), by: 'Alex Rivera', text: 'Según su web, Mike está en campo hasta las 4pm. Llamar a primera hora.' }], niche: 'home-services', category: 'HVAC contractor', city: 'Tampa', state: 'FL', area: '813', svc: 'ai-receptionist', dm: ['Mike Delaney', 'Owner'], scores: [9, 8, 8, 8, 7], deal: [2000, 3800], rating: 4.7, reviews: 530, status: 'new',
       summary: '24/7 emergency HVAC and plumbing company with 14 trucks. Hiring a dispatcher and a customer service rep.',
       pains: ['Missed emergency calls at night', 'Dispatch coordinated by phone and whiteboard'],
       signals: [['hiring', 'Hiring a dispatcher and a CSR'], ['growth', 'Fleet grew from 9 to 14 trucks'], ['website', 'Website promises 24/7 service but only has a contact form']],
       angle: 'Answer every emergency call at 2 a.m. and book the job before the customer calls the next company.',
       why: 'They advertise 24/7 emergency service and are hiring CSRs and dispatchers — clear phone-capacity pain with high-value emergency jobs.' },
-    { name: 'Ridgeway Injury Law', niche: 'law-firms', category: 'Personal injury firm', city: 'Miami', state: 'FL', area: '305', svc: 'ai-receptionist', dm: ['Carla Ridgeway', 'Managing Partner'], scores: [9, 7, 7, 9, 7], deal: [5000, 9000], rating: 4.8, reviews: 189, status: 'meeting', due: 26 * HOUR,
+    { name: 'Ridgeway Injury Law', interest: 4, notes: [{ id: 'N2', at: iso(-25 * HOUR), by: 'Alex Rivera', pinned: true, text: 'Carla quiere ver el flujo de admisión en español. Demo agendada para el jueves 10am ET. Decide con su socio.' }], tasks: [{ id: 'T2', title: 'Preparar demo con un caso de lesiones personales en español', priority: 'high', due: iso(20 * HOUR), done: false, by: 'Alex Rivera', createdAt: iso(-25 * HOUR) }], niche: 'law-firms', category: 'Personal injury firm', city: 'Miami', state: 'FL', area: '305', svc: 'ai-receptionist', dm: ['Carla Ridgeway', 'Managing Partner'], scores: [9, 7, 7, 9, 7], deal: [3000, 4000], rating: 4.8, reviews: 189, status: 'meeting', due: 26 * HOUR,
       summary: 'Bilingual personal injury firm promising free 24/7 consultations.',
       pains: ['Intake calls after hours', 'Spanish-speaking callers need immediate response'],
       signals: [['website', 'Promises 24/7 free consultations'], ['hiring', 'Hiring a bilingual intake specialist']],
       angle: 'Bilingual 24/7 intake so no case goes to the firm down the street.',
       why: 'PI firms win cases on intake speed; they promise 24/7 consultations and are hiring bilingual intake staff.' },
-    { name: 'Northgate Family Dental', niche: 'dental-practices', category: 'Dental practice', city: 'Dallas', state: 'TX', area: '214', svc: 'ai-receptionist', dm: ['Rachel Kim', 'Office Manager'], scores: [8, 7, 7, 7, 6], deal: [3000, 6000], rating: 4.6, reviews: 341, status: 'attempted', due: 2 * HOUR,
+    { name: 'Northgate Family Dental', interest: 0, notes: [{ id: 'N4', at: iso(-26 * HOUR), by: 'Alex Rivera', text: 'Contestó recepción. Rachel (office manager) está en las tardes.' }], niche: 'dental-practices', category: 'Dental practice', city: 'Dallas', state: 'TX', area: '214', svc: 'ai-receptionist', dm: ['Rachel Kim', 'Office Manager'], scores: [8, 7, 7, 7, 6], deal: [1800, 3500], rating: 4.6, reviews: 341, status: 'attempted', due: 2 * HOUR,
       summary: 'Three-dentist family practice without online booking.', pains: ['No online booking', 'Phone tag for recalls'],
       signals: [['website', 'No online booking; "call to schedule" only'], ['hiring', 'Hiring a front desk coordinator']],
       angle: 'Let patients book and reschedule 24/7 without calling the front desk.', why: 'No online booking and an open front-desk role indicate scheduling overload.' },
-    { name: 'Summit Freight Logistics', niche: 'logistics-trucking', category: 'Freight brokerage', city: 'Atlanta', state: 'GA', area: '404', svc: 'process-automation', dm: ['Jordan Blake', 'Director of Operations'], scores: [8, 8, 6, 9, 7], deal: [9000, 15000], rating: 4.5, reviews: 64, status: 'proposal',
+    { name: 'Summit Freight Logistics', interest: 5, statusChangedAt: iso(-5 * 24 * HOUR), notes: [{ id: 'N3', at: iso(-5 * 24 * HOUR), by: 'Alex Rivera', text: 'Propuesta enviada: automatización de facturación desde comprobantes de entrega, fase 1 USD 4.500. Jordan dijo que la revisa con el CFO.' }], niche: 'logistics-trucking', category: 'Freight brokerage', city: 'Atlanta', state: 'GA', area: '404', svc: 'process-automation', dm: ['Jordan Blake', 'Director of Operations'], scores: [8, 8, 6, 9, 7], deal: [4000, 6000], rating: 4.5, reviews: 64, status: 'proposal',
       summary: 'Mid-size freight broker handling invoicing and proof-of-delivery paperwork manually.', pains: ['Manual invoicing from PODs', 'Customers call for load status'],
       signals: [['hiring', 'Hiring two billing clerks'], ['growth', 'New Dallas office announced']],
       angle: 'Turn proof-of-delivery into an invoice automatically — no billing clerks copying data.', why: 'Hiring billing clerks while expanding means admin cost scales with revenue — the exact problem automation removes.' },
-    { name: 'Aurelia Custom Rings', niche: 'jewelry-stores', category: 'Bespoke jeweler', city: 'Scottsdale', state: 'AZ', area: '480', svc: 'ai-jewelry-design-studio', dm: ['Marco Bellini', 'Founder'], scores: [9, 7, 7, 7, 6], deal: [7000, 12000], rating: 4.9, reviews: 156, status: 'new',
+    { name: 'Aurelia Custom Rings', niche: 'jewelry-stores', category: 'Bespoke jeweler', city: 'Scottsdale', state: 'AZ', area: '480', svc: 'ai-jewelry-design-studio', dm: ['Marco Bellini', 'Founder'], scores: [9, 7, 7, 7, 6], deal: [3000, 6500], rating: 4.9, reviews: 156, status: 'new',
       summary: 'Bespoke jeweler with in-house casting and a strong Instagram presence of custom pieces.', pains: ['Design revisions take several rounds'],
       signals: [['tech', 'Mentions in-house CAD and casting'], ['reviews', 'Reviews praise designs but mention multiple revision rounds']],
       angle: 'Cut revision rounds by showing three AI-generated design variations in the first meeting.', why: 'In-house CAD and casting make the integration straightforward, and reviews point to slow revision cycles.' },
-    { name: 'Cypress Creek Animal Hospital', niche: 'veterinary-clinics', category: 'Veterinary hospital', city: 'Charlotte', state: 'NC', area: '704', svc: 'ai-receptionist', dm: [], scores: [8, 6, 6, 6, 5], deal: [3000, 6000], rating: 4.7, reviews: 298, status: 'new',
+    { name: 'Cypress Creek Animal Hospital', niche: 'veterinary-clinics', category: 'Veterinary hospital', city: 'Charlotte', state: 'NC', area: '704', svc: 'ai-receptionist', dm: [], scores: [8, 6, 6, 6, 5], deal: [1500, 3000], rating: 4.7, reviews: 298, status: 'new',
       summary: 'Independent animal hospital with phones that ring constantly.', pains: ['Phones overwhelm the front desk'],
       signals: [['reviews', 'Reviews mention long hold times']], angle: 'Answer routine calls automatically so staff can focus on the patients in the building.', why: 'Hold-time complaints and no online booking.' },
-    { name: 'Lakeshore CPA Group', niche: 'accounting-firms', category: 'CPA firm', city: 'Chicago', state: 'IL', area: '312', svc: 'process-automation', dm: ['Daniel Ortiz', 'Managing Partner'], scores: [7, 6, 6, 8, 5], deal: [5000, 10000], rating: 4.6, reviews: 48, status: 'new',
+    { name: 'Lakeshore CPA Group', niche: 'accounting-firms', category: 'CPA firm', city: 'Chicago', state: 'IL', area: '312', svc: 'process-automation', dm: ['Daniel Ortiz', 'Managing Partner'], scores: [7, 6, 6, 8, 5], deal: [2500, 5000], rating: 4.6, reviews: 48, status: 'contacted', interest: 3, notes: [{ id: 'N7', at: iso(-20 * HOUR), by: 'Alex Rivera', text: 'Daniel pidió info del programa de capacitación en IA para su equipo antes de la temporada de impuestos.' }],
       summary: 'Growing CPA firm collecting client documents by email.', pains: ['Document collection by email', 'Manual data entry'],
       signals: [['hiring', 'Hiring staff accountants']], angle: 'Automate document collection and data entry before next tax season.', why: 'Hiring during a talent shortage; documents still arrive by email.' },
-    { name: 'Copperline Fabrication', niche: 'manufacturing', category: 'Metal fabrication', city: 'Columbus', state: 'OH', area: '614', svc: 'custom-web-platform', dm: ['Greg Holloway', 'President'], scores: [7, 6, 5, 8, 6], deal: [15000, 30000], rating: 4.4, reviews: 22, status: 'new',
+    { name: 'Copperline Fabrication', niche: 'manufacturing', category: 'Metal fabrication', city: 'Columbus', state: 'OH', area: '614', svc: 'custom-web-platform', dm: ['Greg Holloway', 'President'], scores: [7, 6, 5, 8, 6], deal: [9000, 18000], rating: 4.4, reviews: 22, status: 'new',
       summary: 'Contract metal fabricator quoting RFQs by email and spreadsheet.', pains: ['Slow RFQ quoting'],
       signals: [['growth', 'Expanding to a second shop'], ['hiring', 'Hiring an estimator']], angle: 'A customer portal for RFQs, quotes and order status.', why: 'Expansion plus an estimator opening points to quoting bottlenecks.' },
-    { name: 'Palmetto Property Management', niche: 'property-management', category: 'Property management', city: 'Charleston', state: 'SC', area: '843', svc: 'ai-receptionist', dm: [], scores: [6, 5, 5, 6, 4], deal: [3000, 6000], rating: 4.1, reviews: 87, status: 'new', noEmail: true,
+    { name: 'Palmetto Property Management', niche: 'property-management', category: 'Property management', city: 'Charleston', state: 'SC', area: '843', svc: 'ai-receptionist', dm: [], scores: [6, 5, 5, 6, 4], deal: [1500, 3000], rating: 4.1, reviews: 87, status: 'new', noEmail: true,
       summary: 'Residential property manager with ~600 units.', pains: ['After-hours maintenance calls'],
       signals: [['reviews', 'Tenants mention slow maintenance response']], angle: '24/7 maintenance intake that triages emergencies.', why: 'Maintenance response complaints in reviews.' },
-    { name: 'Silverleaf Home Care', niche: 'home-health', category: 'Home care agency', city: 'Orlando', state: 'FL', area: '407', svc: 'process-automation', dm: ['Angela Brooks', 'Administrator'], scores: [8, 7, 7, 7, 7], deal: [6000, 12000], rating: 4.8, reviews: 112, status: 'won',
+    { name: 'Silverleaf Home Care', interest: 5, notes: [{ id: 'N5', at: iso(-3 * 24 * HOUR), by: 'Alex Rivera', text: 'Firmó la fase 1 (agendamiento de cuidadoras). Interesada en el programa de capacitación en IA para su equipo administrativo.' }], niche: 'home-health', category: 'Home care agency', city: 'Orlando', state: 'FL', area: '407', svc: 'process-automation', dm: ['Angela Brooks', 'Administrator'], scores: [8, 7, 7, 7, 7], deal: [3500, 6000], rating: 4.8, reviews: 112, status: 'won',
       summary: 'Home care agency scheduling 80+ caregivers with spreadsheets.', pains: ['Caregiver scheduling on spreadsheets'],
       signals: [['hiring', 'Constant caregiver hiring']], angle: 'Automated caregiver scheduling and compliance paperwork.', why: 'Scheduling 80+ caregivers manually is error-prone and costly.' },
   ];
@@ -120,26 +120,12 @@ function seed() {
     return {
       id: newLeadId() + i, ...lead, dedupeKeys: dedupeKeys(lead), status: s.status, owner: 'demo', runId: i < 8 ? 'R20261014-090000' : '',
       starred: !!s.starred, createdAt, updatedAt: createdAt, nextActionAt: s.due != null ? iso(s.due) : null,
-      notes: s.status === 'meeting' ? [{ at: iso(-25 * HOUR), by: 'Alex Rivera', text: 'Carla wants to see the Spanish intake flow. Demo booked for Thursday 10am ET.' }] : [],
+      notes: s.notes || [], tasks: s.tasks || [], interest: s.interest ?? ({ meeting: 4, proposal: 4, won: 5 }[s.status] || 0),
+      statusChangedAt: s.statusChangedAt || iso(-25 * HOUR), manualFields: [],
       activity,
     };
   });
   writeJson(LEADS_FILE, { version: 1, leads, updatedAt: iso(0) });
-
-  const ins = (id, opportunityScore, growth, whyNow, bestServices, pitchAngle, hotMarkets) => ({ id, name: config.niches.items.find((n) => n.id === id)?.name || id, opportunityScore, growth, whyNow, bestServices, pitchAngle, hotMarkets, isNew: false });
-  writeJson(INSIGHTS_FILE, {
-    generatedAt: iso(-3 * HOUR),
-    summary: 'Demo analysis. Appointment-driven local services with high inbound call volume show the strongest combination of pain and ability to pay; custom jewelers are a focused, low-competition niche for the AI design product.',
-    niches: [
-      ins('med-spas', 88, 'high', 'Fast-growing category that relies on paid ads and phone/DM booking — every unanswered lead is wasted ad spend.', ['ai-receptionist', 'generative-content'], 'Answer and book every ad lead in under a minute.', ['Houston, TX', 'Miami, FL', 'Scottsdale, AZ']),
-      ins('home-services', 85, 'high', 'Emergency jobs are high-ticket and won by whoever answers first; owners are in the field.', ['ai-receptionist', 'process-automation'], 'Never miss a 2 a.m. emergency call.', ['Tampa, FL', 'Phoenix, AZ', 'Dallas, TX']),
-      ins('jewelry-stores', 82, 'medium', 'Custom engagement rings are high-value and won in the first visit; few tools serve independent jewelers.', ['ai-jewelry-design-studio', 'web-performance-seo'], 'Show the 3D render while the customer is still in the store.', ['Austin, TX', 'Scottsdale, AZ', 'Miami, FL']),
-      ins('law-firms', 80, 'medium', 'PI and immigration intake is a speed race; many firms promise 24/7 but answer 9–5.', ['ai-receptionist', 'private-ai-knowledge'], 'Bilingual 24/7 intake.', ['Miami, FL', 'Houston, TX']),
-      ins('home-health', 76, 'high', 'Aging population and caregiver scheduling complexity drive admin cost.', ['process-automation'], 'Automate caregiver scheduling.', ['Orlando, FL', 'Phoenix, AZ']),
-      ins('dental-practices', 72, 'medium', 'Front-desk turnover and recall campaigns keep phones overloaded.', ['ai-receptionist'], 'Online booking and recalls without phone tag.', ['Dallas, TX', 'Charlotte, NC']),
-    ],
-    sources: [],
-  });
 
   const runDir = path.join(RUNS_DIR, 'R20261014-090000');
   writeJson(path.join(runDir, 'run.json'), {

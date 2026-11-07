@@ -57,8 +57,9 @@ Estados: ${STATUSES.join(', ')}`);
       worker: { id: s.workerId || '(sin configurar)', name: s.repName, email: s.repEmail, phone: s.repPhone },
       territory: { states: s.defaultStates?.length ? s.defaultStates : member?.states || [], niches: member?.niches || [] },
       rules: { requirePhone: s.requirePhone, excludeChains: s.excludeChains, minEmployees: s.defaultMinEmployees, defaultLeadCount: s.defaultLeadCount },
-      services: (cfg.services.items || []).filter((x) => x.active !== false).map((x) => `${x.id} — ${x.name} (${x.type})`),
-      niches: (cfg.niches.items || []).filter((n) => n.active !== false).sort((a, b) => b.priority - a.priority).map((n) => `${n.id} — ${n.name} · prioridad ${n.priority} · crecimiento ${n.growth}`),
+      services: (cfg.services.items || []).filter((x) => x.active !== false).map((x) => `${x.id} — ${x.name} (${x.type}${x.allNiches ? ', todos los nichos' : ''})`),
+      niches: (cfg.niches.items || []).filter((n) => n.active !== false).sort((a, b) => (b.potential?.score ?? 0) - (a.potential?.score ?? 0))
+        .map((n) => `${n.id} — ${n.name} · potencial ${n.potential?.score ?? '?'}/100 · prioridad ${n.priority} · crecimiento ${n.growth}${n.potential?.verdict ? ` · ${n.potential.verdict}` : ''}`),
       leadsInDb: loadLeads().leads.length,
     });
   },
@@ -106,9 +107,16 @@ Estados: ${STATUSES.join(', ')}`);
     const data = readJson(abs);
     const cfg = loadAllConfig();
     const serviceIds = new Set((cfg.services.items || []).map((x) => x.id));
+    // El puntaje se calcula con la rúbrica de config/niches.json (_methodology.weights), no se acepta un número libre.
+    const W = cfg.niches._methodology?.weights || { growth: 0.2, pain: 0.25, budget: 0.2, fit: 0.15, market: 0.1, reach: 0.1 };
+    const fromDims = (d) => {
+      if (!d || typeof d !== 'object') return null;
+      const total = Object.entries(W).reduce((s, [k, w]) => s + Math.max(0, Math.min(10, Number(d[k]?.score ?? d[k]) || 0)) * w, 0);
+      return Math.round(total * 10);
+    };
     const niches = (data.niches || []).filter((n) => n?.id && n?.name).map((n) => ({
       ...n,
-      opportunityScore: Math.max(0, Math.min(100, Number(n.opportunityScore) || 0)),
+      opportunityScore: fromDims(n.dimensions) ?? Math.max(0, Math.min(100, Number(n.opportunityScore) || 0)),
       bestServices: (n.bestServices || []).filter((id) => serviceIds.has(id)),
       isNew: !(cfg.niches.items || []).some((x) => x.id === n.id),
     })).sort((a, b) => b.opportunityScore - a.opportunityScore);

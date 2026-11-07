@@ -19,8 +19,13 @@ mercado de USA con el catálogo de Devleck. Sé un analista, no un vendedor: si 
    - Capacidad de pago: ingresos promedio, márgenes, ticket promedio del cliente final.
    - Fragmentación: muchas PyMEs independientes (bueno) vs. pocas cadenas grandes (malo para nosotros).
    - Competencia: cuántos SaaS verticales ya dominan el nicho (mucha competencia = ángulo de customización).
-3. Para cada nicho evaluado calcula `opportunityScore` 0–100 ponderando: crecimiento (25), dolor que resolvemos
-   (25), capacidad de pago (20), encaje con el catálogo (20), facilidad de contacto telefónico (10).
+3. Califica cada nicho con la **misma rúbrica** que usa la calibración de `config/niches.json` (`_methodology`), para que los
+   puntajes sean comparables entre análisis. Cada dimensión de 0 a 10, con una nota de una línea y evidencia citada:
+   - `growth` (20%) crecimiento del mercado en EE. UU. · `pain` (25%) dolor que nuestro catálogo resuelve ·
+     `budget` (20%) capacidad de pago · `fit` (15%) encaje con el catálogo · `market` (10%) cantidad de negocios objetivo ·
+     `reach` (10%) facilidad de llegar al decisor por teléfono.
+   - Calibra contra los valores actuales de `potential.dimensions` en `config/niches.json`: muévelos solo con evidencia nueva.
+   - No calcules el total: el sistema calcula `opportunityScore` con los pesos de la rúbrica.
 4. Identifica mercados calientes (ciudades/estados donde el nicho crece más) y el mejor ángulo de venta.
 
 ## Salida
@@ -34,7 +39,11 @@ Escribe `workspace/inbox/niche-insights-<fecha>.json`:
     {
       "id": "jewelry-stores",
       "name": "Jewelry stores & custom jewelers",
-      "opportunityScore": 82,
+      "dimensions": {
+        "growth": { "score": 4, "note": "…" }, "pain": { "score": 6, "note": "…" }, "budget": { "score": 6, "note": "…" },
+        "fit": { "score": 9, "note": "…" }, "market": { "score": 5, "note": "…" }, "reach": { "score": 8, "note": "…" }
+      },
+      "confidence": "high|medium|low",
       "growth": "high|medium|low",
       "growthEvidence": [{ "detail": "…", "source": "https://…" }],
       "painEvidence": [{ "detail": "…", "source": "https://…" }],

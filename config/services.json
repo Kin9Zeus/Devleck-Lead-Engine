@@ -1,5 +1,5 @@
 {
-  "_help": "Catálogo de servicios y productos de Devleck. La IA SOLO recomienda lo que esté aquí con active=true. Edítalo desde la interfaz (modo administrador) o con /nuevo-servicio en Claude Code, y luego súbelo al repo.",
+  "_help": "Catálogo de servicios y productos de Devleck. La IA SOLO recomienda lo que esté aquí con active=true. allNiches=true significa que aplica a cualquier nicho. 'salesGuide' es material de aprendizaje para el equipo (en español). Edítalo desde la interfaz (modo administrador) o con /nuevo-servicio en Claude Code, y luego súbelo al repo.",
   "items": [
     {
       "id": "ai-receptionist",
@@ -9,9 +9,24 @@
       "active": true,
       "oneLiner": "An AI agent that answers calls, chats and web forms 24/7, qualifies the customer and books the appointment directly in the business calendar.",
       "description": "Omnichannel AI agent (phone, website chat, SMS, WhatsApp, Instagram DM) trained on the business's services, prices and policies. It answers questions, qualifies leads, books/reschedules appointments in the existing calendar/CRM and escalates to a human when needed. Built on Claude, integrated with the tools the business already uses.",
-      "deliverables": ["Voice + chat agent trained on the business", "Calendar / CRM integration", "Human hand-off rules", "Dashboard with conversations and booked appointments"],
+      "deliverables": [
+        "Voice + chat agent trained on the business",
+        "Calendar / CRM integration",
+        "Human hand-off rules",
+        "Dashboard with conversations and booked appointments"
+      ],
       "idealCustomer": {
-        "niches": ["dental-practices", "med-spas", "law-firms", "home-services", "veterinary-clinics", "real-estate", "auto-repair", "fitness-studios", "property-management"],
+        "niches": [
+          "dental-practices",
+          "med-spas",
+          "law-firms",
+          "home-services",
+          "veterinary-clinics",
+          "real-estate",
+          "auto-repair",
+          "fitness-studios",
+          "property-management"
+        ],
         "companySize": "2–100 employees, appointment-driven, high inbound call volume",
         "description": "Local service businesses that lose money when the phone isn't answered: after-hours calls, busy front desk, slow web-lead response."
       },
@@ -22,22 +37,92 @@
         "Multiple locations or extended hours",
         "Running Google/Facebook ads (paying for leads that may go unanswered)"
       ],
-      "disqualifiers": ["Already uses an AI receptionist/chatbot that books appointments", "National chain with corporate call center"],
-      "painPointsSolved": ["Missed calls = lost revenue", "Front-desk overload and turnover", "No coverage nights/weekends", "Slow response to web leads"],
-      "pricing": { "model": "Setup + monthly", "from": 2500, "to": 8000, "currency": "USD", "notes": "Setup fee plus optional monthly maintenance; fixed price per phase." },
+      "disqualifiers": [
+        "Already uses an AI receptionist/chatbot that books appointments",
+        "National chain with corporate call center"
+      ],
+      "painPointsSolved": [
+        "Missed calls = lost revenue",
+        "Front-desk overload and turnover",
+        "No coverage nights/weekends",
+        "Slow response to web leads"
+      ],
+      "pricing": {
+        "currency": "USD",
+        "model": "Setup + monthly",
+        "from": 1500,
+        "to": 4000,
+        "monthly": {
+          "from": 150,
+          "to": 400
+        },
+        "notes": "Setup único + mensualidad de operación (hosting, minutos de voz, ajustes). Precio fijo por fase."
+      },
       "timeline": "2–5 weeks",
       "roi": "If they miss 10 calls/week and a new customer is worth $300, that's ~$150k/year walking to competitors. The agent pays for itself with 2–3 recovered customers a month.",
       "pitch": {
         "hook": "Most {niche} lose 1 in 4 calls after hours or when the front desk is busy — we build an AI receptionist that answers every call and books the appointment for you.",
-        "valueProps": ["Never miss a call or a web lead again", "Books directly into your calendar", "Costs less than a part-time receptionist", "You own it — no per-seat SaaS"],
+        "valueProps": [
+          "Never miss a call or a web lead again",
+          "Books directly into your calendar",
+          "Costs less than a part-time receptionist",
+          "You own it — no per-seat SaaS"
+        ],
         "proof": "Built on Claude by a senior engineering team; weekly demos so you see it working before you pay the next phase."
       },
       "objections": [
-        { "objection": "Customers want to talk to a human.", "response": "Totally — the agent hands off to your team instantly for anything sensitive. It just makes sure nobody hits voicemail at 7 pm and calls your competitor instead." },
-        { "objection": "We already have a receptionist.", "response": "Great — this isn't replacing her, it's covering lunch, after-hours, weekends and the moments she's on another line. How many calls do you think go to voicemail in a week?" },
-        { "objection": "Too expensive.", "response": "It's a fixed setup, quoted after a free call. If it doesn't recover more than it costs in the first months, it's not worth doing — and we'll tell you that." }
+        {
+          "objection": "Customers want to talk to a human.",
+          "response": "Totally — the agent hands off to your team instantly for anything sensitive. It just makes sure nobody hits voicemail at 7 pm and calls your competitor instead."
+        },
+        {
+          "objection": "We already have a receptionist.",
+          "response": "Great — this isn't replacing her, it's covering lunch, after-hours, weekends and the moments she's on another line. How many calls do you think go to voicemail in a week?"
+        },
+        {
+          "objection": "Too expensive.",
+          "response": "It's a fixed setup, quoted after a free call. If it doesn't recover more than it costs in the first months, it's not worth doing — and we'll tell you that."
+        }
       ],
-      "keywords": ["ai receptionist", "answering service", "chatbot", "appointment booking", "missed calls"]
+      "keywords": [
+        "ai receptionist",
+        "answering service",
+        "chatbot",
+        "appointment booking",
+        "missed calls"
+      ],
+      "salesGuide": {
+        "simple": "Es un 'recepcionista' con IA que contesta el teléfono, el chat de la web, WhatsApp e Instagram 24/7. Responde preguntas, califica al cliente y le agenda la cita directamente en el calendario del negocio. Si algo es delicado, pasa la llamada a una persona.",
+        "howItWorks": [
+          "Reunión inicial: aprendemos servicios, precios, horarios y políticas del negocio.",
+          "Configuramos el agente con esa información y lo conectamos a su calendario o CRM.",
+          "Lo probamos con llamadas reales en un número de prueba (demo semanal).",
+          "Lo activamos: primero fuera de horario y luego cuando la recepción está ocupada.",
+          "Cada mes revisamos conversaciones y mejoramos respuestas."
+        ],
+        "example": "Una clínica dental recibe 15 llamadas después de las 6 pm cada semana y todas iban al buzón. Con el agente, esas llamadas se contestan, se agendan 6–8 citas nuevas por semana y la recepcionista llega en la mañana con la agenda llena.",
+        "qualifyingQuestions": [
+          "What happens to calls after hours or when the front desk is busy?",
+          "Roughly how many calls go to voicemail in a week?",
+          "What is a new customer worth to you on average?",
+          "Which calendar or booking system do you use today?"
+        ],
+        "priceTalk": "Compáralo con un recepcionista de medio tiempo (USD 1.800–2.500 al mes en EE. UU.). El setup se paga una vez y la mensualidad cuesta menos que una semana de sueldo. Si recupera 2–3 clientes al mes, se paga solo.",
+        "redFlags": [
+          "Ya tienen un chatbot que agenda citas y están contentos.",
+          "Casi no reciben llamadas (menos de ~20 a la semana)."
+        ],
+        "glossary": [
+          {
+            "term": "CRM",
+            "meaning": "Sistema donde el negocio guarda sus clientes y oportunidades (ej. HubSpot)."
+          },
+          {
+            "term": "Hand-off",
+            "meaning": "Cuando la IA transfiere la conversación a una persona."
+          }
+        ]
+      }
     },
     {
       "id": "process-automation",
@@ -47,9 +132,24 @@
       "active": true,
       "oneLiner": "We automate the repetitive work — invoicing, data entry, reconciliation, CRM/ERP sync, approvals — so the team stops copying data between systems.",
       "description": "Custom automations and internal tools that connect the systems a company already uses (QuickBooks, Xero, Salesforce, HubSpot, spreadsheets, ERPs, email) and remove manual steps: invoicing and reconciliation, order/inventory sync, document processing with AI, approval flows with digital signatures, reporting.",
-      "deliverables": ["Process mapping + ROI estimate", "Automated workflows / bots", "Integrations between existing systems", "Audit trail and monitoring"],
+      "deliverables": [
+        "Process mapping + ROI estimate",
+        "Automated workflows / bots",
+        "Integrations between existing systems",
+        "Audit trail and monitoring"
+      ],
       "idealCustomer": {
-        "niches": ["accounting-firms", "logistics-trucking", "construction", "wholesale-distribution", "insurance-agencies", "manufacturing", "staffing-agencies", "property-management", "home-health"],
+        "niches": [
+          "accounting-firms",
+          "logistics-trucking",
+          "construction",
+          "wholesale-distribution",
+          "insurance-agencies",
+          "manufacturing",
+          "staffing-agencies",
+          "property-management",
+          "home-health"
+        ],
         "companySize": "10–250 employees with admin/ops staff",
         "description": "Companies whose operations run on spreadsheets, email and double data entry, and whose admin headcount grows with revenue."
       },
@@ -59,21 +159,89 @@
         "Mentions of spreadsheets, paper forms, PDFs, fax or 'email us your documents'",
         "Uses several disconnected tools (QuickBooks + CRM + spreadsheets)"
       ],
-      "disqualifiers": ["Fewer than 5 employees with almost no admin work", "Has a large in-house IT/dev team"],
-      "painPointsSolved": ["Hours lost to manual data entry", "Billing errors and late invoices", "Systems that don't talk to each other", "Admin headcount growing with revenue"],
-      "pricing": { "model": "Fixed price per phase", "from": 3000, "to": 15000, "currency": "USD", "notes": "A contained automation module is usually in the low thousands." },
+      "disqualifiers": [
+        "Fewer than 5 employees with almost no admin work",
+        "Has a large in-house IT/dev team"
+      ],
+      "painPointsSolved": [
+        "Hours lost to manual data entry",
+        "Billing errors and late invoices",
+        "Systems that don't talk to each other",
+        "Admin headcount growing with revenue"
+      ],
+      "pricing": {
+        "currency": "USD",
+        "model": "Fixed price per automation",
+        "from": 1500,
+        "to": 6000,
+        "monthly": {
+          "from": 100,
+          "to": 300
+        },
+        "notes": "Cada automatización contenida suele estar entre USD 1.500 y 3.500. Mantenimiento mensual opcional."
+      },
       "timeline": "2–6 weeks per automation",
       "roi": "10 people × 5 hours/week of manual work × $25/hour ≈ $65,000/year and 2,600 hours reclaimed.",
       "pitch": {
         "hook": "We help {niche} stop paying people to copy data between systems — invoicing, dispatch, reconciliation, reports.",
-        "valueProps": ["Fixed price per phase", "Works with the tools you already have", "Measurable hours saved", "You own the code"],
+        "valueProps": [
+          "Fixed price per phase",
+          "Works with the tools you already have",
+          "Measurable hours saved",
+          "You own the code"
+        ],
         "proof": "Free scoping call ends with a written brief and an ROI estimate — you decide with numbers."
       },
       "objections": [
-        { "objection": "We tried Zapier and it broke.", "response": "That's common — no-code glue breaks at scale. We build it like real software: tested, monitored, documented, and you own it." },
-        { "objection": "Our process is too specific.", "response": "That's exactly why off-the-shelf tools fail for you. Custom is our whole business — we map your process first, then automate only what pays back." }
+        {
+          "objection": "We tried Zapier and it broke.",
+          "response": "That's common — no-code glue breaks at scale. We build it like real software: tested, monitored, documented, and you own it."
+        },
+        {
+          "objection": "Our process is too specific.",
+          "response": "That's exactly why off-the-shelf tools fail for you. Custom is our whole business — we map your process first, then automate only what pays back."
+        }
       ],
-      "keywords": ["automation", "invoicing", "reconciliation", "crm integration", "erp", "data entry"]
+      "keywords": [
+        "automation",
+        "invoicing",
+        "reconciliation",
+        "crm integration",
+        "erp",
+        "data entry"
+      ],
+      "salesGuide": {
+        "simple": "Hacemos que las tareas repetitivas de oficina se hagan solas: pasar datos de un sistema a otro, facturar, conciliar pagos, generar reportes, aprobar documentos. El equipo deja de copiar y pegar.",
+        "howItWorks": [
+          "Mapeamos el proceso actual con quien lo hace (1–2 reuniones).",
+          "Calculamos horas y dinero que se pierden hoy (estimado de ROI).",
+          "Construimos la automatización conectando las herramientas que ya usan.",
+          "Probamos con datos reales y dejamos monitoreo y alertas.",
+          "Entregamos documentación y capacitamos al equipo."
+        ],
+        "example": "Una empresa de transporte tenía 2 personas pasando comprobantes de entrega a QuickBooks para facturar. Automatizamos la lectura de los comprobantes con IA y la creación de la factura: el proceso pasó de 2 días a minutos.",
+        "qualifyingQuestions": [
+          "Which tasks does your team repeat every day or week?",
+          "How many people touch that process and for how long?",
+          "Which systems hold the data today (QuickBooks, spreadsheets, CRM)?",
+          "What happens when there is a mistake in that process?"
+        ],
+        "priceTalk": "Habla de horas recuperadas: 10 personas × 5 horas a la semana × USD 25/hora ≈ USD 65.000 al año. Una automatización de USD 2.000–4.000 se paga en semanas.",
+        "redFlags": [
+          "Empresa de menos de 5 personas con casi nada de trabajo administrativo.",
+          "Tienen un equipo grande de TI que ya hace esto."
+        ],
+        "glossary": [
+          {
+            "term": "Integración",
+            "meaning": "Conectar dos sistemas para que compartan datos automáticamente."
+          },
+          {
+            "term": "ERP",
+            "meaning": "Software que maneja inventario, compras, facturación y contabilidad."
+          }
+        ]
+      }
     },
     {
       "id": "custom-web-platform",
@@ -83,9 +251,24 @@
       "active": true,
       "oneLiner": "Fast, modern web platforms, customer portals and internal tools built with Next.js — designed to scale and convert.",
       "description": "Custom web applications: customer portals (quotes, orders, tracking, documents), booking/ordering platforms, internal dashboards, marketplaces and SaaS MVPs. Built with Next.js/React, Node and PostgreSQL, with design system, SEO and performance included.",
-      "deliverables": ["Discovery + UX", "Design system", "Web app / portal", "Admin dashboard", "Deployment + documentation"],
+      "deliverables": [
+        "Discovery + UX",
+        "Design system",
+        "Web app / portal",
+        "Admin dashboard",
+        "Deployment + documentation"
+      ],
       "idealCustomer": {
-        "niches": ["construction", "logistics-trucking", "wholesale-distribution", "manufacturing", "real-estate", "property-management", "saas-startups", "insurance-agencies"],
+        "niches": [
+          "construction",
+          "logistics-trucking",
+          "wholesale-distribution",
+          "manufacturing",
+          "real-estate",
+          "property-management",
+          "saas-startups",
+          "insurance-agencies"
+        ],
         "companySize": "10–500 employees, or funded startups",
         "description": "Businesses whose customers still request quotes, orders or status updates by phone/email, or startups that need an MVP built by seniors."
       },
@@ -95,21 +278,85 @@
         "Recent funding round or new product launch",
         "Job posts for a web developer / CTO (we can be the team instead)"
       ],
-      "disqualifiers": ["Only needs a 5-page brochure website", "Has a strong in-house product team"],
-      "painPointsSolved": ["Manual quoting and order handling", "Website that doesn't generate business", "No visibility for customers", "Slow time to market"],
-      "pricing": { "model": "Fixed price per phase", "from": 15000, "to": 80000, "currency": "USD", "notes": "Full platform in the tens of thousands; MVP phases can start smaller." },
+      "disqualifiers": [
+        "Only needs a 5-page brochure website",
+        "Has a strong in-house product team"
+      ],
+      "painPointsSolved": [
+        "Manual quoting and order handling",
+        "Website that doesn't generate business",
+        "No visibility for customers",
+        "Slow time to market"
+      ],
+      "pricing": {
+        "currency": "USD",
+        "model": "Fixed price per phase",
+        "from": 8000,
+        "to": 35000,
+        "notes": "MVP desde ~USD 6.000. Una plataforma completa normalmente entre USD 12.000 y 35.000, dividida en fases."
+      },
       "timeline": "3–6 months (MVP from 6–8 weeks)",
       "roi": "A self-service portal removes most status/quote calls and emails and lets the business sell 24/7.",
       "pitch": {
         "hook": "We build customer portals that let your clients get quotes, place orders and track status online — without calling your team.",
-        "valueProps": ["Senior engineers only", "Weekly demos", "Fixed price per phase", "You own 100% of the code"],
+        "valueProps": [
+          "Senior engineers only",
+          "Weekly demos",
+          "Fixed price per phase",
+          "You own 100% of the code"
+        ],
         "proof": "Next.js/React platforms engineered for real users and real load, not templates."
       },
       "objections": [
-        { "objection": "We already have a website.", "response": "Most of our clients do — the question is whether it does work for you. Can your customers get a quote or check an order without calling you?" },
-        { "objection": "We'd rather hire an in-house developer.", "response": "One mid-level dev costs $100k+/year and takes months to hire. We give you a senior team for a fixed price per phase, and hand over everything documented if you hire later." }
+        {
+          "objection": "We already have a website.",
+          "response": "Most of our clients do — the question is whether it does work for you. Can your customers get a quote or check an order without calling you?"
+        },
+        {
+          "objection": "We'd rather hire an in-house developer.",
+          "response": "One mid-level in-house developer costs $100k+/year and takes months to hire. We give you a senior team for a fixed price per phase, and hand over everything documented if you hire later."
+        }
       ],
-      "keywords": ["web platform", "customer portal", "web app", "nextjs", "mvp", "dashboard"]
+      "keywords": [
+        "web platform",
+        "customer portal",
+        "web app",
+        "nextjs",
+        "mvp",
+        "dashboard"
+      ],
+      "salesGuide": {
+        "simple": "Construimos aplicaciones web a la medida: portales donde los clientes cotizan, hacen pedidos y ven el estado de su orden, paneles internos o productos SaaS. No son plantillas: es software propio del cliente.",
+        "howItWorks": [
+          "Descubrimiento: entendemos usuarios, procesos y objetivo de negocio.",
+          "Arquitectura y precio fijo por fase.",
+          "Construcción con demos semanales en un ambiente real.",
+          "Pruebas, seguridad y rendimiento.",
+          "Lanzamiento, documentación y entrega del código."
+        ],
+        "example": "Un distribuidor recibía 200 pedidos por correo a la semana. Le construimos un portal donde sus clientes ven precios, hacen pedidos y descargan facturas: los pedidos por correo bajaron a la mitad en dos meses.",
+        "qualifyingQuestions": [
+          "How do customers request quotes or check order status today?",
+          "How many of those requests does your team handle per week?",
+          "What does your current website do for the business?",
+          "Do you have anyone in-house maintaining software?"
+        ],
+        "priceTalk": "Divídelo en fases: el MVP resuelve el problema principal y se paga solo antes de invertir en lo demás. Compáralo con contratar un desarrollador en EE. UU. (USD 100.000+ al año).",
+        "redFlags": [
+          "Solo quieren una web informativa de 5 páginas.",
+          "Tienen un equipo de producto propio fuerte."
+        ],
+        "glossary": [
+          {
+            "term": "MVP",
+            "meaning": "Primera versión mínima que ya resuelve el problema principal."
+          },
+          {
+            "term": "Portal de clientes",
+            "meaning": "Zona privada donde cada cliente gestiona sus pedidos, documentos y pagos."
+          }
+        ]
+      }
     },
     {
       "id": "mobile-app",
@@ -119,27 +366,96 @@
       "active": true,
       "oneLiner": "Cross-platform iOS and Android apps from a single codebase — loyalty, ordering, booking, field-team apps.",
       "description": "React Native apps for customers (ordering, booking, loyalty, memberships) or for field teams (inspections, deliveries, time tracking, photos, signatures), connected to the company's backend.",
-      "deliverables": ["iOS + Android app", "Backend/API", "Admin panel", "Store publishing"],
+      "deliverables": [
+        "iOS + Android app",
+        "Backend/API",
+        "Admin panel",
+        "Store publishing"
+      ],
       "idealCustomer": {
-        "niches": ["fitness-studios", "multi-location-restaurants", "home-services", "construction", "logistics-trucking", "saas-startups"],
+        "niches": [
+          "fitness-studios",
+          "multi-location-restaurants",
+          "home-services",
+          "construction",
+          "logistics-trucking",
+          "saas-startups"
+        ],
         "companySize": "Multi-location businesses or companies with field teams",
         "description": "Brands with recurring customers who would use an app, or companies with crews in the field using paper or WhatsApp."
       },
-      "buyingSignals": ["Several locations / franchise growth", "Field crews and paper forms", "Loyalty/membership model", "Competitors already have an app"],
-      "disqualifiers": ["Single small location with low repeat customers"],
-      "painPointsSolved": ["Low customer retention", "Paper-based field operations", "Dependence on third-party apps and their fees"],
-      "pricing": { "model": "Fixed price per phase", "from": 12000, "to": 60000, "currency": "USD", "notes": "" },
+      "buyingSignals": [
+        "Several locations / franchise growth",
+        "Field crews and paper forms",
+        "Loyalty/membership model",
+        "Competitors already have an app"
+      ],
+      "disqualifiers": [
+        "Single small location with low repeat customers"
+      ],
+      "painPointsSolved": [
+        "Low customer retention",
+        "Paper-based field operations",
+        "Dependence on third-party apps and their fees"
+      ],
+      "pricing": {
+        "currency": "USD",
+        "model": "Fixed price per phase",
+        "from": 7000,
+        "to": 28000,
+        "notes": "App iOS + Android desde un solo código. Primera fase (MVP) desde ~USD 7.000."
+      },
       "timeline": "2–5 months",
       "roi": "Owning the ordering/booking channel avoids 15–30% marketplace fees and increases repeat purchases.",
       "pitch": {
         "hook": "We build the app your customers or your field team actually use — iOS and Android from one codebase, owned by you.",
-        "valueProps": ["One codebase, both stores", "Fixed price per phase", "You own it — no platform fees"],
+        "valueProps": [
+          "One codebase, both stores",
+          "Fixed price per phase",
+          "You own it — no platform fees"
+        ],
         "proof": "Weekly builds you can install on your phone and test."
       },
       "objections": [
-        { "objection": "Apps are expensive.", "response": "Which is why we scope a first phase that pays back on its own — usually ordering or booking — before anything else." }
+        {
+          "objection": "Apps are expensive.",
+          "response": "Which is why we scope a first phase that pays back on its own — usually ordering or booking — before anything else."
+        }
       ],
-      "keywords": ["mobile app", "ios", "android", "react native", "loyalty app"]
+      "keywords": [
+        "mobile app",
+        "ios",
+        "android",
+        "react native",
+        "loyalty app"
+      ],
+      "salesGuide": {
+        "simple": "Apps para iPhone y Android hechas con un solo código: apps para clientes (pedidos, reservas, membresías, fidelización) o para equipos de campo (inspecciones, entregas, fotos, firmas).",
+        "howItWorks": [
+          "Definimos la funcionalidad clave de la primera fase.",
+          "Diseñamos las pantallas y el flujo.",
+          "Construimos app + backend + panel de administración.",
+          "Cada semana el cliente instala la versión nueva en su teléfono.",
+          "Publicamos en App Store y Google Play."
+        ],
+        "example": "Una empresa de techos con 6 cuadrillas usaba papel y WhatsApp para reportes. Con la app, cada cuadrilla sube fotos y firmas desde la obra y la oficina factura el mismo día.",
+        "qualifyingQuestions": [
+          "Who would use the app — customers or your team in the field?",
+          "How do they do that today?",
+          "Do your competitors already have an app?",
+          "How many users would it have in the first year?"
+        ],
+        "priceTalk": "Una sola base de código = dos apps por el precio de una. Empezar con la función que genera ingresos (pedidos o reservas) para que la primera fase se pague sola.",
+        "redFlags": [
+          "Negocio de una sola sede con pocos clientes recurrentes."
+        ],
+        "glossary": [
+          {
+            "term": "React Native",
+            "meaning": "Tecnología para hacer apps iOS y Android con un solo código."
+          }
+        ]
+      }
     },
     {
       "id": "web-performance-seo",
@@ -149,27 +465,103 @@
       "active": true,
       "oneLiner": "We rebuild slow, outdated websites into fast, SEO-healthy sites that turn visitors into calls and bookings.",
       "description": "Technical rebuild of the website focused on Core Web Vitals, technical SEO, local SEO structure, conversion (clear CTAs, online booking/quote forms, click-to-call) and analytics. Often the entry point before automation or AI.",
-      "deliverables": ["Performance & SEO audit", "New fast website", "Conversion-focused pages", "Analytics + tracking setup"],
+      "deliverables": [
+        "Performance & SEO audit",
+        "New fast website",
+        "Conversion-focused pages",
+        "Analytics + tracking setup"
+      ],
       "idealCustomer": {
-        "niches": ["home-services", "law-firms", "dental-practices", "med-spas", "jewelry-stores", "real-estate", "construction", "auto-repair", "solar-installers"],
+        "niches": [
+          "home-services",
+          "law-firms",
+          "dental-practices",
+          "med-spas",
+          "jewelry-stores",
+          "real-estate",
+          "construction",
+          "auto-repair",
+          "solar-installers"
+        ],
         "companySize": "Any local business with a weak website",
         "description": "Profitable local businesses with a website that looks 2015, loads slowly on mobile or doesn't rank."
       },
-      "buyingSignals": ["Old copyright year in the footer", "Not mobile friendly / very slow", "No clear call-to-action or online booking", "Strong reviews but weak website (good business, bad online presence)"],
-      "disqualifiers": ["Website recently rebuilt by an agency and performing well"],
-      "painPointsSolved": ["Losing customers to competitors with better sites", "Not ranking on Google", "Paying ads that land on a slow page"],
-      "pricing": { "model": "Fixed price", "from": 2500, "to": 9000, "currency": "USD", "notes": "Good entry offer; upsell automation / AI receptionist afterwards." },
+      "buyingSignals": [
+        "Old copyright year in the footer",
+        "Not mobile friendly / very slow",
+        "No clear call-to-action or online booking",
+        "Strong reviews but weak website (good business, bad online presence)"
+      ],
+      "disqualifiers": [
+        "Website recently rebuilt by an agency and performing well"
+      ],
+      "painPointsSolved": [
+        "Losing customers to competitors with better sites",
+        "Not ranking on Google",
+        "Paying ads that land on a slow page"
+      ],
+      "pricing": {
+        "currency": "USD",
+        "model": "Fixed price",
+        "from": 1200,
+        "to": 4500,
+        "notes": "Oferta de entrada ideal. Después se vende AI Receptionist o automatización."
+      },
       "timeline": "3–6 weeks",
       "roi": "Faster mobile pages and clear CTAs typically lift calls/bookings from the same traffic.",
       "pitch": {
         "hook": "I took a look at your website on my phone — {specificIssue}. That usually costs {niche} real calls every week.",
-        "valueProps": ["Built by engineers, not a template shop", "Fast on mobile", "Designed to generate calls and bookings"],
+        "valueProps": [
+          "Built by engineers, not a template shop",
+          "Fast on mobile",
+          "Designed to generate calls and bookings"
+        ],
         "proof": "We can send a short free audit of your current site before the call."
       },
       "objections": [
-        { "objection": "My nephew/agency handles the website.", "response": "No problem — we can send the audit to whoever manages it. The goal is just that the site brings you business." }
+        {
+          "objection": "My nephew/agency handles the website.",
+          "response": "No problem — we can send the audit to whoever manages it. The goal is just that the site brings you business."
+        }
       ],
-      "keywords": ["website redesign", "seo", "core web vitals", "page speed", "conversion"]
+      "keywords": [
+        "website redesign",
+        "seo",
+        "core web vitals",
+        "page speed",
+        "conversion"
+      ],
+      "salesGuide": {
+        "simple": "Rehacemos webs lentas o anticuadas para que carguen rápido en el celular, aparezcan en Google y conviertan visitas en llamadas y reservas.",
+        "howItWorks": [
+          "Auditoría gratis de su web actual (velocidad, SEO, conversión).",
+          "Nuevo diseño enfocado en llamadas y reservas.",
+          "Construcción rápida y optimizada.",
+          "Configuración de analítica para medir llamadas y formularios.",
+          "Lanzamiento sin perder su posicionamiento actual."
+        ],
+        "example": "Un taller tenía 4.8 estrellas en Google, pero su web tardaba 9 segundos en cargar en el celular. Con la web nueva (1.5 s y botón de llamar visible) aumentaron las llamadas desde la misma cantidad de visitas.",
+        "qualifyingQuestions": [
+          "How do most new customers find you today?",
+          "Do you run Google or Facebook ads to your website?",
+          "Who manages the website right now?",
+          "How many calls or bookings come from the site per month?"
+        ],
+        "priceTalk": "Es nuestra oferta de entrada: precio bajo, resultado visible rápido. Luego ofrecemos AI Receptionist o automatización al mismo cliente.",
+        "redFlags": [
+          "Su web fue rehecha hace poco por una agencia y funciona bien."
+        ],
+        "glossary": [
+          {
+            "term": "Core Web Vitals",
+            "meaning": "Métricas de Google que miden qué tan rápida y estable es una web."
+          },
+          {
+            "term": "Conversión",
+            "meaning": "Porcentaje de visitantes que llaman, reservan o escriben."
+          }
+        ]
+      }
     },
     {
       "id": "private-ai-knowledge",
@@ -179,27 +571,106 @@
       "active": true,
       "oneLiner": "A private ChatGPT-style assistant that answers from the company's own documents, policies, contracts and case files — securely.",
       "description": "Retrieval-augmented AI (private LLM) over the firm's knowledge: contracts, case files, policies, manuals, SOPs, past proposals. Staff ask questions in plain English and get answers with citations. Deployed in the client's cloud with encryption and access control.",
-      "deliverables": ["Document ingestion pipeline", "Secure AI assistant with citations", "Access control", "Usage analytics"],
+      "deliverables": [
+        "Document ingestion pipeline",
+        "Secure AI assistant with citations",
+        "Access control",
+        "Usage analytics"
+      ],
       "idealCustomer": {
-        "niches": ["law-firms", "insurance-agencies", "accounting-firms", "engineering-firms", "manufacturing", "home-health"],
+        "niches": [
+          "law-firms",
+          "insurance-agencies",
+          "accounting-firms",
+          "engineering-firms",
+          "manufacturing",
+          "home-health"
+        ],
         "companySize": "15–300 employees with lots of documents",
         "description": "Knowledge-heavy firms where staff spend hours searching documents or re-asking senior people the same questions."
       },
-      "buyingSignals": ["Large document volume (case files, policies, contracts)", "Hiring paralegals / analysts / coordinators", "Mentions of compliance or quality manuals", "Onboarding many new employees"],
-      "disqualifiers": ["Very small firm with few documents"],
-      "painPointsSolved": ["Hours lost searching documents", "Knowledge locked in senior people", "Slow onboarding", "Data privacy fears with public AI tools"],
-      "pricing": { "model": "Fixed price per phase", "from": 6000, "to": 30000, "currency": "USD", "notes": "" },
+      "buyingSignals": [
+        "Large document volume (case files, policies, contracts)",
+        "Hiring paralegals / analysts / coordinators",
+        "Mentions of compliance or quality manuals",
+        "Onboarding many new employees"
+      ],
+      "disqualifiers": [
+        "Very small firm with few documents"
+      ],
+      "painPointsSolved": [
+        "Hours lost searching documents",
+        "Knowledge locked in senior people",
+        "Slow onboarding",
+        "Data privacy fears with public AI tools"
+      ],
+      "pricing": {
+        "currency": "USD",
+        "model": "Fixed price per phase",
+        "from": 3500,
+        "to": 14000,
+        "monthly": {
+          "from": 150,
+          "to": 400
+        },
+        "notes": "Primer caso de uso desde ~USD 3.500. Mensualidad de hosting y mantenimiento."
+      },
       "timeline": "4–8 weeks",
       "roi": "If 20 staff save 3 hours/week searching, that's ~3,000 hours/year.",
       "pitch": {
         "hook": "We build private AI assistants for {niche} that answer from your own files — with citations — without sending your data to public chatbots.",
-        "valueProps": ["Your data stays private", "Answers with sources", "Deployed in your cloud", "You own it"],
+        "valueProps": [
+          "Your data stays private",
+          "Answers with sources",
+          "Deployed in your cloud",
+          "You own it"
+        ],
         "proof": "We start from one concrete use case and only ship if it beats how your team works today."
       },
       "objections": [
-        { "objection": "We're worried about confidentiality.", "response": "That's the point of a private deployment — it runs in your environment, encrypted, with permissions. Nothing goes to a public chatbot." }
+        {
+          "objection": "We're worried about confidentiality.",
+          "response": "That's the point of a private deployment — it runs in your environment, encrypted, with permissions. Nothing goes to a public chatbot."
+        }
       ],
-      "keywords": ["private llm", "rag", "knowledge base", "document ai", "enterprise search"]
+      "keywords": [
+        "private llm",
+        "rag",
+        "knowledge base",
+        "document ai",
+        "enterprise search"
+      ],
+      "salesGuide": {
+        "simple": "Un 'ChatGPT privado' de la empresa: el equipo le pregunta en lenguaje normal y responde usando los documentos internos (contratos, manuales, expedientes, políticas), indicando la fuente. Los datos no salen de la empresa.",
+        "howItWorks": [
+          "Elegimos un caso de uso concreto (ej. responder preguntas sobre pólizas).",
+          "Cargamos e indexamos los documentos de forma segura.",
+          "Configuramos el asistente con permisos por usuario.",
+          "Medimos si responde mejor y más rápido que el proceso actual.",
+          "Lo desplegamos en la nube del cliente con cifrado."
+        ],
+        "example": "Una firma de abogados con 10 años de expedientes: los asociados buscaban precedentes internos durante horas. Con el asistente encuentran el caso y el párrafo exacto en segundos.",
+        "qualifyingQuestions": [
+          "How much time does your team spend searching for information in documents?",
+          "Who gets interrupted with the same questions over and over?",
+          "Are people already pasting company data into ChatGPT?",
+          "Where are the documents stored today?"
+        ],
+        "priceTalk": "20 personas ahorrando 3 horas por semana ≈ 3.000 horas al año. Empieza con un caso de uso pequeño y medible.",
+        "redFlags": [
+          "Empresa muy pequeña con pocos documentos."
+        ],
+        "glossary": [
+          {
+            "term": "RAG",
+            "meaning": "Técnica donde la IA busca en tus documentos antes de responder."
+          },
+          {
+            "term": "LLM",
+            "meaning": "Modelo de lenguaje (como Claude o GPT) que entiende y redacta texto."
+          }
+        ]
+      }
     },
     {
       "id": "retail-ai-forecasting",
@@ -209,27 +680,97 @@
       "active": true,
       "oneLiner": "AI models that forecast demand, optimize inventory and adjust prices so the business stops overstocking and running out.",
       "description": "Forecasting and repricing models trained on the company's sales history, seasonality and catalog, integrated with their e-commerce/POS/ERP. Includes inventory recommendations and pricing rules with guardrails.",
-      "deliverables": ["Data audit", "Forecasting model", "Repricing engine", "Dashboard + integration"],
+      "deliverables": [
+        "Data audit",
+        "Forecasting model",
+        "Repricing engine",
+        "Dashboard + integration"
+      ],
       "idealCustomer": {
-        "niches": ["ecommerce-brands", "wholesale-distribution", "multi-location-restaurants", "manufacturing"],
+        "niches": [
+          "ecommerce-brands",
+          "wholesale-distribution",
+          "multi-location-restaurants",
+          "manufacturing"
+        ],
         "companySize": "$2M+ revenue, 500+ SKUs",
         "description": "Retailers and distributors with enough sales history and SKUs that inventory mistakes are expensive."
       },
-      "buyingSignals": ["Large catalog on Shopify/WooCommerce/Amazon", "Frequent out-of-stock or clearance sales", "Hiring inventory planners / buyers", "Multiple warehouses or channels"],
-      "disqualifiers": ["Tiny catalog or under ~1 year of sales data"],
-      "painPointsSolved": ["Cash tied up in overstock", "Lost sales from stock-outs", "Manual price changes"],
-      "pricing": { "model": "Fixed price per phase", "from": 8000, "to": 40000, "currency": "USD", "notes": "" },
+      "buyingSignals": [
+        "Large catalog on Shopify/WooCommerce/Amazon",
+        "Frequent out-of-stock or clearance sales",
+        "Hiring inventory planners / buyers",
+        "Multiple warehouses or channels"
+      ],
+      "disqualifiers": [
+        "Tiny catalog or under ~1 year of sales data"
+      ],
+      "painPointsSolved": [
+        "Cash tied up in overstock",
+        "Lost sales from stock-outs",
+        "Manual price changes"
+      ],
+      "pricing": {
+        "currency": "USD",
+        "model": "Fixed price per phase",
+        "from": 4500,
+        "to": 18000,
+        "notes": "Fase 1 = auditoría de datos (~USD 1.500–2.500) antes de construir el modelo."
+      },
       "timeline": "6–10 weeks",
       "roi": "A few points less overstock on a $1M inventory frees tens of thousands in cash.",
       "pitch": {
         "hook": "We build forecasting models for {niche} that tell you what to reorder and when — so less cash sits in the warehouse.",
-        "valueProps": ["Trained on your data", "Integrated with your store/ERP", "Only ships if it beats your current method"],
+        "valueProps": [
+          "Trained on your data",
+          "Integrated with your store/ERP",
+          "Only ships if it beats your current method"
+        ],
         "proof": "We benchmark against your current forecasting before you commit to the next phase."
       },
       "objections": [
-        { "objection": "Our data is messy.", "response": "Everyone's is. Phase one is a data audit — you get a clear answer on whether AI is worth it before building anything." }
+        {
+          "objection": "Our data is messy.",
+          "response": "Everyone's is. Phase one is a data audit — you get a clear answer on whether AI is worth it before building anything."
+        }
       ],
-      "keywords": ["demand forecasting", "inventory optimization", "dynamic pricing", "retail ai"]
+      "keywords": [
+        "demand forecasting",
+        "inventory optimization",
+        "dynamic pricing",
+        "retail ai"
+      ],
+      "salesGuide": {
+        "simple": "Modelos de IA que predicen cuánto se va a vender de cada producto para comprar la cantidad correcta y ajustar precios, sin quedarse sin stock ni llenar la bodega.",
+        "howItWorks": [
+          "Auditoría de datos de ventas e inventario.",
+          "Construcción del modelo de pronóstico con su historial.",
+          "Comparación contra su método actual (solo seguimos si es mejor).",
+          "Integración con su tienda online, POS o ERP.",
+          "Panel con recomendaciones de compra."
+        ],
+        "example": "Una tienda online con 2.000 productos compraba 'a ojo' y tenía un 20% del inventario parado. El modelo recomienda cantidades por producto y temporada, y se libera caja.",
+        "qualifyingQuestions": [
+          "How do you decide how much to reorder today?",
+          "How often do you run out of stock or end up with overstock?",
+          "How many products (SKUs) do you sell?",
+          "How many years of sales data do you have?"
+        ],
+        "priceTalk": "Unos pocos puntos menos de sobreinventario sobre USD 1M en stock liberan decenas de miles en caja. La fase 1 (auditoría) es barata y dice si vale la pena.",
+        "redFlags": [
+          "Pocos productos o menos de un año de historial de ventas."
+        ],
+        "glossary": [
+          {
+            "term": "SKU",
+            "meaning": "Cada producto o variante distinta que se vende."
+          },
+          {
+            "term": "Stock-out",
+            "meaning": "Quedarse sin un producto que el cliente quiere comprar."
+          }
+        ]
+      }
     },
     {
       "id": "ai-jewelry-design-studio",
@@ -239,9 +780,17 @@
       "active": true,
       "oneLiner": "An AI design tool that turns a customer's idea, sketch or photo into a 3D jewelry model and photorealistic render in minutes — integrated with Blender / AutoCAD / Rhino workflows.",
       "description": "Custom design assistant for jewelers: the customer describes the piece (or uploads a sketch/inspiration photo), Claude generates design variations and parametric 3D models through Blender/AutoCAD scripting, renders photorealistic previews for approval, and exports CAD files ready for casting / 3D printing. Cuts custom-design turnaround from days to minutes and closes more custom orders in the first visit.",
-      "deliverables": ["AI design assistant tuned to the jeweler's style", "Blender / AutoCAD / Rhino integration", "Photorealistic renders for customer approval", "Export to STL/3DM for casting or printing", "Training for the sales team"],
+      "deliverables": [
+        "AI design assistant tuned to the jeweler's style",
+        "Blender / AutoCAD / Rhino integration",
+        "Photorealistic renders for customer approval",
+        "Export to STL/3DM for casting or printing",
+        "Training for the sales team"
+      ],
       "idealCustomer": {
-        "niches": ["jewelry-stores"],
+        "niches": [
+          "jewelry-stores"
+        ],
         "companySize": "Independent jewelers and small chains (1–30 employees) that sell custom pieces",
         "description": "Jewelers selling custom engagement rings, wedding bands and bespoke pieces, who depend on a CAD designer (in-house or outsourced) and lose sales while customers wait for renders."
       },
@@ -252,21 +801,93 @@
         "Job posts for CAD jewelry designer",
         "Reviews mentioning design process, waiting for renders or multiple revisions"
       ],
-      "disqualifiers": ["Only resells mass-produced brand jewelry", "Pawn shops / gold buyers without design services"],
-      "painPointsSolved": ["Days of waiting for CAD renders", "Customers who leave to 'think about it'", "Cost of outsourced CAD designers", "Too many revision rounds"],
-      "pricing": { "model": "Setup + monthly", "from": 4000, "to": 15000, "currency": "USD", "notes": "Price depends on CAD tool integration and customization." },
+      "disqualifiers": [
+        "Only resells mass-produced brand jewelry",
+        "Pawn shops / gold buyers without design services"
+      ],
+      "painPointsSolved": [
+        "Days of waiting for CAD renders",
+        "Customers who leave to 'think about it'",
+        "Cost of outsourced CAD designers",
+        "Too many revision rounds"
+      ],
+      "pricing": {
+        "currency": "USD",
+        "model": "Setup + monthly",
+        "from": 2500,
+        "to": 7500,
+        "monthly": {
+          "from": 200,
+          "to": 450
+        },
+        "notes": "Depende de la integración CAD (Blender, AutoCAD, Rhino) y de cuánto se personaliza al estilo del joyero."
+      },
       "timeline": "4–8 weeks",
-      "roi": "Closing just 2–3 extra custom engagement rings a month (avg. $3k–$6k each) pays for the system quickly.",
+      "roi": "Closing just 1–2 extra custom engagement rings a month (avg. $3k–$6k each) pays for the system in the first months.",
       "pitch": {
         "hook": "We built an AI design tool for jewelers: your customer describes the ring, and in minutes you show them a photorealistic 3D render — while they're still in the store.",
-        "valueProps": ["Close custom orders on the first visit", "Fewer revision rounds", "Works with Blender / AutoCAD / Rhino", "Exports ready for casting/printing"],
+        "valueProps": [
+          "Close custom orders on the first visit",
+          "Fewer revision rounds",
+          "Works with Blender / AutoCAD / Rhino",
+          "Exports ready for casting/printing"
+        ],
         "proof": "We can show a live demo with one of your own pieces as reference."
       },
       "objections": [
-        { "objection": "We already have a CAD designer.", "response": "Perfect — this makes your designer 5x faster: the AI produces the first variations and renders, your designer refines. Less waiting, more closed sales." },
-        { "objection": "AI can't match our craftsmanship.", "response": "Agreed — it doesn't replace your craft. It shows the customer the idea instantly so they commit; your team still makes the final design." }
+        {
+          "objection": "We already have a CAD designer.",
+          "response": "Perfect — this makes your designer 5x faster: the AI produces the first variations and renders, your designer refines. Less waiting, more closed sales."
+        },
+        {
+          "objection": "AI can't match our craftsmanship.",
+          "response": "Agreed — it doesn't replace your craft. It shows the customer the idea instantly so they commit; your team still makes the final design."
+        }
       ],
-      "keywords": ["jewelry cad", "custom engagement ring", "3d jewelry design", "blender", "autocad", "rhino matrix"]
+      "keywords": [
+        "jewelry cad",
+        "custom engagement ring",
+        "3d jewelry design",
+        "blender",
+        "autocad",
+        "rhino matrix"
+      ],
+      "salesGuide": {
+        "simple": "Herramienta con IA para joyerías: el cliente describe el anillo o muestra una foto o un boceto, y en minutos la joyería le muestra un render 3D fotorrealista y variaciones del diseño. El archivo sale listo para el diseñador CAD o para impresión 3D y fundición.",
+        "howItWorks": [
+          "Entendemos el estilo del joyero y su flujo de diseño actual.",
+          "Configuramos Claude para generar diseños con ese estilo.",
+          "Conectamos con Blender, AutoCAD o Rhino para generar el modelo 3D.",
+          "Creamos renders fotorrealistas para aprobar con el cliente en la tienda.",
+          "Exportamos archivos STL/3DM para fundición o impresión."
+        ],
+        "example": "Una pareja entra buscando un anillo de compromiso personalizado. Antes debía esperar 4 días por el render del diseñador CAD y la mitad no volvía. Ahora ve 3 opciones en 3D en la misma visita y deja el anticipo ese día.",
+        "qualifyingQuestions": [
+          "How many custom pieces do you design per month?",
+          "Who does your CAD work today — in-house or outsourced?",
+          "How long from first visit to approved design?",
+          "What share of customers leave to 'think about it'?"
+        ],
+        "priceTalk": "Un solo anillo de compromiso a medida vale USD 3.000–6.000. Si cierra 1–2 anillos más al mes, el sistema se paga en los primeros meses.",
+        "redFlags": [
+          "Solo revenden joyería de marca, sin diseño propio.",
+          "Casas de empeño o compradores de oro."
+        ],
+        "glossary": [
+          {
+            "term": "CAD",
+            "meaning": "Diseño asistido por computador: el modelo 3D exacto de la joya."
+          },
+          {
+            "term": "Render",
+            "meaning": "Imagen fotorrealista generada a partir del modelo 3D."
+          },
+          {
+            "term": "STL / 3DM",
+            "meaning": "Formatos de archivo 3D para impresión y fundición."
+          }
+        ]
+      }
     },
     {
       "id": "generative-content",
@@ -276,27 +897,95 @@
       "active": true,
       "oneLiner": "Automated AI pipelines that produce on-brand product descriptions, listings, images and short videos at volume.",
       "description": "Custom pipelines that generate and publish content at scale: real-estate listing descriptions and virtual staging, e-commerce product copy and images, social posts and short videos — reviewed by humans and kept on brand.",
-      "deliverables": ["Brand-trained generation pipeline", "Approval workflow", "Publishing integrations"],
+      "deliverables": [
+        "Brand-trained generation pipeline",
+        "Approval workflow",
+        "Publishing integrations"
+      ],
       "idealCustomer": {
-        "niches": ["real-estate", "ecommerce-brands", "marketing-agencies", "auto-dealerships"],
+        "niches": [
+          "real-estate",
+          "ecommerce-brands",
+          "marketing-agencies",
+          "auto-dealerships"
+        ],
         "companySize": "Businesses publishing many listings/products every week",
         "description": "Teams that manually write hundreds of listings, product pages or posts."
       },
-      "buyingSignals": ["Hundreds of listings/products", "Hiring content writers / social media coordinators", "Inconsistent or missing product descriptions"],
-      "disqualifiers": ["Low content volume"],
-      "painPointsSolved": ["Content bottleneck", "Inconsistent brand voice", "Cost of writers/designers"],
-      "pricing": { "model": "Fixed price per phase", "from": 4000, "to": 20000, "currency": "USD", "notes": "" },
+      "buyingSignals": [
+        "Hundreds of listings/products",
+        "Hiring content writers / social media coordinators",
+        "Inconsistent or missing product descriptions"
+      ],
+      "disqualifiers": [
+        "Low content volume"
+      ],
+      "painPointsSolved": [
+        "Content bottleneck",
+        "Inconsistent brand voice",
+        "Cost of writers/designers"
+      ],
+      "pricing": {
+        "currency": "USD",
+        "model": "Fixed price per phase",
+        "from": 2000,
+        "to": 8000,
+        "monthly": {
+          "from": 200,
+          "to": 600
+        },
+        "notes": "Pipeline inicial + mensualidad opcional por volumen de contenido."
+      },
       "timeline": "3–6 weeks",
       "roi": "Turns days of copywriting into minutes per batch.",
       "pitch": {
         "hook": "We build AI pipelines that write and publish your listings/product pages in your brand voice — your team just approves.",
-        "valueProps": ["On-brand", "Human approval step", "Integrated with your platform"],
+        "valueProps": [
+          "On-brand",
+          "Human approval step",
+          "Integrated with your platform"
+        ],
         "proof": "We can generate a sample batch from your own listings."
       },
       "objections": [
-        { "objection": "AI content sounds generic.", "response": "Generic prompts do. We train it on your best-performing listings and your tone, and a human approves every batch." }
+        {
+          "objection": "AI content sounds generic.",
+          "response": "Generic prompts do. We train it on your best-performing listings and your tone, and a human approves every batch."
+        }
       ],
-      "keywords": ["ai content", "listing descriptions", "product descriptions", "virtual staging"]
+      "keywords": [
+        "ai content",
+        "listing descriptions",
+        "product descriptions",
+        "virtual staging"
+      ],
+      "salesGuide": {
+        "simple": "Sistemas de IA que producen contenido a escala con la voz de la marca: descripciones de productos o propiedades, imágenes, publicaciones y videos cortos. Una persona aprueba antes de publicar.",
+        "howItWorks": [
+          "Analizamos su mejor contenido y su tono de marca.",
+          "Construimos el pipeline de generación entrenado con eso.",
+          "Agregamos un paso de aprobación humana.",
+          "Conectamos la publicación con su plataforma (Shopify, MLS, redes).",
+          "Medimos tiempo ahorrado y rendimiento."
+        ],
+        "example": "Una inmobiliaria publica 80 propiedades al mes y cada descripción tomaba 30 minutos. Ahora se generan en lote con su estilo y el agente solo revisa y aprueba.",
+        "qualifyingQuestions": [
+          "How much content do you publish per week (products, listings, posts)?",
+          "Who writes it today and how long does it take?",
+          "Is the tone consistent across your team?",
+          "Which platforms do you publish to?"
+        ],
+        "priceTalk": "Compáralo con el costo de un redactor o diseñador. Convierte días de trabajo en minutos por lote.",
+        "redFlags": [
+          "Publican muy poco contenido."
+        ],
+        "glossary": [
+          {
+            "term": "Pipeline",
+            "meaning": "Cadena automática de pasos: generar, revisar y publicar."
+          }
+        ]
+      }
     },
     {
       "id": "reviews-sentiment-ai",
@@ -306,27 +995,97 @@
       "active": true,
       "oneLiner": "AI that reads every review, survey and support ticket across locations and tells management exactly what to fix — plus drafted replies.",
       "description": "Sentiment analysis across Google, Yelp, TripAdvisor, surveys and tickets, by location and topic, with alerts, weekly executive reports and AI-drafted review responses.",
-      "deliverables": ["Review aggregation", "Topic & sentiment dashboard per location", "Alerts", "AI reply drafts"],
+      "deliverables": [
+        "Review aggregation",
+        "Topic & sentiment dashboard per location",
+        "Alerts",
+        "AI reply drafts"
+      ],
       "idealCustomer": {
-        "niches": ["multi-location-restaurants", "hotels-hospitality", "dental-practices", "auto-dealerships", "fitness-studios"],
+        "niches": [
+          "multi-location-restaurants",
+          "hotels-hospitality",
+          "dental-practices",
+          "auto-dealerships",
+          "fitness-studios"
+        ],
         "companySize": "3+ locations or hundreds of reviews",
         "description": "Multi-location brands whose reputation drives revenue and who can't read every review."
       },
-      "buyingSignals": ["Hundreds/thousands of reviews", "Unanswered reviews", "Mixed ratings across locations"],
-      "disqualifiers": ["Single location with few reviews"],
-      "painPointsSolved": ["No visibility across locations", "Unanswered reviews hurting ranking", "Recurring complaints nobody tracks"],
-      "pricing": { "model": "Setup + monthly", "from": 3000, "to": 12000, "currency": "USD", "notes": "" },
+      "buyingSignals": [
+        "Hundreds/thousands of reviews",
+        "Unanswered reviews",
+        "Mixed ratings across locations"
+      ],
+      "disqualifiers": [
+        "Single location with few reviews"
+      ],
+      "painPointsSolved": [
+        "No visibility across locations",
+        "Unanswered reviews hurting ranking",
+        "Recurring complaints nobody tracks"
+      ],
+      "pricing": {
+        "currency": "USD",
+        "model": "Setup + monthly",
+        "from": 1500,
+        "to": 4500,
+        "monthly": {
+          "from": 150,
+          "to": 350
+        },
+        "notes": "Setup por número de sedes + mensualidad de monitoreo."
+      },
       "timeline": "3–5 weeks",
       "roi": "Each star of rating has a direct effect on local revenue; fixing the top recurring complaint pays back quickly.",
       "pitch": {
         "hook": "We give {niche} with several locations one dashboard that reads every review and tells you what to fix first — and drafts the replies.",
-        "valueProps": ["All locations in one view", "Weekly priorities", "Reply drafts in your voice"],
+        "valueProps": [
+          "All locations in one view",
+          "Weekly priorities",
+          "Reply drafts in your voice"
+        ],
         "proof": "We can run a free snapshot on your last 200 reviews."
       },
       "objections": [
-        { "objection": "We already use a reviews tool.", "response": "Most tools count stars. This tells you why — by topic and location — and what to fix first." }
+        {
+          "objection": "We already use a reviews tool.",
+          "response": "Most tools count stars. This tells you why — by topic and location — and what to fix first."
+        }
       ],
-      "keywords": ["review management", "sentiment analysis", "reputation", "multi-location"]
+      "keywords": [
+        "review management",
+        "sentiment analysis",
+        "reputation",
+        "multi-location"
+      ],
+      "salesGuide": {
+        "simple": "IA que lee todas las reseñas (Google, Yelp, encuestas) de todas las sedes y le dice al dueño qué problema se repite, en qué sede, y qué arreglar primero. Además redacta respuestas a las reseñas con el tono de la marca.",
+        "howItWorks": [
+          "Conectamos las fuentes de reseñas de cada sede.",
+          "La IA clasifica temas y sentimiento.",
+          "Panel por sede y alertas de reseñas negativas.",
+          "Reporte semanal con prioridades.",
+          "Borradores de respuesta para aprobar."
+        ],
+        "example": "Un grupo de 5 restaurantes descubrió que el 40% de las reseñas negativas de una sede hablaban del tiempo de espera los fines de semana. Ajustaron personal y la calificación subió.",
+        "qualifyingQuestions": [
+          "How many locations do you have?",
+          "Who reads and answers reviews today?",
+          "Do you know the top complaint per location?",
+          "How many reviews do you get per month?"
+        ],
+        "priceTalk": "Cada estrella en Google afecta directamente las ventas locales. Ofrece un análisis gratis de sus últimas 200 reseñas como gancho.",
+        "redFlags": [
+          "Una sola sede con pocas reseñas."
+        ],
+        "glossary": [
+          {
+            "term": "Análisis de sentimiento",
+            "meaning": "La IA detecta si un texto es positivo, negativo o neutral y de qué tema habla."
+          }
+        ]
+      }
     },
     {
       "id": "rescue-and-harden",
@@ -336,27 +1095,236 @@
       "active": true,
       "oneLiner": "Audit and fix existing software that's slow, insecure or abandoned by the previous developer — in priority order.",
       "description": "We audit the existing app (security, performance, architecture, data), deliver a prioritized report and then fix the issues — or take over development as an embedded senior team.",
-      "deliverables": ["Full technical audit + scorecard", "Prioritized fix plan", "Fixes / takeover", "Documentation"],
+      "deliverables": [
+        "Full technical audit + scorecard",
+        "Prioritized fix plan",
+        "Fixes / takeover",
+        "Documentation"
+      ],
       "idealCustomer": {
-        "niches": ["saas-startups", "ecommerce-brands", "logistics-trucking", "property-management", "staffing-agencies"],
+        "niches": [
+          "saas-startups",
+          "ecommerce-brands",
+          "logistics-trucking",
+          "property-management",
+          "staffing-agencies"
+        ],
         "companySize": "Companies running their own custom software",
         "description": "Businesses that depend on custom software built by a freelancer or agency that disappeared, or that's slow and breaking."
       },
-      "buyingSignals": ["Job posts for a senior developer / CTO", "App store reviews complaining about bugs", "Very slow web app", "Custom platform with no visible tech team"],
-      "disqualifiers": ["No custom software at all"],
-      "painPointsSolved": ["Fragile software nobody understands", "Security risk", "Slow product and unhappy users"],
-      "pricing": { "model": "Audit fixed fee + phases", "from": 2500, "to": 25000, "currency": "USD", "notes": "Audit is a low-risk entry point." },
+      "buyingSignals": [
+        "Job posts for a senior developer / CTO",
+        "App store reviews complaining about bugs",
+        "Very slow web app",
+        "Custom platform with no visible tech team"
+      ],
+      "disqualifiers": [
+        "No custom software at all"
+      ],
+      "painPointsSolved": [
+        "Fragile software nobody understands",
+        "Security risk",
+        "Slow product and unhappy users"
+      ],
+      "pricing": {
+        "currency": "USD",
+        "model": "Audit fixed fee + phases",
+        "from": 800,
+        "to": 15000,
+        "notes": "Auditoría fija de USD 800–2.000 como entrada de bajo riesgo; las correcciones se cotizan por fase."
+      },
       "timeline": "Audit 1–2 weeks; fixes per phase",
       "roi": "Avoids rewrites, outages and security incidents that cost far more.",
       "pitch": {
         "hook": "If your platform was built by a developer who's no longer around, we audit it, tell you exactly what's risky, and fix it in priority order.",
-        "valueProps": ["Clear written audit", "Fix in priority order", "Fixed price per phase"],
+        "valueProps": [
+          "Clear written audit",
+          "Fix in priority order",
+          "Fixed price per phase"
+        ],
         "proof": "15-domain senior engineering audit with a 0–100 scorecard."
       },
       "objections": [
-        { "objection": "It works fine for now.", "response": "Usually until it doesn't. The audit is a small fixed fee and tells you whether you have a problem before your customers find it." }
+        {
+          "objection": "It works fine for now.",
+          "response": "Usually until it doesn't. The audit is a small fixed fee and tells you whether you have a problem before your customers find it."
+        }
       ],
-      "keywords": ["software audit", "legacy code", "app rescue", "security audit", "fractional cto"]
+      "keywords": [
+        "software audit",
+        "legacy code",
+        "app rescue",
+        "security audit",
+        "fractional cto"
+      ],
+      "salesGuide": {
+        "simple": "Rescatamos software que ya existe pero está lento, inseguro o abandonado por el desarrollador anterior. Primero auditamos y entregamos un informe claro; luego arreglamos en orden de prioridad o tomamos el desarrollo.",
+        "howItWorks": [
+          "Auditoría de 15 áreas (seguridad, datos, rendimiento, arquitectura...).",
+          "Informe con puntaje de 0 a 100 y riesgos explicados en lenguaje de negocio.",
+          "Plan de correcciones priorizado con precio por fase.",
+          "Correcciones o toma del desarrollo.",
+          "Documentación para que no vuelva a pasar."
+        ],
+        "example": "Una startup dependía de una plataforma hecha por un freelancer que desapareció. La auditoría encontró contraseñas expuestas y una base de datos sin respaldos. Se corrigió en 3 semanas antes de que se convirtiera en un incidente.",
+        "qualifyingQuestions": [
+          "Who built your platform and who maintains it today?",
+          "Is anything slow, breaking or scary to change?",
+          "When was the last security review?",
+          "Do you have backups and documentation?"
+        ],
+        "priceTalk": "La auditoría es una entrada de bajo riesgo (USD 800–2.000) y dice exactamente qué está en peligro. Una caída o fuga de datos cuesta mucho más.",
+        "redFlags": [
+          "No tienen software propio."
+        ],
+        "glossary": [
+          {
+            "term": "Deuda técnica",
+            "meaning": "Atajos del pasado en el código que hoy hacen lento y riesgoso cambiarlo."
+          },
+          {
+            "term": "Auditoría",
+            "meaning": "Revisión completa del sistema con hallazgos y prioridades."
+          }
+        ]
+      }
+    },
+    {
+      "id": "ai-adoption-training",
+      "type": "service",
+      "name": "AI Adoption Training & Coaching",
+      "category": "Applied AI",
+      "active": true,
+      "allNiches": true,
+      "oneLiner": "Hands-on training that teaches a company's team to use AI (Claude, ChatGPT, automations) on their real daily work — safely — so everyone saves hours every week starting from the first session.",
+      "description": "Personalized AI training for companies and individuals. We map how the team works, then run live sessions using their own documents, emails and processes: writing, research, reports, customer replies, data analysis, meeting notes and simple automations. Includes a prompt library per role, an AI usage policy (what data can and cannot go into AI tools), 1:1 coaching for leaders and a 30-day follow-up measuring time saved. Formats: 1:1 coaching (hourly), team workshops (half day) and 4–8 week adoption programs.",
+      "deliverables": [
+        "AI readiness assessment of the team's processes",
+        "Live workshops with the company's own cases",
+        "Prompt library and step-by-step guides per role",
+        "AI usage policy (data privacy and safe use)",
+        "1:1 coaching for owners and managers",
+        "30-day follow-up with measured hours saved"
+      ],
+      "idealCustomer": {
+        "niches": [],
+        "companySize": "Any company with 3–300 employees, plus executives and professionals one-on-one",
+        "description": "Every business that runs on emails, documents, spreadsheets and customer conversations — which is nearly all of them. Best fit: owners who know AI matters but don't know where to start, and teams already using ChatGPT informally and unsafely."
+      },
+      "buyingSignals": [
+        "The owner or managers post about AI on LinkedIn or say they want to 'get into AI'",
+        "Job posts asking for 'AI skills', 'ChatGPT' or 'automation'",
+        "Heavy admin or document work (proposals, reports, emails, quotes)",
+        "Growing team that is hiring admin or assistant roles",
+        "No mention of AI tools or policies anywhere on the website",
+        "Competitors in their market are announcing AI use"
+      ],
+      "disqualifiers": [
+        "Tech companies with an in-house AI/ML team",
+        "One-person businesses with no budget for training"
+      ],
+      "painPointsSolved": [
+        "Hours lost every week on repetitive writing, research and reports",
+        "Staff pasting client data into public AI tools without rules",
+        "Owners who know AI matters but don't know where to start",
+        "Fear of falling behind competitors that already use AI"
+      ],
+      "pricing": {
+        "currency": "USD",
+        "model": "Per hour / workshop / program",
+        "from": 900,
+        "to": 8000,
+        "packages": [
+          {
+            "name": "1:1 coaching",
+            "price": "$90–$150 / hour",
+            "detail": "Owners, executives or professionals. Packs of 5–10 hours."
+          },
+          {
+            "name": "Team workshop (half day)",
+            "price": "$900–$1,800",
+            "detail": "Up to 15 people, built around the company's real tasks."
+          },
+          {
+            "name": "AI adoption program (4–8 weeks)",
+            "price": "$2,500–$8,000",
+            "detail": "Assessment, workshops by role, prompt library, AI policy and 30-day follow-up."
+          }
+        ],
+        "notes": "Excelente entrada: después de la capacitación salen naturalmente oportunidades de automatización e IA a la medida (upsell)."
+      },
+      "timeline": "1 day (workshop) to 4–8 weeks (program)",
+      "roi": "If 10 employees each save 3 hours a week at $25/hour, that's ~$39,000 a year in recovered time — the full program costs a fraction of that.",
+      "pitch": {
+        "hook": "Most {niche} teams are already using ChatGPT — without rules and without getting much out of it. We train your team to use AI on your real work, safely, so everyone saves hours every week starting from the first session.",
+        "valueProps": [
+          "Trained on your own processes and documents, not generic theory",
+          "Measurable hours saved in 30 days",
+          "Clear AI usage policy to protect client data",
+          "Taught by engineers who build AI systems every day"
+        ],
+        "proof": "We can run a free 30-minute diagnostic with the owner and show 3 tasks AI can take off their plate this week."
+      },
+      "objections": [
+        {
+          "objection": "We already use ChatGPT.",
+          "response": "Great — most teams use 10% of what it can do, and often paste client data where they shouldn't. We make that usage systematic, safe and measurable."
+        },
+        {
+          "objection": "My team isn't technical.",
+          "response": "That's exactly who it's for. No coding: we teach with their own emails, documents and tasks, step by step."
+        },
+        {
+          "objection": "We don't have time for training.",
+          "response": "The first session is built to save time the same week. If it doesn't save more hours than it takes, we've done it wrong."
+        },
+        {
+          "objection": "Is our data safe?",
+          "response": "Part of the program is an AI usage policy: which tools, which settings and what data never goes in. Most companies don't have one and are exposed today."
+        }
+      ],
+      "keywords": [
+        "ai training",
+        "ai workshop",
+        "chatgpt training",
+        "claude training",
+        "ai adoption",
+        "ai coaching",
+        "corporate ai training"
+      ],
+      "salesGuide": {
+        "simple": "Clases personalizadas para que el equipo de una empresa (o una persona) aprenda a usar IA como Claude o ChatGPT en su trabajo real: redactar, investigar, hacer reportes, responder clientes y automatizar tareas simples. Se trabaja con los documentos y procesos de la empresa, no con teoría.",
+        "howItWorks": [
+          "Diagnóstico: entrevistamos al dueño y revisamos qué tareas repite el equipo.",
+          "Diseñamos las sesiones por rol (ventas, administración, gerencia...).",
+          "Talleres en vivo con sus propios casos: cada persona sale con algo que ya le ahorra tiempo.",
+          "Entregamos una biblioteca de prompts, guías y una política de uso seguro de IA.",
+          "Seguimiento a 30 días: medimos horas ahorradas y detectamos qué se puede automatizar."
+        ],
+        "example": "Una agencia de seguros de 12 personas tardaba 40 minutos en cada comparación de pólizas y en responder correos de clientes. Después de un programa de 4 semanas, el equipo usa IA para resumir pólizas y redactar respuestas, y ahorra 3–4 horas por persona a la semana. Además salió un proyecto de automatización de cotizaciones.",
+        "qualifyingQuestions": [
+          "Is your team using ChatGPT or any AI tool today? How?",
+          "Which tasks eat most of your team's week (emails, reports, quotes, research)?",
+          "Do you have rules about what client data can go into AI tools?",
+          "How many people would we train?"
+        ],
+        "priceTalk": "Calcula horas: 10 personas × 3 horas a la semana × USD 25 = ~USD 39.000 al año. El programa completo cuesta una fracción. Para dudosos, empieza con un taller de medio día.",
+        "redFlags": [
+          "Empresas de tecnología con equipo propio de IA.",
+          "Negocio de una persona sin presupuesto."
+        ],
+        "upsell": "Es la mejor puerta de entrada: durante la capacitación aparecen procesos que conviene automatizar o un asistente de IA privado. Anótalos como oportunidades.",
+        "glossary": [
+          {
+            "term": "Prompt",
+            "meaning": "La instrucción que se le escribe a la IA."
+          },
+          {
+            "term": "Política de uso de IA",
+            "meaning": "Reglas de la empresa sobre qué herramientas y qué datos se pueden usar con IA."
+          }
+        ]
+      }
     }
   ]
 }

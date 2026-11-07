@@ -21,11 +21,15 @@ Si el usuario pide algo equivalente en lenguaje natural ("búscame 10 joyerías 
 - `scripts/cli.mjs` — única vía para escribir leads: `brief`, `known`, `validate`, `ingest`, `insights`, `lead`, `set-status`, `stats`.
   **Nunca edites `workspace/leads.json` a mano.**
 - `server/` + `ui/` — interfaz web local (`npm start` → http://localhost:4600). Node sin dependencias.
-- `lib/` — normalización, validación, deduplicación y puntaje (compartido por CLI y servidor).
+- `lib/` — normalización, validación, deduplicación y puntaje (`leads.mjs`); embudo, cercanía al sí, tareas, ediciones
+  manuales y migración de datos (`pipeline.mjs`). Compartido por CLI y servidor.
+- `workspace/backups/` — copia diaria automática de los leads (y una antes de cada actualización).
+- Al cambiar el formato de los leads, agrega la migración en `migrateLead()` (lib/pipeline.mjs): los trabajadores actualizan
+  con un `git pull` y sus leads existentes deben seguir funcionando sin perder datos.
 
 ## Reglas de oro
 1. Nunca inventes datos de contacto ni cifras. Todo teléfono/correo lleva la URL fuente.
-2. Solo recomienda servicios activos del catálogo; el `why` debe citar evidencia real del negocio.
+2. Solo recomienda servicios activos del catálogo; el `why` debe citar evidencia real del negocio. Los servicios con `allNiches: true` aplican a cualquier nicho.
 3. Respeta la blocklist y no repitas negocios existentes (`node scripts/cli.mjs known`).
 4. Solo datos públicos de contacto de negocios. Correos con pie de baja (CAN-SPAM). Nada de datos personales de domicilio.
 5. Guarda por lotes con `ingest` y corrige los rechazos sin inventar.

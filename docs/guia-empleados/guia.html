@@ -24,7 +24,7 @@
   .hero { background: var(--bg); color: var(--text); padding: 0.4in 0.6in 0.3in; position: relative; overflow: hidden; }
   .hero::after { content: ''; position: absolute; right: -1.1in; top: -1.3in; width: 4in; height: 4in; border-radius: 50%; background: radial-gradient(circle, rgba(215,255,31,.22), rgba(215,255,31,0) 65%); }
   .brand { display: flex; align-items: center; gap: 12px; position: relative; z-index: 1; }
-  .brand svg { width: 38px; height: 38px; }
+  .brand img, .brand svg { width: 38px; height: 38px; }
   .brand b { font-family: 'Anton', Impact, sans-serif; font-weight: 400; font-size: 17pt; letter-spacing: 1.5px; line-height: 1; display: block; }
   .brand small { color: var(--lime); font-size: 7.5pt; letter-spacing: 2.2px; text-transform: uppercase; font-weight: 600; }
   h1 { font-family: 'Anton', Impact, sans-serif; font-weight: 400; font-size: 30pt; line-height: 1.02; letter-spacing: .5px; text-transform: uppercase; margin: 0.18in 0 0.07in; position: relative; z-index: 1; }
@@ -38,7 +38,7 @@
   .running { position: absolute; left: 0; right: 0; bottom: 0; height: 0.42in; background: var(--bg); color: var(--muted); font-size: 7.5pt; display: flex; align-items: center; justify-content: space-between; padding: 0 0.6in; letter-spacing: .3px; }
   .running b { color: var(--lime); font-weight: 600; }
   .topbar { background: var(--bg); color: var(--text); padding: 0.28in 0.6in; display: flex; align-items: center; justify-content: space-between; }
-  .topbar .brand svg { width: 28px; height: 28px; }
+  .topbar .brand img, .topbar .brand svg { width: 28px; height: 28px; }
   .topbar .brand b { font-size: 13pt; }
   .topbar .t { font-family: 'Anton', Impact, sans-serif; font-size: 15pt; text-transform: uppercase; letter-spacing: .6px; }
   .topbar .t em { font-style: normal; color: var(--lime); }
@@ -96,7 +96,7 @@
 <section class="page">
   <div class="hero">
     <div class="brand">
-      <svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="32" fill="#000"/><g fill="#D7FF1F"><path d="M32 12 16 28h9v6h14v-6h9z"/><path d="M25 37h14v5H25z" opacity=".85"/><path d="M25 45h14v4H25z" opacity=".6"/><path d="M27 52h10v3H27z" opacity=".4"/><path d="M40 20l8 0-4 4z" opacity=".5"/><path d="M13 33h6v2h-6zM45 31h6v2h-6z" opacity=".55"/></g></svg>
+      <img src="../../ui/logo-badge.png" alt="" />
       <div><b>DEVLECK</b><small>Lead Engine</small></div>
     </div>
     <h1>Guía de <em>instalación</em><br/>para el equipo comercial</h1>
@@ -154,7 +154,7 @@
 <section class="page">
   <div class="topbar">
     <div class="brand">
-      <svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="32" fill="#000"/><g fill="#D7FF1F"><path d="M32 12 16 28h9v6h14v-6h9z"/><path d="M25 37h14v5H25z" opacity=".85"/><path d="M25 45h14v4H25z" opacity=".6"/><path d="M27 52h10v3H27z" opacity=".4"/></g></svg>
+      <img src="../../ui/logo-badge.png" alt="" />
       <div><b>DEVLECK</b><small>Lead Engine</small></div>
     </div>
     <div class="t">Puesta en <em>marcha</em></div>
@@ -206,11 +206,11 @@
       <div class="card">
         <h3>Cada día</h3>
         <ol>
-          <li>Abre <span class="inline">iniciar.bat</span>.</li>
-          <li>Entra a <b>Cola de llamadas</b> y llama de arriba hacia abajo.</li>
-          <li>Mientras suena el teléfono, lee el <b>guion</b> en la ficha.</li>
-          <li>Al colgar, <b>registra el resultado</b>: así se programa el seguimiento solo.</li>
-          <li>Si no contesta, envía el <b>correo</b> preparado con un clic.</li>
+          <li>Abre <span class="inline">iniciar.bat</span> y entra a <b>Agenda</b>: atiende primero lo <b style="color:#c62828">vencido (rojo)</b> y lo de <b style="color:#b26a00">hoy (ámbar)</b>.</li>
+          <li>Sigue con la <b>Cola de llamadas</b>, de arriba hacia abajo.</li>
+          <li>Al colgar, <b>registra el resultado</b> y el <b>nivel de interés</b> (1 Frío → 5 Listo para cerrar).</li>
+          <li>Guarda una <b>nota</b> y agrega los teléfonos, correos o personas nuevas que consigas.</li>
+          <li>Revisa el <b>Embudo</b>: los de mayor <b>cercanía al sí</b> van primero.</li>
         </ol>
       </div>
       <div class="card">
@@ -233,7 +233,7 @@
 <section class="page">
   <div class="topbar">
     <div class="brand">
-      <svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="32" fill="#000"/><g fill="#D7FF1F"><path d="M32 12 16 28h9v6h14v-6h9z"/><path d="M25 37h14v5H25z" opacity=".85"/><path d="M25 45h14v4H25z" opacity=".6"/><path d="M27 52h10v3H27z" opacity=".4"/></g></svg>
+      <img src="../../ui/logo-badge.png" alt="" />
       <div><b>DEVLECK</b><small>Lead Engine</small></div>
     </div>
     <div class="t">Si algo <em>falla</em></div>

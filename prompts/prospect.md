@@ -28,7 +28,10 @@ Si estás en modo interactivo y falta algo crítico, usa los valores por defecto
 ## 1. Cargar contexto (obligatorio, antes de buscar)
 
 1. `node scripts/cli.mjs brief` → trabajador, territorio, reglas, servicios y nichos.
-2. Lee `config/services.json` completo: perfil de cliente ideal, señales de compra, descalificadores, precios, pitch y objeciones de cada servicio. **Solo puedes recomendar servicios activos de este catálogo.**
+2. Lee `config/services.json` completo: perfil de cliente ideal, señales de compra, descalificadores, precios, pitch, objeciones y `salesGuide` de cada servicio. **Solo puedes recomendar servicios activos de este catálogo.**
+   Los servicios con `allNiches: true` (ej. `ai-adoption-training`) aplican a cualquier nicho: recomiéndalos como servicio
+   principal cuando no haya un encaje más fuerte y el negocio muestre interés en IA, mucho trabajo administrativo o un equipo
+   sin herramientas modernas; en los demás casos inclúyelos en `secondaryServiceIds` como venta adicional.
 3. Lee la entrada del nicho en `config/niches.json` (keywords, señales, decisores, mejor hora para llamar).
 4. Lee `config/company.json` (tono, diferenciales, objetivo de la llamada, firma, pie legal).
 5. `node scripts/cli.mjs known --niche <id>` → negocios que ya están en la base. **No los repitas.**
@@ -85,7 +88,7 @@ Para cada lead calificado:
 - `why`: 2–4 frases con **evidencia concreta de este negocio** (no genérico). Ej.: "Tienen 3 vacantes de
   front desk en Indeed y 6 reseñas de 2026 quejándose de que nadie contesta; solo tienen formulario de contacto."
 - `angle`: el gancho de la conversación en una frase.
-- `estimatedDeal`: rango USD coherente con `pricing` del servicio y el tamaño del negocio.
+- `estimatedDeal`: rango USD coherente con `pricing` del servicio (incluye `pricing.monthly` si existe, como valor del primer año) y el tamaño del negocio.
 - `roi`: cálculo simple con sus números (ticket promedio × clientes recuperados, horas × costo).
 
 ### Material de contacto (en INGLÉS, tono de `company.brandTone`)

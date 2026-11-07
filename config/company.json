@@ -21,10 +21,12 @@
     "Readable, tested and documented code. Bilingual team (English / Spanish)."
   ],
   "pricingGuidance": {
-    "contained_automation": "Low thousands of USD (≈ $2,500 – $9,000)",
-    "full_platform": "Tens of thousands of USD (≈ $15,000 – $80,000)",
-    "timelines": "Focused automation 2–6 weeks; full web platform 3–6 months",
-    "freeOffer": "Free 30-minute scoping call + written brief"
+    "contained_automation": "USD 1.500 – 6.000 por automatización",
+    "full_platform": "USD 8.000 – 35.000 (MVP desde ~USD 6.000)",
+    "ai_training": "Taller de medio día USD 900 – 1.800 · programa de 4–8 semanas USD 2.500 – 8.000",
+    "timelines": "Automatización enfocada 2–6 semanas; plataforma web completa 3–6 meses",
+    "freeOffer": "Free 30-minute scoping call + written brief",
+    "positioning": "Equipo senior en Colombia: calidad de agencia de EE. UU. a una fracción del costo y en horario compatible con EE. UU."
   },
   "process": [
     "Scope — call + written brief (problem, inclusions, exclusions, success criteria)",
@@ -33,7 +35,20 @@
     "Harden — testing, performance, security review and load checks",
     "Handover — deployment, documentation and team walkthrough"
   ],
-  "techStack": ["TypeScript", "React", "Next.js", "React Native", "Node.js", "Python", "PostgreSQL", "Anthropic Claude", "OpenAI", "AWS", "Vercel", "Docker"],
+  "techStack": [
+    "TypeScript",
+    "React",
+    "Next.js",
+    "React Native",
+    "Node.js",
+    "Python",
+    "PostgreSQL",
+    "Anthropic Claude",
+    "OpenAI",
+    "AWS",
+    "Vercel",
+    "Docker"
+  ],
   "callGoal": "Book a free 30-minute scoping call with the decision maker.",
   "salesRepIntro": "Hi, this is {repName} with Devleck — we're a software engineering studio that builds automation and AI tools for {niche}.",
   "brandTone": "Direct, confident and practical. Short sentences. Talk about outcomes and money/time saved, never about technology for its own sake. No hype, no buzzwords, no pressure.",

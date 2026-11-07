@@ -4,10 +4,11 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { exec, execFile } from 'node:child_process';
 import {
-  ROOT, INSIGHTS_FILE, CONFIG_FILES, loadAllConfig, saveConfig, loadLeads, updateLeads, loadSettings, saveSettings, readJson,
+  ROOT, INSIGHTS_FILE, CONFIG_FILES, loadAllConfig, saveConfig, loadLeads, updateLeads, loadSettings, saveSettings, readJson, backupLeads,
 } from '../lib/store.mjs';
 import { STATUSES, computeScore } from '../lib/leads.mjs';
 import { localTimeInfo } from '../lib/normalize.mjs';
+import { decorate, migrateLead, applyLeadUpdate, EditError, STAGES, GROUPS, INTEREST } from '../lib/pipeline.mjs';
 import { runs, getClaudeVersion, findClaude } from './runner.mjs';
 
 const PORT = Number(process.env.PORT) || 4600;
@@ -62,7 +63,7 @@ async function systemInfo(fetchRemote) {
 }
 
 function decorateLead(lead) {
-  return { ...lead, local: localTimeInfo(lead.business.state) };
+  return { ...decorate(lead), local: localTimeInfo(lead.business.state) };
 }
 
 function requireAdmin() {
@@ -87,7 +88,10 @@ function validateConfig(name, data) {
 const routes = [];
 const route = (method, pattern, handler) => routes.push({ method, re: new RegExp(`^${pattern.replace(/:(\w+)/g, '(?<$1>[^/]+)')}$`), handler });
 
-route('GET', '/api/bootstrap', async () => ({ config: loadAllConfig(), settings: loadSettings(), statuses: STATUSES, insights: readJson(INSIGHTS_FILE, null) }));
+route('GET', '/api/bootstrap', async () => ({
+  config: loadAllConfig(), settings: loadSettings(), statuses: STATUSES, insights: readJson(INSIGHTS_FILE, null),
+  pipeline: { stages: STAGES, groups: GROUPS, interest: INTEREST },
+}));
 
 route('GET', '/api/system', async (req, res, p, url) => systemInfo(url.searchParams.get('fetch') === '1'));
 
@@ -95,6 +99,8 @@ route('POST', '/api/system/update', async () => {
   const before = await systemInfo(true);
   if (!before.git.repo || !before.git.upstream) throw new HttpError(400, 'Esta copia no está conectada a un repositorio remoto (git clone).');
   if (before.git.dirty.length) throw new HttpError(409, `Tienes cambios locales en archivos de la herramienta:\n${before.git.dirty.join('\n')}\nGuárdalos o descártalos antes de actualizar.`);
+  // Los leads viven en workspace/ (fuera de git) y no se tocan al actualizar; igual se guarda una copia por seguridad.
+  backupLeads('pre-update');
   const pull = await git(['pull', '--ff-only'], 60000);
   if (!pull.ok) throw new HttpError(500, `No se pudo actualizar: ${pull.err}`);
   return { ok: true, output: pull.out, restartRequired: true };
@@ -129,29 +135,16 @@ route('GET', '/api/leads', async () => {
 route('PATCH', '/api/leads/:id', async (req, res, p) => {
   const body = await readBody(req);
   const s = loadSettings();
+  const config = loadAllConfig();
   const lead = updateLeads((db) => {
     const l = db.leads.find((x) => x.id === p.id);
     if (!l) return null;
-    const at = new Date().toISOString();
-    if (body.status && body.status !== l.status) {
-      if (!STATUSES.includes(body.status)) throw new HttpError(400, 'Estado inválido');
-      l.activity.push({ at, type: 'status', by: s.workerId, text: `${l.status} → ${body.status}${body.outcome ? ` · ${body.outcome}` : ''}` });
-      l.status = body.status;
+    try {
+      return applyLeadUpdate(l, body, { by: s.workerId, byName: s.repName || s.workerId, config });
+    } catch (err) {
+      if (err instanceof EditError) throw new HttpError(400, err.message);
+      throw err;
     }
-    if (body.note) {
-      const note = { at, by: s.repName || s.workerId, text: String(body.note).slice(0, 4000) };
-      l.notes.push(note);
-      l.activity.push({ at, type: 'note', by: s.workerId, text: note.text.slice(0, 140) });
-    }
-    if ('nextActionAt' in body) {
-      l.nextActionAt = body.nextActionAt || null;
-      if (body.nextActionAt) l.activity.push({ at, type: 'schedule', by: s.workerId, text: `Próxima acción: ${body.nextActionAt}` });
-    }
-    if (body.logCall) l.activity.push({ at, type: 'call', by: s.workerId, text: body.logCall });
-    if (body.logEmail) l.activity.push({ at, type: 'email', by: s.workerId, text: body.logEmail });
-    if (body.starred !== undefined) l.starred = !!body.starred;
-    l.updatedAt = at;
-    return l;
   });
   if (!lead) throw new HttpError(404, 'Lead no encontrado');
   return decorateLead(lead);
@@ -237,6 +230,20 @@ server.on('error', (err) => {
   }
   throw err;
 });
+
+// Al arrancar: copia de seguridad diaria, migración no destructiva de leads de versiones anteriores
+// y re-puntuación con la configuración actual (pesos y prioridades de nicho).
+function prepareData() {
+  try {
+    backupLeads('daily');
+    const cfg = loadAllConfig();
+    updateLeads((db) => { for (const l of db.leads) { migrateLead(l); Object.assign(l, computeScore(l, cfg)); } });
+  } catch (err) {
+    console.error(`Aviso: no se pudo preparar la base de leads: ${err.message}`);
+  }
+}
+
+prepareData();
 
 server.listen(PORT, '127.0.0.1', () => {
   const url = `http://localhost:${PORT}`;
