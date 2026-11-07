@@ -724,7 +724,7 @@ const priceLabel = (p) => {
   return `${base}${p.monthly ? ` + $${p.monthly.from}–${p.monthly.to}/mes` : ''}`;
 };
 
-function catalog() {
+function catalog(id) {
   const isAdmin = state.settings.isAdmin;
   const items = state.config.services.items;
   view.innerHTML = `
@@ -747,6 +747,8 @@ function catalog() {
         <div class="row"><button class="btn sm primary" data-guide="${attr(x.id)}">${icon('book')} Guía de ventas</button></div>
       </div>`).join('')}</div>`;
   view.querySelectorAll('[data-guide]').forEach((b) => b.addEventListener('click', () => salesGuide(items.find((i) => i.id === b.dataset.guide))));
+  // Enlace directo: #/catalog/<id> abre la guía de ventas del servicio.
+  if (id && items.some((i) => i.id === id)) salesGuide(items.find((i) => i.id === decodeURIComponent(id)));
   if (!isAdmin) return;
   view.querySelector('#c-add').addEventListener('click', () => editService(null));
   view.querySelector('#c-claude').addEventListener('click', () => {

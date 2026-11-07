@@ -6,17 +6,19 @@
 
 **AI-powered B2B prospecting and sales pipeline for the US market — from calibrated niche research to closed deals.**
 
-Claude Code researches the web, verifies contact data, qualifies each business against a service catalog,
-and writes the call script and emails. A local dashboard turns the result into a call queue, a color-coded pipeline and a follow-up agenda for the sales team.
+Claude Code researches the web, verifies contact data, qualifies each business against a service catalog
+and writes the call script and emails. A local dashboard turns the result into a call queue, a color-coded pipeline
+and a follow-up agenda, so reps spend their day selling instead of researching.
 
+[![Version](https://img.shields.io/badge/version-1.1.0-d7ff1f)](CHANGELOG.md)
 [![Node.js](https://img.shields.io/badge/Node.js-%E2%89%A518-339933?logo=node.js&logoColor=white)](https://nodejs.org)
 [![Claude Code](https://img.shields.io/badge/Powered%20by-Claude%20Code-D97757?logo=anthropic&logoColor=white)](https://claude.com/claude-code)
 [![Dependencies](https://img.shields.io/badge/npm%20dependencies-0-d7ff1f)](package.json)
-[![Tests](https://img.shields.io/badge/tests-node%3Atest-informational)](tests/)
+[![Tests](https://img.shields.io/badge/tests-14%20passing-3ddc84)](tests/)
 [![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey)](#quick-start)
 [![License](https://img.shields.io/badge/license-All%20rights%20reserved-red)](LICENSE)
 
-[Overview](#overview) · [Screenshots](#screenshots) · [Features](#features) · [Architecture](#architecture) · [Quick start](#quick-start) · [Configuration](#configuration) · [Lead pipeline](#the-lead-pipeline) · [Design decisions](#design-decisions)
+[Overview](#overview) · [Product tour](#product-tour) · [Sales pipeline model](#the-sales-pipeline-model) · [Niche potential](#calibrated-niche-potential) · [Catalog](#service-catalog) · [Architecture](#architecture) · [Quick start](#quick-start) · [Design decisions](#design-decisions)
 
 <br/>
 
@@ -26,13 +28,18 @@ and writes the call script and emails. A local dashboard turns the result into a
 
 ---
 
+> [!NOTE]
+> **New in v1.1:** pipeline stages and a drag-and-drop kanban, *closeness to a yes*, prioritized tasks, an agenda with reminders,
+> notes visible everywhere, manual contact enrichment, a semantic color system, niche potential calibrated with cited market data,
+> a Spanish sales guide for every service and a new AI training service. See the [changelog](CHANGELOG.md).
+
 ## Overview
 
 Cold outreach usually fails for two reasons: the list is wrong (businesses that can't or won't buy), and reps waste
-their time researching instead of calling. **Devleck Lead Engine** fixes both.
+their time researching instead of calling. **Devleck Lead Engine** fixes both, then keeps every deal moving until it closes.
 
 You describe **what you sell** in a structured catalog. The engine finds US businesses that show **real, cited evidence**
-of needing it. Examples: job posts for a front-desk role, reviews complaining about unanswered phones, a website stuck in 2017, a new location.
+of needing it: job posts for a front-desk role, reviews complaining about unanswered phones, a website stuck in 2017, a new location.
 Each lead comes back with:
 
 | | |
@@ -40,80 +47,227 @@ Each lead comes back with:
 | 📞 **Verified contact data** | Phone numbers and emails, each with the URL where it was found and a confidence level (`verified` · `listed` · `pattern`) |
 | 🎯 **What to sell and why** | The best-fit service from the catalog, the evidence behind it, a deal-size estimate and an ROI argument |
 | 🗣️ **Ready-to-use outreach** | Call opener, discovery questions, objection handling, voicemail, first email and follow-up, all personalized to the business |
-| 📊 **A consistent score** | 0–100 score and A/B/C tier computed from weighted sub-scores, plus the business's local time so reps call when someone answers |
+| 📊 **Two clear numbers** | *Lead quality* (is this worth calling?) and *closeness to a yes* (how near is this deal to closing?) |
+| ✅ **A next step, always** | Prioritized tasks and dated follow-ups, so no lead is ever forgotten |
 
 The research runs on **each rep's own Claude subscription** through Claude Code's headless mode. There are no API keys,
 no per-seat SaaS fees and no hosted backend to maintain.
 
-## Screenshots
+## Product tour
 
 > All data shown is fictional demo data (`npm run demo`). Businesses, people, `.example` domains and `555-01xx` numbers are invented.
+> The interface is in Spanish because the sales team is based in Colombia; outreach copy for prospects is in English.
+
+### 1 · Start the day with the agenda
+
+<img src="docs/screenshots/agenda.png" alt="Agenda: overdue, today and next-7-days tasks with priorities, plus the team's recent notes" width="100%" />
+
+Every follow-up and task is grouped by urgency: <img src="https://img.shields.io/badge/-overdue-ff5d5d" alt="overdue" valign="middle"/> <img src="https://img.shields.io/badge/-today-ffb547" alt="today" valign="middle"/> <img src="https://img.shields.io/badge/-next%207%20days-5cb8ff" alt="next 7 days" valign="middle"/> → no date.
+*Suggested* tasks are derived from each lead's state and clear themselves once done, while *manual* tasks carry a priority and a due date.
+In-app and desktop notifications fire when a follow-up is due, the sidebar shows a red counter, and the right column is a feed of the team's latest notes.
+
+### 2 · Work the call queue
+
+<img src="docs/screenshots/call-queue.png" alt="Call queue ranked by overdue follow-ups, closeness and open-now status" width="100%" />
+
+The queue is ranked by **overdue follow-ups → closeness to a yes → lead quality → open right now** in the lead's own timezone.
+One click dials (`tel:`), and the lead opens on its call script while the phone rings.
+
+### 3 · Everything about a lead in one place
 
 <table>
   <tr>
-    <td width="50%"><img src="docs/screenshots/pipeline.png" alt="Kanban pipeline: stage columns, cards sorted by closeness to a yes, interest level, follow-ups and last note" /></td>
-    <td width="50%"><img src="docs/screenshots/lead-detail.png" alt="Lead detail: stage stepper, closeness meter, interest level, prioritized next steps, follow-up and notes" /></td>
-  </tr>
-  <tr>
-    <td><b>Pipeline</b>: one column per stage, cards ordered by <i>closeness to a yes</i> and color-coded by interest. Drag a card to move it to another stage.</td>
-    <td><b>Lead detail</b>: stage stepper, closeness meter, interest level, prioritized next steps, one-click follow-up scheduling and pinned notes.</td>
-  </tr>
-  <tr>
-    <td><img src="docs/screenshots/agenda.png" alt="Agenda: overdue, today and next-7-days tasks with priorities, plus the team's recent notes" /></td>
-    <td><img src="docs/screenshots/leads.png" alt="Leads split into lists by stage, with closeness, last note and next step" /></td>
-  </tr>
-  <tr>
-    <td><b>Agenda</b>: overdue, today and upcoming follow-ups and tasks by priority, with in-app and desktop reminders and a feed of the team's latest notes.</td>
-    <td><b>Leads by stage</b>: separate lists for each step of the process, each row showing closeness, interest, the last note and the next step.</td>
-  </tr>
-  <tr>
-    <td colspan="2"><img src="docs/screenshots/niche-potential.png" alt="Niche potential calibrated with a fixed rubric and cited US market data" /></td>
-  </tr>
-  <tr>
-    <td colspan="2"><b>Calibrated niche potential</b>: every niche scored with the same six-dimension rubric and cited US market data (BLS, Census, trade associations), with the reasoning behind each score.</td>
-  </tr>
-  <tr>
-    <td><img src="docs/screenshots/call-queue.png" alt="Call queue ranked by overdue follow-ups, closeness and open-now status" /></td>
-    <td><img src="docs/screenshots/research-run.png" alt="Live research log streamed from Claude Code" /></td>
-  </tr>
-  <tr>
-    <td><b>Call queue</b>: overdue follow-ups first, then the deals closest to a yes and the businesses open right now. One click dials, and the script opens while it rings.</td>
-    <td><b>Live research run</b>: every search, page read and saved batch streams from headless Claude Code over Server-Sent Events.</td>
+    <td width="52%"><img src="docs/screenshots/lead-detail.png" alt="Lead detail: stage stepper, closeness meter, interest level, prioritized next steps, follow-up and notes" /></td>
+    <td>
+      <ul>
+        <li><b>Stage stepper</b>: click a stage to move the deal.</li>
+        <li><b>Closeness to a yes</b> meter and the rep's <b>interest rating</b> (1 cold → 5 ready to close).</li>
+        <li><b>Prioritized next steps</b>, suggested and manual.</li>
+        <li><b>Follow-up</b> scheduling in one click (+1 h, tomorrow 9:00, +3 days, +1 week).</li>
+        <li><b>Pinned notes</b> that surface in every list and card.</li>
+        <li><b>Call outcomes</b> (no answer, voicemail, gatekeeper, meeting, proposal, won…) that update the stage and interest and schedule the next touch.</li>
+      </ul>
+    </td>
   </tr>
 </table>
 
+### 4 · Call script, emails and manual enrichment
+
+<table>
+  <tr>
+    <td width="50%"><img src="docs/screenshots/lead-script.png" alt="Call script tab: angle, opener, discovery questions, why it fits, price talk and objections" /></td>
+    <td width="50%"><img src="docs/screenshots/lead-contacts.png" alt="Contacts tab: people with notes, phones and emails with sources, and forms to add new ones" /></td>
+  </tr>
+  <tr>
+    <td><b>Script</b>: an angle grounded in evidence about this specific business, a 20-second opener, discovery questions, ROI, price talk, objections and a voicemail. The <b>Emails</b> tab opens the rep's mail client with everything prefilled.</td>
+    <td><b>Contacts</b>: every phone and email shows its source and confidence. Reps add the people, numbers and emails they learn on calls, or edit business data. Manual fields are flagged and <b>never overwritten</b> by later AI research.</td>
+  </tr>
+</table>
+
+### 5 · See the whole pipeline
+
+<img src="docs/screenshots/pipeline.png" alt="Kanban pipeline: stage columns, cards sorted by closeness to a yes, interest level, follow-ups and last note" width="100%" />
+
+One column per stage. Cards are sorted by closeness to a yes, bordered with their interest color, and show the next task, the follow-up and the last note.
+Dragging a card moves the deal, and the interest rating rises to the minimum that makes sense for the new stage.
+
+### 6 · Leads in separate lists by stage
+
+<img src="docs/screenshots/leads.png" alt="Leads split into lists by stage, with closeness, last note and next step" width="100%" />
+
+Color-coded tabs split the database into *To contact · Trying · Interested · Meeting · Proposal · Won · Closed*. Each row shows closeness,
+stage and interest, the next step and the last note. Search covers names, phones, emails, decision makers **and note text**, and CSV export follows the current view.
+
+### 7 · Prospect with AI and watch it work
+
+<table>
+  <tr>
+    <td width="50%"><img src="docs/screenshots/prospecting.png" alt="Prospecting form with niche potential, product, states, signals and filters" /></td>
+    <td width="50%"><img src="docs/screenshots/research-run.png" alt="Live research log streamed from Claude Code" /></td>
+  </tr>
+  <tr>
+    <td><b>Prospecting</b>: pick a niche (ranked by potential), the product to sell, states, cities and buying signals, then launch.</td>
+    <td><b>Live run</b>: every search, page read and saved batch streams from headless Claude Code over Server-Sent Events.</td>
+  </tr>
+</table>
+
+### 8 · Know where the opportunity is
+
+<img src="docs/screenshots/niche-potential.png" alt="Niche potential calibrated with a fixed rubric and cited US market data" width="100%" />
+
+Every niche is scored with the same six-dimension rubric and cited US market data, with the reasoning behind each score.
+See [Calibrated niche potential](#calibrated-niche-potential).
+
+### 9 · Learn every service before selling it
+
+<table>
+  <tr>
+    <td width="50%"><img src="docs/screenshots/sales-guide.png" alt="Sales guide modal: plain-language explanation, how it works, real example, pricing packages, who to sell to and buying signals" /></td>
+    <td>
+      Each catalog item ships with a <b>sales guide in Spanish</b> written for reps, not engineers:
+      <ul>
+        <li>What it is, in plain words</li>
+        <li>How it works, step by step</li>
+        <li>A concrete example</li>
+        <li>Pricing and packages, plus how to talk about price</li>
+        <li>Who to sell to, buying signals and red flags</li>
+        <li>Qualifying questions, the pitch and objection handling (in English)</li>
+        <li>A glossary of key terms</li>
+      </ul>
+    </td>
+  </tr>
+</table>
+
+## The sales pipeline model
+
+### Stages
+
+| Stage | Color | Base probability | Typical outcome that moves a lead here |
+|---|---|---:|---|
+| New *(to contact)* | ![](https://img.shields.io/badge/-%20-5cb8ff) | 5% | Found and qualified by the AI |
+| Attempted | ![](https://img.shields.io/badge/-%20-ffb547) | 8% | No answer · voicemail · wrong number |
+| Callback | ![](https://img.shields.io/badge/-%20-ff9447) | 15% | Gatekeeper · "call me back" |
+| Interested | ![](https://img.shields.io/badge/-%20-b18cff) | 30% | Positive conversation, asked for information |
+| Meeting | ![](https://img.shields.io/badge/-%20-d7ff1f) | 50% | Meeting booked |
+| Proposal | ![](https://img.shields.io/badge/-%20-2dd4bf) | 70% | Proposal sent |
+| Won | ![](https://img.shields.io/badge/-%20-3ddc84) | 100% | Deal closed |
+| Lost · Not a fit · Do not contact | ![](https://img.shields.io/badge/-%20-6b7280) | 0% | Closed without a sale |
+
+### Two numbers, two questions
+
+- **Lead quality (0–100, tier A/B/C)**: *is this business worth calling?* It is computed once from the research (see [Scoring](#scoring)).
+- **Closeness to a yes (0–100%)**: *how close is this deal to closing?* It updates as the rep works the lead:
+
+  ```text
+  closeness = 0.6 × stage probability + 0.4 × (interest × 20) + (lead quality − 60) / 8
+              − 5 if the follow-up is more than 3 days overdue
+              − 5 if an active deal hasn't changed stage in 21 days
+  ```
+
+| Interest | ![](https://img.shields.io/badge/1-Cold-60a5fa) | ![](https://img.shields.io/badge/2-Warm-2dd4bf) | ![](https://img.shields.io/badge/3-Interested-facc15) | ![](https://img.shields.io/badge/4-Hot-fb923c) | ![](https://img.shields.io/badge/5-Ready%20to%20close-3ddc84) |
+|---|---|---|---|---|---|
+| **Closeness band** | 0–19% | 20–39% | 40–59% | 60–79% | 80–100% |
+
+Interest and closeness share the same cold → hot color scale, so the dashboard reads at a glance.
+
+### Suggested tasks
+
+Tasks are derived from the lead's state and **disappear automatically** once the condition is met. Reps never have to tick off administrative to-dos.
+
+| When | Suggested task | Priority |
+|---|---|---|
+| Follow-up overdue / due today | Contact the decision maker | ![](https://img.shields.io/badge/-high-ff5d5d) |
+| New lead with a phone | First call (high for tier A) | ![](https://img.shields.io/badge/-high-ff5d5d) / ![](https://img.shields.io/badge/-medium-ffb547) |
+| Attempted, email not sent yet | Send the prepared email | ![](https://img.shields.io/badge/-medium-ffb547) |
+| Interested | Send info and book the meeting | ![](https://img.shields.io/badge/-high-ff5d5d) |
+| Meeting within 7 days / meeting date passed | Prepare the meeting / log the outcome and send the proposal | ![](https://img.shields.io/badge/-high-ff5d5d) |
+| Proposal older than 3 days | Follow up on the proposal | ![](https://img.shields.io/badge/-high-ff5d5d) |
+| No decision maker / no verified email | Identify the decision maker / get a verified email | ![](https://img.shields.io/badge/-medium-ffb547) / ![](https://img.shields.io/badge/-low-8b939c) |
+
+## Calibrated niche potential
+
+Niche priorities are not opinions. Each niche is rated 0–10 on six dimensions with a fixed rubric and evidence from public US sources
+(BLS Employment Projections, Census, trade associations such as the ADA, AGC, Clio and SEIA, and industry reports). The potential is the weighted sum × 10,
+and the 1–5 priority that boosts lead scores is derived from it.
+
+| Dimension | Weight | Question |
+|---|---:|---|
+| Pain we solve | 25% | Is there evidence of a problem our catalog solves (staff shortages, missed calls, manual work)? |
+| Growth | 20% | Is the US market growing? |
+| Ability to pay | 20% | Revenue per business, margins, average ticket |
+| Catalog fit | 15% | How many services fit, and how directly |
+| Market size | 10% | Number of target businesses |
+| Reachability | 10% | How easy is it to reach the decision maker by phone? |
+
+<details>
+<summary><b>Current ranking (calibrated November 2026)</b></summary>
+
+| Niche | Potential | Why |
+|---|---:|---|
+| Med spas & aesthetic clinics | **76** | ~10–16% annual market growth, ad-driven booking where every unanswered lead is wasted spend |
+| Home services (HVAC, plumbing…) | **76** | ~125k HVAC firms, technician shortage, high-ticket emergency calls |
+| Home health & senior care | **76** | BLS projects +18.6% employment growth 2024–34, plus scheduling and compliance paperwork |
+| Dental practices | **73** | ADA: over half of practices report staffing shortages |
+| Law firms | **72** | Clio 2024: only 40% of firms answered a prospective client's call |
+| Wholesale distribution | **71** | Small distributors still take most orders by phone and email |
+| Engineering firms | **70** | 11-month median backlog; only 11% of small firms have an AI policy |
+| Property management | 68 | ~335k companies; 24/7 maintenance calls |
+| … | | 26 niches in total, down to residential solar (**43**) after the 25D tax-credit expiration |
+
+Full scores, notes and sources: [`config/niches.json`](config/niches.json) and the **Nichos** screen. `/nichos` re-runs the research with the same rubric,
+and the score is computed from the dimensions rather than taken from the model, so analyses stay comparable over time.
+</details>
+
+## Service catalog
+
+Reference pricing for a senior engineering team based in Colombia selling to US businesses. Final prices are quoted per phase after a free scoping call.
+
+| Service / product | Reference price (USD) |
+|---|---|
+| AI Receptionist & Booking Agent | $1,500 – 4,000 + $150 – 400/mo |
+| Back-Office Process Automation | $1,500 – 6,000 per automation |
+| **AI Adoption Training & Coaching** *(new, every niche)* | $90 – 150/h · half-day workshop $900 – 1,800 · 4–8 week program $2,500 – 8,000 |
+| Website Rebuild — Performance, SEO & Conversion | $1,200 – 4,500 |
+| AI Jewelry Design Studio (Claude + Blender / AutoCAD) | $2,500 – 7,500 + $200 – 450/mo |
+| Private AI Assistant over Company Documents | $3,500 – 14,000 + $150 – 400/mo |
+| Reviews & Customer Sentiment Intelligence | $1,500 – 4,500 + $150 – 350/mo |
+| Generative Content Pipeline | $2,000 – 8,000 |
+| Retail AI — Demand Forecasting & Dynamic Pricing | $4,500 – 18,000 |
+| Custom Web Platform / Customer Portal | $8,000 – 35,000 |
+| Mobile App (iOS + Android) | $7,000 – 28,000 |
+| Software Rescue & Hardening | Audit $800 – 2,000 · fixes per phase |
+
 ## Features
 
-**Prospecting**
-- Targeted searches by niche, product, US states, cities, company size and buying signals (hiring, growth, reviews, website quality, funding, ads)
-- Free-text niches beyond the curated list (e.g. *"bridal boutiques"*)
-- Exclusion of national chains and of businesses already in the database or on the blocklist
-- Incremental batch saving, so a long research session never loses work
+**Prospecting** · targeted searches by niche, product, states, cities, company size and buying signals · free-text niches · chains, duplicates and the blocklist excluded · incremental batch saving.
 
-**Market intelligence**
-- Every niche carries a **calibrated potential score**: a fixed six-dimension rubric (growth, pain, ability to pay, catalog fit, market size, reachability) backed by cited US data, with a confidence level
-- `/nichos` re-runs the research with the same rubric. The score is computed from the dimensions, not taken from the model, so analyses stay comparable over time
+**Market intelligence** · calibrated, evidence-backed niche potential with a confidence level · `/nichos` re-analysis with the same rubric · suggested new niches.
 
-**Sales pipeline**
-- Leads are split into lists by stage (*to contact → trying → interested → meeting → proposal → won*), and a **drag-and-drop kanban** shows the same flow
-- **Closeness to a yes** (0–100%) combines the stage, the rep's interest rating (cold → ready to close) and lead quality, so reps always know which deal is nearest to closing
-- **Prioritized next steps** per lead: suggested tasks derived from the lead's state, which clear themselves once done, plus manual tasks with a priority and a due date
-- **Agenda** of overdue, today and upcoming follow-ups, with in-app and desktop reminders and a red counter in the sidebar
-- **Notes everywhere**: pinned notes, the last note shown in every list and card, notes included in search, and a team notes feed
-- A consistent **color system** (stage, interest, priority, urgency, tier) with a built-in legend
-- Manual enrichment: add phones, emails and people (with notes) or edit business data. Manual edits are flagged and never overwritten by later AI research
+**Sales pipeline** · lists by stage · drag-and-drop kanban · closeness to a yes · interest rating · suggested and manual tasks · agenda · in-app and desktop reminders · pinned notes surfaced everywhere · team notes feed · semantic color system with a built-in legend.
 
-**Sales workflow**
-- **Call queue** ranked by overdue follow-ups, closeness, *open-now* status in the lead's timezone and attempt count
-- One-click outcomes (*no answer, voicemail, gatekeeper, callback, meeting booked, proposal sent, won…*), each updating the stage and interest and scheduling the next touch
-- `tel:` and `mailto:` actions with the subject and body prefilled and the rep's name and email injected into the copy
-- On-demand **call prep**: re-researches a single lead (decision maker, direct line, recent news) and returns a one-screen call brief
-- Activity timeline, dashboard and CSV export
+**Sales workflow** · call queue ranked by urgency and closeness · one-click outcomes · prefilled `tel:` and `mailto:` · on-demand AI call prep · manual enrichment of people, phones, emails and business data · CSV export.
 
-**Administration**
-- Service catalog, niche priorities, scoring weights, sales territories and blocklist are versioned JSON, editable from the UI or through Claude
-- Each service ships with a Spanish **sales guide** for reps: plain-language explanation, how it works, a real example, qualifying questions, how to talk about price and a glossary
-- Changes ship to the whole team with `git push`. Reps update from inside the app (fast-forward `git pull`). Their leads live outside git, are migrated in place without data loss and are backed up daily
+**Administration** · versioned JSON configuration editable from the UI or through Claude · Spanish sales guides · territories · blocklist · in-app updates through git.
 
 ## Architecture
 
@@ -125,25 +279,23 @@ flowchart LR
         CHAT["Claude Code chat<br/>/prospectar · /nichos"] --> CLI
         C -- WebSearch / WebFetch --> WEB[(Public web:<br/>sites, directories,<br/>reviews, job boards)]
         C -- "node scripts/cli.mjs ingest" --> CLI["CLI"]
-        CLI --> CORE["lib/leads.mjs<br/>validate · normalize<br/>dedupe · score"]
+        CLI --> CORE["lib/leads.mjs · lib/pipeline.mjs<br/>validate · dedupe · score<br/>stages · tasks · migration"]
         S --> CORE
-        CORE --> DB[("workspace/leads.json<br/>(local, git-ignored)")]
+        CORE --> DB[("workspace/leads.json<br/>(local, git-ignored)<br/>+ daily backups")]
     end
     CFG["config/*.json<br/>catalog · niches · scoring · team"] -. git pull .-> S
     CFG -.-> C
     PROMPTS["prompts/*.md<br/>research playbooks"] -.-> C
 ```
 
-The system has three layers:
-
 1. **Reasoning: Claude Code.** Markdown playbooks in [`prompts/`](prompts/) define the research method: sources to combine,
    qualification rules, data-integrity rules, outreach guidelines and the exact output contract. The same playbook runs from the
-   dashboard (headless `claude -p`) or from an interactive chat (custom slash commands in [`.claude/commands/`](.claude/commands/)).
-2. **Integrity: a deterministic core.** The model never writes the database directly. Every batch goes through
-   [`lib/leads.mjs`](lib/leads.mjs), which validates and normalizes it, rejects bad leads with actionable errors (the model then fixes them or drops the lead),
-   merges duplicates without losing pipeline state, and computes the score.
-3. **Operations: a local dashboard.** A dependency-free Node server streams the agent's progress over Server-Sent Events.
-   It serves a single-page app built for one job: getting reps on the phone with the right business at the right time.
+   dashboard (headless `claude -p`) or from an interactive chat (slash commands in [`.claude/commands/`](.claude/commands/)).
+2. **Integrity: a deterministic core.** The model never writes the database directly. [`lib/leads.mjs`](lib/leads.mjs) validates, normalizes,
+   deduplicates and scores every batch, and rejects bad leads with actionable errors. [`lib/pipeline.mjs`](lib/pipeline.mjs) owns stages, closeness,
+   suggested tasks, manual edits and schema migration.
+3. **Operations: a local dashboard.** A dependency-free Node server streams the agent's progress over Server-Sent Events and serves a
+   single-page app built for one job: getting reps on the phone with the right business at the right time, and making sure every deal has a next step.
 
 ## Quick start
 
@@ -160,7 +312,7 @@ There is no `npm install` step: the project has zero runtime dependencies. On Wi
 
 **Just want to look around?** Run `npm run demo`. It opens http://localhost:4601 with fictional sample data stored in `.demo-workspace/`, and it doesn't need Claude Code or a login.
 
-On first launch, open **Configuración**, pick your profile and territory, then go to **Prospectar** and launch a search.
+📘 **Team guide:** installation plus an illustrated walkthrough of every screen, in Spanish: [`docs/guia-empleados/Guia-del-Equipo-Devleck-Lead-Engine.pdf`](docs/guia-empleados/Guia-del-Equipo-Devleck-Lead-Engine.pdf) (21 pages).
 
 ### Running from the Claude Code chat
 
@@ -173,37 +325,27 @@ On first launch, open **Configuración**, pick your profile and territory, then 
 
 Leads created from the chat show up in the dashboard automatically.
 
+## Updating and data safety
+
+Reps update from **Configuración → Buscar actualizaciones → Actualizar ahora**, which runs a fast-forward `git pull`. Their data is protected in four ways:
+
+- **Leads live outside git** in `workspace/`, so an update never touches them.
+- **Non-destructive migration**: on startup, leads saved by older versions get the new fields (stage timestamps, interest, tasks, note ids), and nothing is removed. The migration path is covered by tests.
+- **Backups**: one copy per day and one before every in-app update, in `workspace/backups/` (the latest 30 are kept).
+- **Manual edits win**: fields a rep edits by hand are tracked in `manualFields`, and later AI re-research never overwrites them.
+
 ## Configuration
 
-Everything shared by the team lives in [`config/`](config/) and is distributed through git. Each rep's leads, notes and
-settings stay in `workspace/`, which is git-ignored.
+Everything shared by the team lives in [`config/`](config/) and is distributed through git.
 
 | File | Purpose |
 |---|---|
-| [`services.json`](config/services.json) | **Service and product catalog.** Ideal customer profile, buying signals, disqualifiers, pricing, ROI logic, pitch and objections. The model may only recommend active items. |
-| [`niches.json`](config/niches.json) | Target niches with search keywords, signals, decision-maker titles, best call windows and a **1–5 priority** that shifts lead scores |
-| [`scoring.json`](config/scoring.json) | Dimension weights, adjustments and tier thresholds |
-| [`team.json`](config/team.json) | Reps and their state territories, so two reps don't call the same business |
-| [`company.json`](config/company.json) | Positioning, differentiators, tone of voice, email signature and compliance footer |
-| [`blocklist.json`](config/blocklist.json) | Current clients and do-not-contact businesses (matched by domain, phone or name) |
-
-<details>
-<summary><b>Example catalog entry</b></summary>
-
-```jsonc
-{
-  "id": "ai-jewelry-design-studio",
-  "type": "product",
-  "name": "AI Jewelry Design Studio (Claude + Blender / AutoCAD)",
-  "idealCustomer": { "niches": ["jewelry-stores"], "companySize": "1–30 employees", "description": "…" },
-  "buyingSignals": ["Offers 'design your own ring'", "Job posts for CAD jewelry designer", "…"],
-  "disqualifiers": ["Only resells mass-produced brand jewelry"],
-  "pricing": { "model": "Setup + monthly", "from": 4000, "to": 15000, "currency": "USD" },
-  "pitch": { "hook": "Your customer describes the ring, and in minutes you show them a photorealistic 3D render…" },
-  "objections": [{ "objection": "We already have a CAD designer.", "response": "…" }]
-}
-```
-</details>
+| [`services.json`](config/services.json) | **Catalog**: ideal customer profile, buying signals, disqualifiers, pricing (incl. monthly fees and packages), ROI logic, pitch, objections and the Spanish `salesGuide`. `allNiches: true` makes a service applicable to any niche. |
+| [`niches.json`](config/niches.json) | Target niches with keywords, signals, decision makers, best call windows, the **calibrated potential** (dimensions, evidence, sources) and the derived 1–5 priority |
+| [`scoring.json`](config/scoring.json) | Lead-quality weights, adjustments and tier thresholds |
+| [`team.json`](config/team.json) | Reps and their state territories |
+| [`company.json`](config/company.json) | Positioning, pricing guidance, tone of voice, email signature and compliance footer |
+| [`blocklist.json`](config/blocklist.json) | Current clients and do-not-contact businesses |
 
 ## The lead pipeline
 
@@ -214,33 +356,21 @@ flowchart LR
     C --> D["Recommend<br/><sub>catalog item · evidence · deal · ROI</sub>"]
     D --> E["Write outreach<br/><sub>script · emails · objections</sub>"]
     E --> F["Ingest<br/><sub>validate · dedupe · score</sub>"]
-    F --> G["Call queue<br/><sub>score · open-now · follow-ups</sub>"]
+    F --> G["Work the deal<br/><sub>queue · tasks · follow-ups · stages</sub>"]
     F -. rejected with errors .-> B
 ```
 
 ### Data integrity rules
 
-The playbooks enforce these rules, and the ingest layer checks them:
-
 - **Nothing is invented.** Every phone and email carries a source URL. Emails inferred from a pattern are flagged and ranked last.
-- Phone numbers are validated against NANP rules and normalized to E.164 (`+15124821234`), with the extension preserved.
-- Emails are syntax-checked, junk domains are filtered out, and generic inboxes (`info@`, `office@`) rank below personal ones.
-- Leads that can't be reached, recommend an unknown or inactive service, or lack outreach copy are **rejected with field-level errors**. The agent fixes them or drops them.
-- **Deduplication** by domain, phone and normalized name + city. Re-discovered leads are enriched, and their status, notes and history are kept.
-
-### Lead quality vs. closeness to a yes
-
-Two numbers answer two different questions:
-
-- **Lead quality (0–100, tier A/B/C)**: *is this business worth calling?* It is computed once from the research (below).
-- **Closeness to a yes (0–100%)**: *how close is this deal to closing?* It updates as the rep works the lead:
-  `0.6 × stage probability + 0.4 × interest rating + quality adjustment`, minus a penalty for stale or overdue deals.
-  Stage probabilities run from 5% (new) to 70% (proposal sent).
+- Phone numbers are validated against NANP rules and normalized to E.164, with the extension preserved.
+- Emails are syntax-checked, junk domains are filtered out, and generic inboxes rank below personal ones.
+- Leads that can't be reached, recommend an unknown or inactive service, or lack outreach copy are **rejected with field-level errors**. The agent then fixes them or drops them.
+- **Deduplication** by domain, phone and normalized name + city. Re-discovered leads are enriched, and their stage, notes, tasks and manual edits are kept.
 
 ### Scoring
 
-The model rates five dimensions from 0 to 10 and must justify each rating with evidence. The server then computes the final score with the company's weights,
-so scores stay comparable across reps and sessions:
+The model rates five dimensions from 0 to 10 and must justify each rating with evidence. The server then computes lead quality with the company's weights:
 
 | Dimension | Default weight | Question |
 |---|---:|---|
@@ -250,8 +380,8 @@ so scores stay comparable across reps and sessions:
 | Budget | 15% | Size, locations and industry ticket suggest they can pay |
 | Timing | 10% | Recent trigger: hiring, expansion, funding |
 
-Adjustments are applied on top: niche priority (±3 points per level), missing phone (−20), no verified email (−5), decision maker identified (+4) and direct line (+3).
-The default tiers are **A ≥ 75** and **B ≥ 55**. Changing weights or niche priorities re-scores the whole database.
+On top of that come the niche priority (±3 points per level), a missing phone (−20), no verified email (−5), an identified decision maker (+4) and a direct line (+3).
+The tiers are **A ≥ 75** and **B ≥ 55**.
 
 ## Project structure
 
@@ -259,24 +389,26 @@ The default tiers are **A ≥ 75** and **B ≥ 55**. Changing weights or niche p
 ├── .claude/
 │   ├── commands/          # /prospectar · /nichos · /preparar-llamada · /nuevo-servicio
 │   └── settings.json      # least-privilege tool permissions for the agent
-├── config/                # shared, versioned business configuration (see above)
+├── config/                # shared, versioned business configuration
 ├── prompts/               # research playbooks: prospect.md · niches.md · call-prep.md
 ├── lib/
 │   ├── leads.mjs          # validation, normalization, scoring, dedupe, ingest
-│   ├── pipeline.mjs       # stages, interest, closeness, suggested tasks, manual edits, data migration
+│   ├── pipeline.mjs       # stages, interest, closeness, suggested tasks, manual edits, migration
 │   ├── normalize.mjs      # phones (NANP/E.164), emails, domains, US states & timezones
-│   └── store.mjs          # atomic JSON writes + cross-process file lock
+│   └── store.mjs          # atomic JSON writes, cross-process file lock, backups
 ├── scripts/
 │   ├── cli.mjs            # the agent's only write path: brief · known · ingest · insights · stats · doctor
 │   └── demo.mjs           # demo mode with fictional data in .demo-workspace/
 ├── server/
-│   ├── index.mjs          # REST API, SSE, static hosting, git-based updates
+│   ├── index.mjs          # REST API, SSE, static hosting, git-based updates, startup migration
 │   └── runner.mjs         # headless Claude Code runner and stream-json → event translation
-├── ui/                    # dependency-free SPA (dashboard, queue, lead drawer, prospecting, niches, catalog)
-├── tests/                 # node:test suite for the core
+├── ui/                    # dependency-free SPA: panel, agenda, queue, kanban, leads, lead drawer, prospecting, niches, catalog
+├── tests/                 # node:test suites for the core and the pipeline (incl. v1.0 → v1.1 migration)
 ├── docs/
-│   ├── GUIA-DEL-EQUIPO.md # end-user guide for the sales team (Spanish)
+│   ├── guia-empleados/    # illustrated team guide (PDF + HTML source)
+│   ├── GUIA-DEL-EQUIPO.md # quick reference for the sales team (Spanish)
 │   └── screenshots/
+├── CHANGELOG.md
 └── CLAUDE.md              # project context loaded by Claude Code
 ```
 
@@ -286,32 +418,37 @@ The default tiers are **A ≥ 75** and **B ≥ 55**. Changing weights or niche p
 |---|---|
 | **Claude Code instead of the API** | Every rep already has a Claude subscription. Running the agent through `claude -p` removes API keys, usage billing and a hosted backend, and the same playbooks power both the chat and the dashboard. |
 | **Prompts as versioned playbooks** | The research method is reviewable, diffable and improvable like code. One improvement to `prompts/prospect.md` raises lead quality for the whole team on the next `git pull`. |
-| **Deterministic ingest layer** | LLM output is treated as untrusted input. Validation, normalization, dedupe and scoring live in tested code, and rejections return to the agent as actionable errors, which creates a self-correcting loop. |
+| **Deterministic ingest layer** | LLM output is treated as untrusted input. Validation, normalization, dedupe and scoring live in tested code, and rejections go back to the agent as actionable errors, which creates a self-correcting loop. |
+| **Scores computed, not generated** | The model rates dimensions with evidence, and code applies the weights. Lead quality, closeness and niche potential stay consistent across reps, sessions and model versions. |
+| **Derived tasks over to-do lists** | Suggested tasks are a function of the lead's state, so they can't go stale and reps don't have to tick off administrative to-dos. |
 | **Zero dependencies** | Reps aren't developers. Without `npm install`, there is no supply-chain surface and nothing breaks on a Node upgrade: clone and run. |
-| **Local-first data** | Leads and notes never leave the rep's machine and never touch git. Only business configuration is shared. |
+| **Local-first data with migrations** | Leads never leave the rep's machine or touch git. Schema changes ship as idempotent, non-destructive migrations with daily backups, so updates are safe to click. |
 | **Atomic writes and a file lock** | The server and the agent's CLI write the same database concurrently. A lock based on `mkdir` plus temp-file rename prevents corruption, including on Windows. |
 | **Least-privilege agent** | The agent may search, read, write in `workspace/` and run only `node scripts/cli.mjs`. The server binds to `127.0.0.1` and rejects foreign `Host` and `Origin` headers (DNS-rebinding protection). |
 
 ## Compliance
 
 - Only **publicly listed business contact data** is collected, and each data point keeps its source.
-- Generated emails include an opt-out line (**CAN-SPAM**). *Do not contact* outcomes plus the shared blocklist keep opt-outs honored across the team.
+- Generated emails include an opt-out line (**CAN-SPAM**). *Do not contact* outcomes and the shared blocklist keep opt-outs honored across the team.
 - Calls are designed to be placed manually by a rep, with no autodialers or prerecorded messages (**TCPA**).
 
 ## Development
 
 ```bash
-npm test                      # core test suite (node:test)
+npm test                      # 14 tests: normalization, validation, scoring, dedupe, pipeline, migration
 npm run check                 # environment diagnostics
 npm run demo                  # UI with fictional data (add -- --reset to regenerate it)
 node scripts/cli.mjs help     # all CLI commands
 PORT=4700 npm start           # run on another port
 ```
 
+Append `?quiet=1` to the URL to silence pop-up reminders, for example while screen-sharing in a meeting.
+
 ## Roadmap
 
 - [x] Pipeline stages, closeness to a yes, tasks, agenda and reminders (v1.1)
 - [x] Calibrated niche potential with cited market data (v1.1)
+- [x] Sales guides per service and the AI training service (v1.1)
 - [ ] Optional shared lead registry (Supabase or Google Sheets) for cross-rep dedupe beyond territories
 - [ ] Manual lead creation for referrals and inbound contacts
 - [ ] CRM export (HubSpot / Pipedrive)

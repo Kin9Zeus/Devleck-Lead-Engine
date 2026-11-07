@@ -2,275 +2,430 @@
 <html lang="es">
 <head>
 <meta charset="utf-8" />
-<title>Guía de instalación — Devleck Lead Engine</title>
+<title>Guía del equipo comercial — Devleck Lead Engine</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet" />
 <style>
-  @page { size: Letter; margin: 0; }
+  @page { size: Letter; margin: 0.6in 0.6in 0.8in; }
+  @page :first { margin: 0; }
   :root {
-    --bg: #07080a; --panel: #111418; --panel2: #161a1f; --line: #262c34;
-    --text: #eef0f2; --muted: #98a0a9; --lime: #d7ff1f; --ink: #0a0c00;
-    --green: #3ddc84; --amber: #ffb547; --red: #ff6b6b;
-    --paper: #ffffff; --soft: #f4f6f1; --dark-text: #0d1014; --dark-muted: #5b636d;
+    --bg: #07080a; --text: #eef0f2; --muted: #98a0a9; --lime: #d7ff1f; --ink: #0a0c00;
+    --soft: #f4f6f1; --line: #e3e8dc; --dark: #0d1014; --dmuted: #5b636d;
   }
   * { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   html, body { margin: 0; padding: 0; }
-  body { font-family: 'Inter', 'Segoe UI', Arial, sans-serif; color: var(--dark-text); font-size: 10.5pt; line-height: 1.5; }
-  .page { width: 8.5in; height: 11in; position: relative; overflow: hidden; page-break-after: always; background: var(--paper); }
-  .page:last-child { page-break-after: auto; }
+  body { font-family: 'Inter', 'Segoe UI', Arial, sans-serif; color: var(--dark); font-size: 10.2pt; line-height: 1.5; }
+  .footer { position: fixed; bottom: -0.55in; left: 0; right: 0; height: 0.3in; display: flex; justify-content: space-between; align-items: center; font-size: 7.5pt; color: #8a919a; border-top: 1px solid var(--line); z-index: 1; }
+  .footer b { color: #556b00; }
 
-  /* ---------- Header ---------- */
-  .hero { background: var(--bg); color: var(--text); padding: 0.4in 0.6in 0.3in; position: relative; overflow: hidden; }
-  .hero::after { content: ''; position: absolute; right: -1.1in; top: -1.3in; width: 4in; height: 4in; border-radius: 50%; background: radial-gradient(circle, rgba(215,255,31,.22), rgba(215,255,31,0) 65%); }
+  /* ---------- Portada ---------- */
+  .cover { width: 8.5in; height: 11in; background: var(--bg); color: var(--text); padding: 0.75in 0.7in; position: relative; overflow: hidden; z-index: 5; break-after: page; display: flex; flex-direction: column; }
+  .cover::after { content: ''; position: absolute; right: -1.6in; top: -1.4in; width: 5.5in; height: 5.5in; border-radius: 50%; background: radial-gradient(circle, rgba(215,255,31,.2), rgba(215,255,31,0) 65%); }
   .brand { display: flex; align-items: center; gap: 12px; position: relative; z-index: 1; }
-  .brand img, .brand svg { width: 38px; height: 38px; }
-  .brand b { font-family: 'Anton', Impact, sans-serif; font-weight: 400; font-size: 17pt; letter-spacing: 1.5px; line-height: 1; display: block; }
-  .brand small { color: var(--lime); font-size: 7.5pt; letter-spacing: 2.2px; text-transform: uppercase; font-weight: 600; }
-  h1 { font-family: 'Anton', Impact, sans-serif; font-weight: 400; font-size: 30pt; line-height: 1.02; letter-spacing: .5px; text-transform: uppercase; margin: 0.18in 0 0.07in; position: relative; z-index: 1; }
-  h1 em { font-style: normal; color: var(--lime); }
-  .lead { color: #c4cad1; font-size: 11pt; max-width: 5.6in; margin: 0; position: relative; z-index: 1; }
-  .chips { display: flex; gap: 8px; margin-top: 0.14in; position: relative; z-index: 1; }
-  .chip { border: 1px solid #343b44; background: #0f1215; color: var(--text); font-size: 8.5pt; font-weight: 600; padding: 4px 11px; border-radius: 20px; }
-  .chip b { color: var(--lime); }
+  .brand img { width: 44px; height: 44px; }
+  .brand b { font-family: 'Anton', Impact, sans-serif; font-weight: 400; font-size: 19pt; letter-spacing: 1.5px; line-height: 1; display: block; }
+  .brand small { color: var(--lime); font-size: 8pt; letter-spacing: 2.2px; text-transform: uppercase; font-weight: 600; }
+  .cover h1 { font-family: 'Anton', Impact, sans-serif; font-weight: 400; font-size: 46pt; line-height: 1; text-transform: uppercase; margin: 0.6in 0 0.15in; position: relative; z-index: 1; }
+  .cover h1 em { font-style: normal; color: var(--lime); }
+  .cover .lead { color: #c4cad1; font-size: 12pt; max-width: 5.8in; margin: 0; position: relative; z-index: 1; }
+  .cover .hero-img { margin-top: 0.35in; border-radius: 12px; border: 1px solid #2a3038; width: 100%; position: relative; z-index: 1; box-shadow: 0 20px 50px rgba(0,0,0,.5); }
+  .toc { margin-top: auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; position: relative; z-index: 1; }
+  .toc div { border: 1px solid #2a3038; background: #0f1215; border-radius: 12px; padding: 12px 14px; font-size: 8.8pt; color: var(--muted); }
+  .toc b { display: block; color: var(--lime); font-family: 'Anton', Impact, sans-serif; font-weight: 400; font-size: 13pt; letter-spacing: .4px; text-transform: uppercase; margin-bottom: 4px; }
+  .toc span { color: var(--text); }
 
-  .body { padding: 0.26in 0.6in 0; }
-  .running { position: absolute; left: 0; right: 0; bottom: 0; height: 0.42in; background: var(--bg); color: var(--muted); font-size: 7.5pt; display: flex; align-items: center; justify-content: space-between; padding: 0 0.6in; letter-spacing: .3px; }
-  .running b { color: var(--lime); font-weight: 600; }
-  .topbar { background: var(--bg); color: var(--text); padding: 0.28in 0.6in; display: flex; align-items: center; justify-content: space-between; }
-  .topbar .brand img, .topbar .brand svg { width: 28px; height: 28px; }
-  .topbar .brand b { font-size: 13pt; }
-  .topbar .t { font-family: 'Anton', Impact, sans-serif; font-size: 15pt; text-transform: uppercase; letter-spacing: .6px; }
-  .topbar .t em { font-style: normal; color: var(--lime); }
-
-  /* ---------- Blocks ---------- */
-  h2 { font-family: 'Anton', Impact, sans-serif; font-weight: 400; font-size: 15pt; text-transform: uppercase; letter-spacing: .5px; margin: 0 0 8px; display: flex; align-items: center; gap: 10px; }
-  h2 .bar { width: 26px; height: 5px; background: var(--lime); border-radius: 3px; display: inline-block; box-shadow: 0 0 0 1px #0d1014 inset; }
-  .req { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 0.14in; }
-  .req div { background: var(--soft); border: 1px solid #e3e8dc; border-radius: 10px; padding: 10px 12px; font-size: 9pt; color: var(--dark-muted); }
-  .req b { display: block; color: var(--dark-text); font-size: 10pt; margin-bottom: 2px; }
-
-  .step { display: grid; grid-template-columns: 0.46in 1fr; gap: 12px; margin-bottom: 0.13in; break-inside: avoid; }
-  .num { width: 0.46in; height: 0.46in; border-radius: 12px; background: var(--bg); color: var(--lime); font-family: 'Anton', Impact, sans-serif; font-size: 18pt; display: grid; place-items: center; line-height: 1; }
-  .step h3 { margin: 1px 0 3px; font-size: 12pt; line-height: 1.25; }
-  .step p { margin: 0 0 6px; color: var(--dark-muted); font-size: 10pt; }
-  .step ul { margin: 0 0 6px; padding-left: 17px; color: var(--dark-text); font-size: 10pt; }
-  .step li { margin-bottom: 3px; }
-  .step li span { color: var(--dark-muted); }
-  code, .k { font-family: 'JetBrains Mono', Consolas, monospace; font-size: 8.8pt; }
-  .code { background: var(--bg); color: #e9ffd0; border-radius: 9px; padding: 6px 12px; margin: 4px 0 5px; border-left: 3px solid var(--lime); line-height: 1.7; }
-  .code .c { color: #77808a; }
-  .inline { background: #eef2e6; color: #1a2008; border-radius: 5px; padding: 1px 6px; font-weight: 600; }
-  a { color: #3d5200; font-weight: 600; text-decoration: none; border-bottom: 1px solid #c4dc3b; }
-  .note { border-radius: 10px; padding: 6px 12px; font-size: 9pt; margin: 5px 0 0; }
+  /* ---------- Capítulos ---------- */
+  .part { break-before: page; }
+  .part-head { background: var(--bg); color: var(--text); border-radius: 14px; padding: 18px 22px; margin-bottom: 18px; display: flex; align-items: center; justify-content: space-between; }
+  .part-head .k { color: var(--lime); font-size: 8pt; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; }
+  .part-head h2 { margin: 2px 0 0; font-family: 'Anton', Impact, sans-serif; font-weight: 400; font-size: 24pt; text-transform: uppercase; letter-spacing: .5px; line-height: 1.05; }
+  .part-head h2 em { font-style: normal; color: var(--lime); }
+  .part-head p { margin: 6px 0 0; color: #c4cad1; font-size: 9.5pt; max-width: 5in; }
+  .part-head img { width: 54px; height: 54px; }
+  h3 { font-family: 'Anton', Impact, sans-serif; font-weight: 400; font-size: 16pt; text-transform: uppercase; letter-spacing: .4px; margin: 22px 0 6px; display: flex; align-items: center; gap: 10px; break-after: avoid; }
+  h3.pb { break-before: page; margin-top: 0; }
+  h3 .n { background: var(--lime); color: var(--ink); border-radius: 8px; font-size: 11pt; padding: 1px 8px; }
+  h4 { font-size: 10.5pt; margin: 14px 0 4px; break-after: avoid; }
+  p { margin: 0 0 8px; }
+  .sub { color: var(--dmuted); font-size: 9.8pt; margin-bottom: 10px; }
+  ul, ol { margin: 0 0 8px; padding-left: 18px; }
+  li { margin-bottom: 3px; }
+  figure { margin: 10px 0 12px; break-inside: avoid; }
+  figure img { width: 100%; border-radius: 10px; border: 1px solid #1f242b; display: block; box-shadow: 0 6px 18px rgba(0,0,0,.12); }
+  figure.narrow > img { width: 78%; margin: 0 auto; }
+  figcaption { font-size: 8.5pt; color: var(--dmuted); margin-top: 5px; text-align: center; }
+  .shot { position: relative; }
+  .pin { position: absolute; width: 21px; height: 21px; border-radius: 50%; background: #ff3d7f; color: #fff; font: 700 10pt 'Inter', sans-serif; display: grid; place-items: center; box-shadow: 0 0 0 3px #fff, 0 3px 8px rgba(0,0,0,.4); }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .card { border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; background: var(--soft); break-inside: avoid; }
+  .card h4 { margin-top: 0; }
+  .note { border-radius: 10px; padding: 8px 12px; font-size: 9.2pt; margin: 8px 0; break-inside: avoid; }
+  .note.lime { background: #f6ffd0; border: 1px solid #d9ef7c; color: #2c3a00; }
   .note.warn { background: #fff6e5; border: 1px solid #f5d79a; color: #6b4a07; }
   .note.ok { background: #effcf4; border: 1px solid #bfeccf; color: #145a31; }
-  .note.lime { background: #f6ffd0; border: 1px solid #d9ef7c; color: #2c3a00; }
-  .note b { font-weight: 700; }
-
-  /* ---------- Page 3 ---------- */
-  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0.25in; margin-bottom: 0.2in; }
-  .card { border: 1px solid #e3e8dc; border-radius: 12px; padding: 14px 16px; background: var(--soft); break-inside: avoid; }
-  .card h3 { margin: 0 0 6px; font-size: 11.5pt; }
-  .card ol, .card ul { margin: 0; padding-left: 18px; font-size: 9.8pt; }
-  .card li { margin-bottom: 3px; }
-  table { width: 100%; border-collapse: collapse; font-size: 9.4pt; margin-bottom: 0.2in; border-radius: 10px; overflow: hidden; }
-  th { background: var(--bg); color: var(--lime); text-align: left; padding: 8px 12px; font-size: 8pt; letter-spacing: 1.2px; text-transform: uppercase; }
-  td { padding: 8px 12px; border-bottom: 1px solid #e5e9df; vertical-align: top; }
+  .code { background: var(--bg); color: #e9ffd0; border-radius: 9px; padding: 7px 12px; margin: 5px 0 7px; border-left: 3px solid var(--lime); font-family: 'JetBrains Mono', Consolas, monospace; font-size: 8.8pt; line-height: 1.7; break-inside: avoid; }
+  .inline { background: #eef2e6; color: #1a2008; border-radius: 5px; padding: 1px 6px; font-weight: 600; font-family: 'JetBrains Mono', monospace; font-size: 8.8pt; }
+  table { width: 100%; border-collapse: collapse; font-size: 9pt; margin: 6px 0 12px; break-inside: avoid; }
+  th { background: var(--bg); color: var(--lime); text-align: left; padding: 7px 10px; font-size: 7.6pt; letter-spacing: 1.1px; text-transform: uppercase; }
+  td { padding: 7px 10px; border-bottom: 1px solid #e5e9df; vertical-align: top; }
   tr:nth-child(even) td { background: #fafbf7; }
-  td:first-child { font-weight: 600; width: 36%; }
-  .rules { background: var(--bg); color: var(--text); border-radius: 14px; padding: 16px 20px; margin-bottom: 0.2in; }
-  .rules h3 { margin: 0 0 8px; font-family: 'Anton', Impact, sans-serif; font-weight: 400; font-size: 13pt; letter-spacing: .5px; text-transform: uppercase; color: var(--lime); }
-  .rules ul { margin: 0; padding-left: 18px; font-size: 9.6pt; color: #d6dbe0; }
-  .rules li { margin-bottom: 4px; }
-  .rules b { color: #fff; }
-  .contact { display: flex; align-items: center; justify-content: space-between; background: var(--lime); color: var(--ink); border-radius: 14px; padding: 14px 20px; }
-  .contact b { font-family: 'Anton', Impact, sans-serif; font-weight: 400; font-size: 14pt; text-transform: uppercase; letter-spacing: .4px; display: block; line-height: 1.1; }
-  .contact span { font-size: 9.5pt; }
-  .contact .mail { font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 10pt; background: var(--ink); color: var(--lime); padding: 7px 13px; border-radius: 9px; }
+  .sw { display: inline-block; width: 11px; height: 11px; border-radius: 3px; vertical-align: -1px; margin-right: 6px; }
+  .pill { display: inline-block; padding: 1px 8px; border-radius: 20px; font-size: 8.4pt; font-weight: 600; }
+  .steps { display: grid; gap: 8px; }
+  .step { display: grid; grid-template-columns: 0.42in 1fr; gap: 12px; break-inside: avoid; }
+  .num { width: 0.42in; height: 0.42in; border-radius: 11px; background: var(--bg); color: var(--lime); font-family: 'Anton', Impact, sans-serif; font-size: 16pt; display: grid; place-items: center; }
+  .step h4 { margin: 2px 0 3px; font-size: 11pt; }
+  .step p { color: var(--dmuted); }
+  .legend { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 22px; }
+  .legend div { display: flex; gap: 8px; align-items: flex-start; font-size: 9pt; break-inside: avoid; }
+  .legend .sw { width: 13px; height: 13px; flex: none; margin-top: 2px; }
+  .contact { display: flex; align-items: center; justify-content: space-between; background: var(--lime); color: var(--ink); border-radius: 14px; padding: 14px 20px; margin-top: 14px; break-inside: avoid; }
+  .contact b { font-family: 'Anton', Impact, sans-serif; font-weight: 400; font-size: 14pt; text-transform: uppercase; display: block; line-height: 1.1; }
+  .contact .mail { font-family: 'JetBrains Mono', monospace; font-weight: 600; background: var(--ink); color: var(--lime); padding: 7px 13px; border-radius: 9px; }
 </style>
 </head>
 <body>
 
-<!-- ============ PÁGINA 1 ============ -->
-<section class="page">
-  <div class="hero">
-    <div class="brand">
-      <img src="../../ui/logo-badge.png" alt="" />
-      <div><b>DEVLECK</b><small>Lead Engine</small></div>
-    </div>
-    <h1>Guía de <em>instalación</em><br/>para el equipo comercial</h1>
-    <p class="lead">Deja la herramienta lista en tu computadora en unos 15 minutos. Se hace una sola vez; después solo la abres y empiezas a llamar.</p>
-    <div class="chips"><span class="chip"><b>6</b> pasos</span><span class="chip"><b>~15</b> minutos</span><span class="chip">Windows · Mac · Linux</span></div>
+
+<!-- =============================== PORTADA =============================== -->
+<section class="cover">
+  <div class="brand"><img src="../../ui/logo-badge.png" alt="" /><div><b>DEVLECK</b><small>Lead Engine</small></div></div>
+  <h1>Guía del equipo <em>comercial</em></h1>
+  <p class="lead">Todo lo que necesitas para instalar la herramienta y usarla en tu día a día: encontrar clientes en EE. UU., llamarlos, hacer seguimiento y cerrar ventas.</p>
+  <img class="hero-img" src="img/dashboard.jpg" alt="" />
+  <div class="toc">
+    <div><b>1 · Instalación</b><span>15 minutos, una sola vez.</span> Programas, sesión de Claude, descarga y perfil.</div>
+    <div><b>2 · Tutorial</b><span>Cada pantalla paso a paso.</span> Agenda, cola de llamadas, ficha del lead, embudo, prospección, nichos y catálogo.</div>
+    <div><b>3 · Ayuda</b><span>Tu rutina diaria,</span> la guía de colores, soluciones rápidas y reglas de oro.</div>
   </div>
-
-  <div class="body">
-    <h2><span class="bar"></span>Antes de empezar</h2>
-    <div class="req">
-      <div><b>Una computadora</b>Windows, Mac o Linux, con conexión a internet.</div>
-      <div><b>Cuenta de Claude de pago</b>Plan Pro o Max. La herramienta investiga con tu propia cuenta.</div>
-      <div><b>Sin cuenta de GitHub</b>El repositorio es público: no necesitas registrarte en GitHub.</div>
-    </div>
-
-    <div class="step">
-      <div class="num">1</div>
-      <div>
-        <h3>Instala 3 programas</h3>
-        <ul>
-          <li><b>Node.js</b> (versión LTS) <span>→</span> <a>nodejs.org</a></li>
-          <li><b>Git</b> <span>→</span> <a>git-scm.com/downloads</a></li>
-          <li><b>Claude Code</b>: abre PowerShell (en Mac o Linux, la Terminal) y ejecuta:</li>
-        </ul>
-        <div class="code">npm install -g @anthropic-ai/claude-code</div>
-        <div class="note warn"><b>Importante:</b> cierra y vuelve a abrir la terminal cuando termines de instalar.</div>
-      </div>
-    </div>
-
-    <div class="step">
-      <div class="num">2</div>
-      <div>
-        <h3>Inicia sesión en Claude</h3>
-        <p>En la terminal escribe el comando de abajo. Se abre el navegador para que entres con tu cuenta de Claude. Cuando termine, escribe <span class="inline">/exit</span>.</p>
-        <div class="code">claude</div>
-      </div>
-    </div>
-
-    <div class="step">
-      <div class="num">3</div>
-      <div>
-        <h3>Descarga la herramienta</h3>
-        <p>Elige una carpeta que recuerdes (por ejemplo, Documentos) y ejecuta estos comandos, uno por uno:</p>
-        <div class="code">git clone https://github.com/Kin9Zeus/Devleck-Lead-Engine.git<br/>cd Devleck-Lead-Engine<br/>npm run check</div>
-        <div class="note ok"><b>Qué debes ver:</b> ✔ en Node, Claude Code, Git y Catálogo ("Trabajador" saldrá ✘ hasta el paso 5).</div>
-        <div class="note warn"><b>No uses "Download ZIP":</b> sin <span class="inline">git clone</span> no podrás recibir actualizaciones.</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="running"><span><b>Devleck</b> · Software &amp; Digital Solutions</span><span>Guía de instalación · 1 de 3</span></div>
 </section>
 
-<!-- ============ PÁGINA 2 ============ -->
-<section class="page">
-  <div class="topbar">
-    <div class="brand">
-      <img src="../../ui/logo-badge.png" alt="" />
-      <div><b>DEVLECK</b><small>Lead Engine</small></div>
-    </div>
-    <div class="t">Puesta en <em>marcha</em></div>
+<!-- =============================== PARTE 1 =============================== -->
+<section class="part">
+  <div class="part-head"><div><div class="k">Parte 1</div><h2>Instalación <em>paso a paso</em></h2><p>Se hace una sola vez por computadora. Después solo abres la herramienta y empiezas a trabajar.</p></div><img src="../../ui/logo-badge.png" alt="" /></div>
+
+  <h4>Antes de empezar necesitas</h4>
+  <div class="grid2" style="grid-template-columns:1fr 1fr 1fr;margin-bottom:12px">
+    <div class="card"><h4>Una computadora</h4>Windows, Mac o Linux, con internet.</div>
+    <div class="card"><h4>Cuenta de Claude de pago</h4>Plan Pro o Max: la herramienta investiga con tu propia cuenta.</div>
+    <div class="card"><h4>Sin cuenta de GitHub</h4>El repositorio es público: no tienes que registrarte en GitHub.</div>
   </div>
 
-  <div class="body" style="padding-top:0.32in">
-    <div class="step">
-      <div class="num">4</div>
-      <div>
-        <h3>Abre la herramienta</h3>
-        <ul>
-          <li><b>Windows:</b> doble clic en <span class="inline">iniciar.bat</span>, dentro de la carpeta Devleck-Lead-Engine.</li>
-          <li><b>Mac o Linux:</b> en la terminal, ejecuta <span class="inline">./iniciar.sh</span></li>
-        </ul>
-        <p>Se abre el navegador en <b>http://localhost:4600</b>. No cierres la ventana negra mientras uses la herramienta.</p>
-      </div>
-    </div>
-
-    <div class="step">
-      <div class="num">5</div>
-      <div>
-        <h3>Configura tu perfil (solo la primera vez)</h3>
-        <p>Ve a <b>Configuración</b> en el menú izquierdo y completa:</p>
-        <ul>
-          <li><b>¿Quién eres?</b> Elige tu nombre. Si no aparece, elige "Otro…" y escribe tu id.</li>
-          <li><b>Tu nombre, correo de trabajo y teléfono.</b> <span>Se usan en los guiones y correos que envías.</span></li>
-          <li><b>Tu territorio:</b> los estados que te asignaron.</li>
-        </ul>
-        <p>Pulsa <b>Guardar perfil</b>.</p>
-      </div>
-    </div>
-
-    <div class="step">
-      <div class="num">6</div>
-      <div>
-        <h3>Haz tu primera búsqueda</h3>
-        <ul>
-          <li>Ve a <b>Prospectar</b>. Elige el nicho, el servicio y los estados.</li>
-          <li>Para la primera prueba pon <b>3 leads</b> y pulsa <b>Lanzar búsqueda</b>.</li>
-          <li>Mira el progreso en <b>Búsquedas</b>. Con 3 leads tarda unos 10 minutos.</li>
-          <li>Al terminar, ve a <b>Cola de llamadas</b>: los leads aparecen ordenados por prioridad, con teléfono, guion y correo listos.</li>
-        </ul>
-        <div class="note lime"><b>Consejo:</b> puedes seguir llamando mientras una búsqueda corre en segundo plano; los leads aparecen a medida que se guardan.</div>
-      </div>
-    </div>
-
-    <h2 style="margin-top:0.26in"><span class="bar"></span>Tu rutina diaria</h2>
-    <div class="cols">
-      <div class="card">
-        <h3>Cada día</h3>
-        <ol>
-          <li>Abre <span class="inline">iniciar.bat</span> y entra a <b>Agenda</b>: atiende primero lo <b style="color:#c62828">vencido (rojo)</b> y lo de <b style="color:#b26a00">hoy (ámbar)</b>.</li>
-          <li>Sigue con la <b>Cola de llamadas</b>, de arriba hacia abajo.</li>
-          <li>Al colgar, <b>registra el resultado</b> y el <b>nivel de interés</b> (1 Frío → 5 Listo para cerrar).</li>
-          <li>Guarda una <b>nota</b> y agrega los teléfonos, correos o personas nuevas que consigas.</li>
-          <li>Revisa el <b>Embudo</b>: los de mayor <b>cercanía al sí</b> van primero.</li>
-        </ol>
-      </div>
-      <div class="card">
-        <h3>Cuando haya una versión nueva</h3>
-        <ol>
-          <li>Te avisaremos por el chat del equipo.</li>
-          <li>Entra a <b>Configuración → Buscar actualizaciones</b>.</li>
-          <li>Pulsa <b>Actualizar ahora</b>.</li>
-          <li>Cierra la ventana negra y vuelve a abrir <span class="inline">iniciar.bat</span>.</li>
-        </ol>
-        <p style="margin:8px 0 0;font-size:9pt;color:var(--dark-muted)">Tus leads y notas no se pierden al actualizar.</p>
-      </div>
-    </div>
+  <div class="steps">
+    <div class="step"><div class="num">1</div><div><h4>Instala 3 programas</h4>
+      <ul><li><b>Node.js</b> (versión LTS) → nodejs.org</li><li><b>Git</b> → git-scm.com/downloads</li><li><b>Claude Code</b>: abre PowerShell (en Mac o Linux, la Terminal) y ejecuta:</li></ul>
+      <div class="code">npm install -g @anthropic-ai/claude-code</div>
+      <div class="note warn"><b>Importante:</b> cuando termines, cierra la terminal y vuelve a abrirla.</div></div></div>
+    <div class="step"><div class="num">2</div><div><h4>Inicia sesión en Claude</h4>
+      <p>En la terminal escribe el comando de abajo. Se abrirá el navegador para que entres con tu cuenta de Claude. Al terminar, escribe <span class="inline">/exit</span>.</p>
+      <div class="code">claude</div></div></div>
+    <div class="step"><div class="num">3</div><div><h4>Descarga la herramienta</h4>
+      <p>Ve a una carpeta que recuerdes (por ejemplo, Documentos) y ejecuta estos comandos, uno por uno:</p>
+      <div class="code">git clone https://github.com/Kin9Zeus/Devleck-Lead-Engine.git<br/>cd Devleck-Lead-Engine<br/>npm run check</div>
+      <div class="note ok"><b>Qué debes ver:</b> ✔ en Node, Claude Code, Git y Catálogo. La línea de "Trabajador" saldrá con ✘ hasta que completes el paso 5.</div>
+      <div class="note warn"><b>No uses "Download ZIP":</b> si no descargas con <span class="inline">git clone</span>, no podrás recibir actualizaciones.</div></div></div>
+    <div class="step"><div class="num">4</div><div><h4>Abre la herramienta</h4>
+      <ul><li><b>Windows:</b> doble clic en <span class="inline">iniciar.bat</span>, dentro de la carpeta Devleck-Lead-Engine.</li><li><b>Mac o Linux:</b> en la terminal, ejecuta <span class="inline">./iniciar.sh</span></li></ul>
+      <p>Se abre el navegador en <b>http://localhost:4600</b>. Deja abierta la ventana negra mientras uses la herramienta.</p></div></div>
+    <div class="step"><div class="num">5</div><div><h4>Configura tu perfil (solo la primera vez)</h4>
+      <p>Ve a <b>Configuración</b> y completa quién eres, tu nombre, tu correo de trabajo, tu teléfono y tu territorio (los estados que te asignaron). Pulsa <b>Guardar perfil</b>. Tu nombre y tu correo se insertan solos en los guiones y correos.</p></div></div>
   </div>
-
-  <div class="running"><span><b>Devleck</b> · Software &amp; Digital Solutions</span><span>Guía de instalación · 2 de 3</span></div>
 </section>
 
-<!-- ============ PÁGINA 3 ============ -->
-<section class="page">
-  <div class="topbar">
-    <div class="brand">
-      <img src="../../ui/logo-badge.png" alt="" />
-      <div><b>DEVLECK</b><small>Lead Engine</small></div>
-    </div>
-    <div class="t">Si algo <em>falla</em></div>
+<!-- =============================== PARTE 2 =============================== -->
+<section class="part">
+  <div class="part-head"><div><div class="k">Parte 2</div><h2>Cómo usar la <em>herramienta</em></h2><p>Un recorrido por cada pantalla, en el orden en que la vas a usar durante el día.</p></div><img src="../../ui/logo-badge.png" alt="" /></div>
+
+  <h4>El menú de la izquierda</h4>
+  <table>
+    <thead><tr><th style="width:26%">Sección</th><th>Para qué la usas</th></tr></thead>
+    <tbody>
+      <tr><td><b>Panel</b></td><td>Resumen del día: seguimientos vencidos, tareas urgentes, los negocios más cerca del sí y a quién llamar ahora.</td></tr>
+      <tr><td><b>Agenda</b> <span class="pill" style="background:#ff5d5d;color:#fff">2</span></td><td>Seguimientos y tareas por urgencia. El número rojo indica cuántos tienes vencidos o para hoy.</td></tr>
+      <tr><td><b>Cola de llamadas</b></td><td>La lista para llamar uno tras otro, en el mejor orden posible.</td></tr>
+      <tr><td><b>Embudo</b></td><td>Tablero con todas tus oportunidades por etapa. Arrastra las tarjetas para moverlas.</td></tr>
+      <tr><td><b>Leads</b></td><td>Tu base completa, separada en listas por etapa, con filtros, búsqueda y exportación.</td></tr>
+      <tr><td><b>Prospectar · Búsquedas</b></td><td>Pídele a la IA que encuentre negocios nuevos y mira su progreso en vivo.</td></tr>
+      <tr><td><b>Nichos</b></td><td>Qué industrias de EE. UU. tienen más potencial para lo que vendemos, y por qué.</td></tr>
+      <tr><td><b>Catálogo</b></td><td>Los servicios y productos de Devleck, con su precio y su guía de ventas.</td></tr>
+      <tr><td><b>Configuración</b></td><td>Tu perfil, los recordatorios de escritorio y las actualizaciones.</td></tr>
+    </tbody>
+  </table>
+  <div class="note lime">¿Un color no te queda claro? En la parte de abajo del menú está la <b>Guía de colores</b>. También la encuentras al final de este documento.</div>
+
+  <h3 class="pb"><span class="n">2.1</span> Panel</h3>
+  <p class="sub">Tu punto de partida cada mañana.</p>
+  <figure><img src="img/dashboard.jpg" alt="" /><figcaption>Panel: aviso de vencidos, indicadores, tareas de alta prioridad y los negocios más cerca del sí.</figcaption></figure>
+  <ul>
+    <li><b>Aviso rojo:</b> aparece cuando tienes seguimientos vencidos. Haz clic para ir a la Agenda.</li>
+    <li><b>Indicadores:</b> vencidos (rojo), para hoy (ámbar), negocios con cercanía al sí de 50% o más, y el <b>pipeline ponderado</b> (el valor de los tratos multiplicado por su probabilidad de cierre).</li>
+    <li><b>Tareas de alta prioridad:</b> agrupadas por negocio. El botón verde llama directamente.</li>
+    <li><b>Más cerca del sí:</b> las oportunidades a las que debes dedicarles más energía hoy.</li>
+  </ul>
+
+  <h3 class="pb"><span class="n">2.2</span> Agenda y recordatorios</h3>
+  <p class="sub">Todo lo que tienes que hacer, ordenado por urgencia.</p>
+  <figure><img src="img/agenda.jpg" alt="" /><figcaption>Agenda: vencidos, hoy, próximos 7 días y tareas sin fecha. A la derecha, las notas recientes del equipo.</figcaption></figure>
+  <ul>
+    <li><b style="color:#d32f2f">Vencidos</b> → <b style="color:#b26a00">Hoy</b> → <b style="color:#1e6fb8">Próximos 7 días</b> → <b>Sin fecha</b> (solo prioridad alta y media).</li>
+    <li>Cada fila muestra la tarea, el negocio, su etapa, la <b>última nota</b>, la prioridad, la hora y la hora local del negocio.</li>
+    <li>Hay dos tipos de tareas. Las <b>sugeridas</b> (✨) las crea la herramienta según el estado del lead y desaparecen solas cuando registras lo que pasó; por ejemplo, "Primera llamada a…" se va cuando registras el resultado de la llamada. Las <b>manuales</b> las creas tú en la ficha del lead.</li>
+    <li><b>Recordatorios:</b> con la herramienta abierta, aparece un aviso cuando llega la hora de un seguimiento. Si además pulsas <b>"Recordatorios en el escritorio"</b>, te llegan aunque estés en otra ventana.</li>
+  </ul>
+
+  <h3 class="pb"><span class="n">2.3</span> Cola de llamadas</h3>
+  <p class="sub">Para llamar de arriba hacia abajo sin pensar en el orden.</p>
+  <figure><img src="img/call-queue.jpg" alt="" /><figcaption>Cola de llamadas: primero los seguimientos vencidos, luego los más cerca del sí y los negocios abiertos ahora.</figcaption></figure>
+  <div class="grid2">
+    <div class="card"><h4>Cómo ordena</h4><ol><li>Seguimientos vencidos o de hoy.</li><li>Cercanía al sí y calidad del lead.</li><li>Negocios abiertos ahora: punto verde = horario laboral en su zona.</li><li>Favoritos (★). Bajan los que ya llamaste muchas veces.</li></ol></div>
+    <div class="card"><h4>Cómo hacer cada llamada</h4><ol><li>Pulsa el botón verde con el teléfono.</li><li>Mientras suena, se abre la ficha en la pestaña <b>Guion</b>.</li><li>Al colgar, pulsa <b>Registrar resultado</b>.</li><li>Sigue con el siguiente de la lista.</li></ol></div>
   </div>
+  <div class="note lime"><b>Tip:</b> marca "Solo abiertos ahora" para ver únicamente los negocios que están en horario laboral en este momento.</div>
+</section>
 
-  <div class="body" style="padding-top:0.32in">
-    <h2><span class="bar"></span>Soluciones rápidas</h2>
-    <table>
-      <thead><tr><th>Problema</th><th>Solución</th></tr></thead>
-      <tbody>
-        <tr><td>La búsqueda dice "Failed to authenticate" o "OAuth session expired"</td><td>Tu sesión de Claude caducó. En la terminal escribe <span class="inline">claude</span>, luego <span class="inline">/login</span> e inicia sesión de nuevo.</td></tr>
-        <tr><td>"No se encontró Claude Code"</td><td>Repite el comando de instalación del paso 1 y reinicia la herramienta. Para comprobarlo, ejecuta <span class="inline">claude --version</span>.</td></tr>
-        <tr><td>No se abre la página</td><td>Entra manualmente a <b>http://localhost:4600</b>. Si el puerto está ocupado, es que la herramienta ya está abierta.</td></tr>
-        <tr><td>Al actualizar dice "Tienes cambios locales"</td><td>Modificaste archivos de la herramienta. Escríbele a soporte antes de actualizar; tus leads no se tocan.</td></tr>
-        <tr><td>Salen muy pocos leads</td><td>Amplía los estados o ciudades, desmarca "Solo leads con teléfono" o elige otro nicho en la sección <b>Nichos</b>.</td></tr>
-        <tr><td>La búsqueda se queda "trabajando" mucho rato</td><td>Es normal: cada lead toma unos 2–3 minutos. Si pasa de 45 minutos, detenla con el botón <b>Detener</b>; los leads ya guardados se conservan.</td></tr>
-      </tbody>
-    </table>
+<section class="part">
+  <h3 style="margin-top:0"><span class="n">2.4</span> La ficha del lead (Resumen)</h3>
+  <p class="sub">Se abre al hacer clic en cualquier negocio. Aquí decides el siguiente paso y registras lo que pasó.</p>
+  <figure><div class="shot" style="width:78%;margin:0 auto">
+    <img src="img/lead-detail.jpg" alt="" />
+    <span class="pin" style="left:-2.5%;top:8.2%">1</span>
+    <span class="pin" style="left:-2.5%;top:12.6%">2</span>
+    <span class="pin" style="left:34%;top:12.6%">3</span>
+    <span class="pin" style="left:-2.5%;top:16.6%">4</span>
+    <span class="pin" style="left:-2.5%;top:21%">5</span>
+    <span class="pin" style="left:-2.5%;top:26.4%">6</span>
+    <span class="pin" style="left:-2.5%;top:33.2%">7</span>
+    <span class="pin" style="left:48.5%;top:33.2%">8</span>
+    <span class="pin" style="left:-2.5%;top:62.4%">9</span>
+    <span class="pin" style="left:-2.5%;top:81.8%">10</span>
+  </div><figcaption>Ficha del lead, pestaña Resumen.</figcaption></figure>
+  <ol>
+    <li><b>Etapa del embudo.</b> Por contactar → En intento → Interesados → Reunión → Propuesta → Ganados. Haz clic en una etapa para mover el lead.</li>
+    <li><b>Cercanía al sí (0–100%).</b> Qué tan cerca está de cerrar. Se calcula sola con la etapa, tu nivel de interés y la calidad del lead.</li>
+    <li><b>Interés (1–5).</b> Lo asignas tú después de hablar con el decisor: 1 Frío · 2 Tibio · 3 Interesado · 4 Caliente · 5 Listo para cerrar.</li>
+    <li><b>Datos clave:</b> qué venderle, trato estimado, a quién pedir (decisor) y el próximo seguimiento con su color de urgencia.</li>
+    <li><b>Llamar y escribir:</b> el botón verde llama; el del correo abre tu correo con el mensaje ya escrito.</li>
+    <li><b>Pestañas:</b> Resumen · Guion · Correos · Contactos · Análisis · Notas y actividad.</li>
+    <li><b>Próximos pasos:</b> las tareas ordenadas por prioridad (roja = alta, ámbar = media, gris = baja). Las manuales se marcan con la casilla. Abajo puedes agregar una tarea nueva con prioridad y fecha.</li>
+    <li><b>Notas:</b> escribe qué pasó. Marca "Fijar arriba" en lo más importante: las notas fijadas aparecen primero en todas las listas.</li>
+    <li><b>Seguimiento:</b> programa cuándo volver a contactar con los botones rápidos (+1 h, mañana 9:00, +3 días, +1 semana) o con una fecha exacta.</li>
+    <li><b>Registrar resultado:</b> un botón por cada desenlace de la llamada (ver la tabla de abajo).</li>
+  </ol>
+  <h4>Qué hace cada resultado</h4>
+  <table>
+    <thead><tr><th>Botón</th><th>Mueve a</th><th>Qué pasa después</th></tr></thead>
+    <tbody>
+      <tr><td>No contestó</td><td><span class="sw" style="background:#ffb547"></span>Intentado</td><td>Sugiere reintentar en 24 h.</td></tr>
+      <tr><td>Dejé buzón de voz</td><td><span class="sw" style="background:#ffb547"></span>Intentado</td><td>Reintento en 48 h y te lleva a la pestaña Correos para enviar el mensaje.</td></tr>
+      <tr><td>Filtro / no está el decisor</td><td><span class="sw" style="background:#ff9447"></span>Volver a llamar</td><td>Reintento en 24 h. Anota el nombre del decisor si te lo dieron.</td></tr>
+      <tr><td>Pidió volver a llamar</td><td><span class="sw" style="background:#ff9447"></span>Volver a llamar</td><td>Te pide la fecha y la hora exactas.</td></tr>
+      <tr><td>Interesado — enviar info</td><td><span class="sw" style="background:#b18cff"></span>Interesado</td><td>Interés 3 y seguimiento en 3 días; te lleva a Correos.</td></tr>
+      <tr><td>Reunión agendada</td><td><span class="sw" style="background:#d7ff1f;border:1px solid #9bb800"></span>Reunión</td><td>Interés 4. Te pide la fecha de la reunión, que queda como seguimiento.</td></tr>
+      <tr><td>Propuesta enviada</td><td><span class="sw" style="background:#2dd4bf"></span>Propuesta</td><td>Seguimiento en 3 días.</td></tr>
+      <tr><td>Cerró — ganado</td><td><span class="sw" style="background:#3ddc84"></span>Ganado</td><td>Interés 5. Tarea sugerida: coordinar el inicio y pedir un referido.</td></tr>
+      <tr><td>No interesado · No califica · Pidió no ser contactado</td><td><span class="sw" style="background:#6b7280"></span>Cerrado</td><td>Sale de la cola y de la agenda. "No contactar" es definitivo.</td></tr>
+    </tbody>
+  </table>
+  <div class="note lime">Al registrar el resultado puedes escribir una nota y ajustar el interés en la misma ventana. <b>Escribe siempre la nota:</b> es lo que te salva cuando vuelves a llamar dos semanas después.</div>
 
-    <div class="rules">
-      <h3>Reglas de oro</h3>
+  <h3 class="pb"><span class="n">2.5</span> Guion y correos</h3>
+  <div class="grid2" style="align-items:start">
+    <figure style="margin-top:0"><img src="img/lead-script.jpg" alt="" /><figcaption>Pestaña Guion.</figcaption></figure>
+    <div>
+      <h4 style="margin-top:0">Pestaña Guion (en inglés, para la llamada)</h4>
       <ul>
-        <li><b>Confirma los datos en la llamada.</b> Un correo marcado como "Deducido" no se vio publicado: pídelo al hablar con el cliente.</li>
-        <li>Si alguien pide <b>no ser contactado</b>, márcalo como "No contactar" y avisa a soporte para bloquearlo para todo el equipo.</li>
-        <li>Llama <b>manualmente</b> desde tu teléfono: nada de marcadores automáticos ni mensajes pregrabados.</li>
-        <li>No compartas tus leads con personas fuera del equipo: contienen datos de prospectos de Devleck.</li>
-        <li>Si algo se ve raro, no lo arregles tú: envía una <b>captura de pantalla</b> a soporte.</li>
+        <li><b>Ángulo:</b> la idea central para ese negocio y la mejor hora para llamar.</li>
+        <li><b>Apertura:</b> los primeros 20 segundos. Léela tal cual las primeras veces.</li>
+        <li><b>Preguntas de descubrimiento:</b> para confirmar el problema y quién decide.</li>
+        <li><b>Por qué le sirve y ROI:</b> tus argumentos, con evidencia real del negocio.</li>
+        <li><b>Cómo hablar del precio</b> y <b>objeciones</b> con su respuesta.</li>
+        <li><b>Buzón de voz:</b> el mensaje corto para dejar si no contestan.</li>
+      </ul>
+      <h4>Pestaña Correos</h4>
+      <ul>
+        <li><b>Primer correo</b> (para enviar después del buzón de voz) y <b>seguimiento</b> a los 3 días.</li>
+        <li><b>"Abrir en correo"</b> abre tu programa de correo con el destinatario, el asunto y el texto listos, y con tu nombre ya puesto.</li>
+        <li>Si el correo dice <b>"Deducido"</b>, no se vio publicado: confírmalo en la llamada antes de enviarlo.</li>
       </ul>
     </div>
+  </div>
 
-    <div class="contact">
-      <div><b>¿Necesitas ayuda?</b><span>Escríbenos con una captura de pantalla del problema.</span></div>
-      <div class="mail">contact@devleck.com</div>
+  <h3 class="pb"><span class="n">2.6</span> Contactos y datos manuales</h3>
+  <div class="grid2" style="align-items:start">
+    <div>
+      <p>En la llamada muchas veces consigues datos nuevos. Guárdalos aquí:</p>
+      <ul>
+        <li><b>Agregar persona:</b> nombre, cargo, teléfono directo, correo, LinkedIn y <b>notas sobre esa persona</b> (rol en la decisión, horarios, cómo prefiere que la contacten). Si es el decisor principal, pasa a ser el contacto de la ficha.</li>
+        <li><b>Agregar teléfono o correo</b>, indicando de quién es.</li>
+        <li><b>Editar datos del negocio:</b> nombre, web, dirección, ciudad, estado, empleados, sedes y redes.</li>
+        <li>Puedes eliminar datos que estén mal (número equivocado, persona que ya no trabaja ahí).</li>
+      </ul>
+      <div class="note ok">Lo que agregas a mano queda marcado como <b>"manual"</b> y la IA <b>nunca lo sobrescribe</b>, aunque vuelva a investigar el negocio.</div>
+    </div>
+    <figure style="margin-top:0"><img src="img/lead-contacts.jpg" alt="" /><figcaption>Pestaña Contactos.</figcaption></figure>
+  </div>
+</section>
+
+<section class="part">
+  <h3 style="margin-top:0"><span class="n">2.7</span> Embudo de ventas</h3>
+  <p class="sub">Todas tus oportunidades de un vistazo, ordenadas por cercanía al sí.</p>
+  <figure><img src="img/pipeline.jpg" alt="" /><figcaption>Embudo: una columna por etapa. El borde izquierdo de cada tarjeta tiene el color de su nivel de interés.</figcaption></figure>
+  <ul>
+    <li><b>Arrastra una tarjeta</b> a otra columna para cambiar su etapa. El interés sube solo al mínimo lógico de esa etapa (por ejemplo, Caliente al pasar a Reunión).</li>
+    <li>Cada tarjeta muestra la cercanía al sí, el interés, el seguimiento, la tarea más importante y la última nota.</li>
+    <li>Usa el buscador (también busca dentro de las notas) y el filtro por nicho. Marca "Mostrar cerrados sin venta" para ver perdidos y descartados.</li>
+  </ul>
+
+  <h3 class="pb"><span class="n">2.8</span> Leads separados por etapa</h3>
+  <figure><img src="img/leads.jpg" alt="" /><figcaption>Leads: pestañas por etapa con su conteo, cercanía al sí, última nota y próximo paso.</figcaption></figure>
+  <ul>
+    <li>Las <b>pestañas de colores</b> separan las listas: Activos · Por contactar · En intento · Interesados · Reunión · Propuesta · Ganados · Cerrados sin venta · Todos.</li>
+    <li><b>Orden:</b> más cerca del sí (por defecto), próximo seguimiento, calidad, más recientes o nombre.</li>
+    <li><b>Filtros:</b> interés, tier, nicho, estado de EE. UU. y servicio. La búsqueda incluye nombre, ciudad, teléfono, correo, decisor y <b>texto de las notas</b>.</li>
+    <li><b>Exportar CSV</b> descarga la lista que estás viendo, con etapa, interés, cercanía, último seguimiento y última nota.</li>
+  </ul>
+
+  <h3 class="pb"><span class="n">2.9</span> Prospectar: encontrar clientes nuevos</h3>
+  <figure><img src="img/prospecting.jpg" alt="" /><figcaption>Prospectar: elige el nicho, el servicio a vender, los estados y las señales de compra.</figcaption></figure>
+  <div class="grid2">
+    <div class="card"><h4>Qué completar</h4><ul>
+      <li><b>Nicho:</b> la lista muestra el potencial de cada uno (0–100). También puedes escribir uno nuevo.</li>
+      <li><b>Servicio o producto:</b> elige uno si vas a vender algo concreto, o deja que la IA elija.</li>
+      <li><b>Estados y ciudades</b> (tu territorio sale marcado).</li>
+      <li><b>Cantidad:</b> unos 2–3 minutos por lead.</li>
+      <li><b>Señales de compra</b> a priorizar e instrucciones adicionales.</li></ul></div>
+    <div class="card"><h4>Qué hace la IA</h4><ol>
+      <li>Busca negocios en la web, directorios, reseñas y vacantes.</li>
+      <li>Verifica el teléfono y el correo, con la fuente de cada uno.</li>
+      <li>Descarta los que no encajan (cadenas, sin necesidad, duplicados).</li>
+      <li>Escribe qué venderle y por qué, el guion y los correos.</li>
+      <li>Guarda los leads por lotes: van apareciendo mientras trabaja.</li></ol></div>
+  </div>
+  <figure><img src="img/research-run.jpg" alt="" /><figcaption>Búsquedas: el progreso en vivo de la investigación (búsquedas, páginas leídas y lotes guardados).</figcaption></figure>
+  <div class="note lime"><b>Tip:</b> las búsquedas enfocadas dan mejores leads: un nicho y de 1 a 3 estados. Mientras la IA trabaja puedes seguir llamando.</div>
+</section>
+
+<section class="part">
+  <h3 style="margin-top:0"><span class="n">2.10</span> Nichos: dónde está la oportunidad</h3>
+  <figure><img src="img/niche-potential.jpg" alt="" style="width:84%;margin:0 auto" /><figcaption>Potencial de nichos: puntaje 0–100 con sus seis dimensiones y fuentes.</figcaption></figure>
+  <p>Cada nicho se califica con la <b>misma rúbrica</b> y con datos públicos de EE. UU. (BLS, Census, asociaciones del sector):</p>
+  <table>
+    <thead><tr><th>Dimensión</th><th>Peso</th><th>Pregunta</th></tr></thead>
+    <tbody>
+      <tr><td>Dolor que resolvemos</td><td>25%</td><td>¿Hay evidencia de un problema que nuestro catálogo resuelve (falta de personal, llamadas perdidas, trabajo manual)?</td></tr>
+      <tr><td>Crecimiento</td><td>20%</td><td>¿El mercado crece en EE. UU.?</td></tr>
+      <tr><td>Capacidad de pago</td><td>20%</td><td>¿Facturan lo suficiente y tienen buen margen?</td></tr>
+      <tr><td>Encaje con el catálogo</td><td>15%</td><td>¿Cuántos de nuestros servicios les sirven, y qué tan directo?</td></tr>
+      <tr><td>Tamaño de mercado</td><td>10%</td><td>¿Hay muchos negocios a los que llamar?</td></tr>
+      <tr><td>Facilidad de contacto</td><td>10%</td><td>¿Se llega fácil al decisor por teléfono?</td></tr>
+    </tbody>
+  </table>
+  <p>Abre <b>"Por qué este puntaje"</b> en cada tarjeta para ver la explicación y las fuentes. Las estrellas (★) indican la prioridad del nicho, y el botón <b>Prospectar</b> abre una búsqueda ya configurada para ese nicho.</p>
+
+  <h3 class="pb"><span class="n">2.11</span> Catálogo y guía de ventas</h3>
+  <p class="sub">Aprende cada servicio antes de venderlo. Pulsa <b>"Guía de ventas"</b> en cualquier servicio.</p>
+  <figure><img src="img/sales-guide.jpg" alt="" style="width:40%;margin:0 auto" /><figcaption>Guía de ventas: qué es, cómo funciona, ejemplo real, precio y paquetes, a quién venderle y señales de compra.</figcaption></figure>
+  <div class="note warn">Son <b>precios de referencia</b> para orientar la conversación. El precio final siempre se cotiza después de la llamada de diagnóstico gratuita (precio fijo por fase).</div>
+  <table>
+    <thead><tr><th>Servicio / producto</th><th>Precio de referencia (USD)</th></tr></thead>
+    <tbody>
+      <tr><td>AI Receptionist &amp; Booking Agent</td><td>$1.500 – 4.000 + $150 – 400/mes</td></tr>
+      <tr><td>Back-Office Process Automation</td><td>$1.500 – 6.000 por automatización</td></tr>
+      <tr><td>AI Adoption Training &amp; Coaching <i>(todos los nichos)</i></td><td>$90 – 150/h · taller $900 – 1.800 · programa $2.500 – 8.000</td></tr>
+      <tr><td>Website Rebuild — Performance, SEO &amp; Conversion</td><td>$1.200 – 4.500</td></tr>
+      <tr><td>AI Jewelry Design Studio (Claude + Blender / AutoCAD)</td><td>$2.500 – 7.500 + $200 – 450/mes</td></tr>
+      <tr><td>Private AI Assistant over Company Documents</td><td>$3.500 – 14.000 + $150 – 400/mes</td></tr>
+      <tr><td>Reviews &amp; Customer Sentiment Intelligence</td><td>$1.500 – 4.500 + $150 – 350/mes</td></tr>
+      <tr><td>Generative Content Pipeline</td><td>$2.000 – 8.000</td></tr>
+      <tr><td>Retail AI — Demand Forecasting &amp; Dynamic Pricing</td><td>$4.500 – 18.000</td></tr>
+      <tr><td>Custom Web Platform / Customer Portal</td><td>$8.000 – 35.000</td></tr>
+      <tr><td>Mobile App (iOS + Android)</td><td>$7.000 – 28.000</td></tr>
+      <tr><td>Software Rescue &amp; Hardening</td><td>Auditoría $800 – 2.000 · correcciones por fase</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="pb"><span class="n">2.12</span> Configuración y actualizaciones</h3>
+  <figure><img src="img/settings.jpg" alt="" /><figcaption>Configuración: perfil, territorio, recordatorios y actualizaciones.</figcaption></figure>
+  <ul>
+    <li><b>Recordatorios:</b> pulsa "Activar notificaciones" para recibir avisos de escritorio.</li>
+    <li><b>Actualizar:</b> cuando te avisemos de una versión nueva, pulsa <b>Buscar actualizaciones → Actualizar ahora</b>, cierra la ventana negra y vuelve a abrir <span class="inline">iniciar.bat</span>.</li>
+  </ul>
+  <div class="note ok"><b>Tus datos están seguros:</b> tus leads y notas viven solo en tu computadora (carpeta <span class="inline">workspace</span>) y nunca se borran al actualizar. La herramienta guarda además una copia diaria y otra antes de cada actualización en <span class="inline">workspace/backups</span>.</div>
+</section>
+
+<!-- =============================== PARTE 3 =============================== -->
+<section class="part">
+  <div class="part-head"><div><div class="k">Parte 3</div><h2>Rutina, colores <em>y ayuda</em></h2><p>Cómo organizar tu día, qué significa cada color y qué hacer si algo falla.</p></div><img src="../../ui/logo-badge.png" alt="" /></div>
+
+  <h3><span class="n">3.1</span> Tu día ideal</h3>
+  <div class="steps">
+    <div class="step"><div class="num">1</div><div><h4>Abre la Agenda</h4><p>Atiende primero lo <b style="color:#d32f2f">vencido</b> y lo de <b style="color:#b26a00">hoy</b>: son personas que esperan tu llamada.</p></div></div>
+    <div class="step"><div class="num">2</div><div><h4>Trabaja la Cola de llamadas</h4><p>De arriba hacia abajo. Registra el resultado, el interés y una nota en cada llamada.</p></div></div>
+    <div class="step"><div class="num">3</div><div><h4>Envía los correos pendientes</h4><p>A quienes dejaste buzón de voz o pidieron información (pestaña Correos).</p></div></div>
+    <div class="step"><div class="num">4</div><div><h4>Revisa el Embudo</h4><p>Dedica tiempo a los de mayor cercanía al sí: prepara reuniones y haz seguimiento a las propuestas.</p></div></div>
+    <div class="step"><div class="num">5</div><div><h4>Lanza una búsqueda nueva</h4><p>Si tu lista "Por contactar" baja de unos 15 leads, prospecta en el nicho con más potencial.</p></div></div>
+  </div>
+
+  <h3 class="pb"><span class="n">3.2</span> Guía de colores</h3>
+  <div class="grid2" style="align-items:start">
+    <div><div class="card"><h4>Etapa del embudo</h4><div class="legend" style="grid-template-columns:1fr">
+      <div><span class="sw" style="background:#5cb8ff"></span><span><b>Nuevo</b> — aún sin contactar</span></div>
+      <div><span class="sw" style="background:#ffb547"></span><span><b>Intentado</b> — se llamó sin hablar con nadie</span></div>
+      <div><span class="sw" style="background:#ff9447"></span><span><b>Volver a llamar</b> — pidieron otra llamada</span></div>
+      <div><span class="sw" style="background:#b18cff"></span><span><b>Interesado</b> — conversación positiva</span></div>
+      <div><span class="sw" style="background:#d7ff1f;border:1px solid #9bb800"></span><span><b>Reunión agendada</b></span></div>
+      <div><span class="sw" style="background:#2dd4bf"></span><span><b>Propuesta enviada</b></span></div>
+      <div><span class="sw" style="background:#3ddc84"></span><span><b>Ganado</b> — ya es cliente</span></div>
+      <div><span class="sw" style="background:#6b7280"></span><span><b>Perdido / No califica</b></span></div>
+      <div><span class="sw" style="background:#ff5d5d"></span><span><b>No contactar</b> — definitivo</span></div>
+    </div></div>
+    <div class="card" style="margin-top:10px"><h4>Calidad del lead (tier)</h4>
+      <p style="margin:0"><b>A</b> (≥ 75), <b>B</b> (55–74) y <b>C</b> (&lt; 55): qué tan bueno es el negocio <i>antes</i> de llamarlo. La cercanía al sí, en cambio, mide qué tan avanzada está la venta.</p></div></div>
+    <div>
+      <div class="card"><h4>Interés y cercanía al sí (frío → caliente)</h4><div class="legend" style="grid-template-columns:1fr">
+        <div><span class="sw" style="background:#60a5fa"></span><span><b>1 Frío</b> · cercanía 0–19%</span></div>
+        <div><span class="sw" style="background:#2dd4bf"></span><span><b>2 Tibio</b> · 20–39%</span></div>
+        <div><span class="sw" style="background:#facc15"></span><span><b>3 Interesado</b> · 40–59%</span></div>
+        <div><span class="sw" style="background:#fb923c"></span><span><b>4 Caliente</b> · 60–79%</span></div>
+        <div><span class="sw" style="background:#3ddc84"></span><span><b>5 Listo para cerrar</b> · 80–100%</span></div>
+      </div></div>
+      <div class="card" style="margin-top:10px"><h4>Seguimientos y prioridad</h4><div class="legend">
+        <div><span class="sw" style="background:#ff5d5d"></span><span><b>Vencido</b> / prioridad alta</span></div>
+        <div><span class="sw" style="background:#ffb547"></span><span><b>Hoy</b> / prioridad media</span></div>
+        <div><span class="sw" style="background:#5cb8ff"></span><span><b>Próximo</b> (7 días)</span></div>
+        <div><span class="sw" style="background:#8b939c"></span><span><b>Programado</b> / prioridad baja</span></div>
+        <div><span class="sw" style="background:#b18cff"></span><span><b>Nota</b> (violeta)</span></div>
+        <div><span class="sw" style="background:#d7ff1f;border:1px solid #9bb800"></span><span><b>Nota fijada</b> (lima)</span></div>
+      </div></div>
     </div>
   </div>
 
-  <div class="running"><span><b>Devleck</b> · Software &amp; Digital Solutions · devleck.com</span><span>Guía de instalación · 3 de 3</span></div>
+  <h3 class="pb"><span class="n">3.3</span> Si algo falla</h3>
+  <table>
+    <thead><tr><th style="width:38%">Problema</th><th>Solución</th></tr></thead>
+    <tbody>
+      <tr><td>La búsqueda dice "Failed to authenticate" o "OAuth session expired"</td><td>Tu sesión de Claude caducó. En la terminal escribe <span class="inline">claude</span>, luego <span class="inline">/login</span>, y vuelve a entrar.</td></tr>
+      <tr><td>"No se encontró Claude Code"</td><td>Repite la instalación del paso 1 y reinicia la herramienta. Comprueba con <span class="inline">claude --version</span>.</td></tr>
+      <tr><td>No se abre la página</td><td>Entra manualmente a <b>http://localhost:4600</b>. Si el puerto está ocupado, es que la herramienta ya está abierta.</td></tr>
+      <tr><td>No me llegan los recordatorios</td><td>La herramienta debe estar abierta. Activa las notificaciones en Configuración y permite las notificaciones del navegador.</td></tr>
+      <tr><td>Al actualizar dice "Tienes cambios locales"</td><td>Se modificaron archivos de la herramienta. Escríbele a soporte antes de actualizar; tus leads no se tocan.</td></tr>
+      <tr><td>Salen muy pocos leads</td><td>Amplía los estados o ciudades, desmarca "Solo leads con teléfono" o elige un nicho con más potencial.</td></tr>
+      <tr><td>La búsqueda lleva mucho rato</td><td>Es normal: unos 2–3 minutos por lead. Si pasa de 45 minutos, pulsa <b>Detener</b>; los leads ya guardados se conservan.</td></tr>
+    </tbody>
+  </table>
+
+  <h3><span class="n">3.4</span> Reglas de oro</h3>
+  <ul>
+    <li><b>Confirma los datos en la llamada.</b> Si un correo dice "Deducido", pídelo cuando hables con el negocio.</li>
+    <li>Si alguien pide <b>no ser contactado</b>, márcalo como "Pidió no ser contactado" y avisa a soporte para bloquearlo para todo el equipo.</li>
+    <li>Llama <b>manualmente</b> desde tu teléfono: nada de marcadores automáticos ni mensajes pregrabados (ley TCPA de EE. UU.).</li>
+    <li>Todos los correos llevan un pie para darse de baja (ley CAN-SPAM): no lo borres.</li>
+    <li>No compartas tus leads con personas fuera del equipo.</li>
+    <li><b>Escribe una nota después de cada conversación.</b> Tu "yo" de la próxima semana te lo agradecerá.</li>
+  </ul>
+
+  <div class="contact"><div><b>¿Necesitas ayuda?</b><span>Escríbenos con una captura de pantalla del problema.</span></div><div class="mail">contact@devleck.com</div></div>
 </section>
 
 </body>
